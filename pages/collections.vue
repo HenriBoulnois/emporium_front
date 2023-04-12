@@ -5,8 +5,8 @@
         <a>Image</a>
         <a>Nom</a>
         <a>Type</a>
-        <a>Description</a>
         <a>Catégorie</a>
+        <a>Description</a>
       </li>
       <li
         v-for="item in items"
