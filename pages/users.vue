@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="grid grid-cols-3 justify-items-center text-center">
+    <ul class="grid grid-cols-4 justify-items-center text-center">
       <li
         v-for="user in users"
         :key="user.id"

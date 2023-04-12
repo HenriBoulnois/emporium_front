@@ -1,11 +1,11 @@
 <template>
-  <div class="h-screen bg-gray-10 dark:bg-gray-800">
+  <div class="h-screen bg-gray-800">
     <div class="grid grid-rows-[auto_1fr] h-full">
       <EmHeader />
       <div class="grid grid-cols-[auto_1fr]">
         <EmSideBar />
-        <div class="rounded-tl-lg dark:bg-gray-600 pt-10 px-10">
-          <Nuxt class=" bg-gray-50 dark:bg-gray-800 rounded-t-lg h-full" />
+        <div class="rounded-tl-lg bg-gray-600 pt-10 px-10">
+          <Nuxt class=" bg-gray-800 rounded-t-lg h-full" />
         </div>
       </div>
     </div>
