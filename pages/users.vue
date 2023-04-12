@@ -1,13 +1,13 @@
 <template>
   <div>
-    <ul class="grid grid-cols-3 justify-items-center text-center">
+    <ul class="grid grid-cols-4 justify-items-center text-center">
       <li
         v-for="user in users"
-        :key="user.id"
+        :key="user.uwuid"
         class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4"
       >
         <img :src="user.image">
-        <a class="m-7">{{ user.firstName }}</a>
+        <a class="m-7">{{ user.pseudo }}</a>
       </li>
     </ul>
   </div>
@@ -22,8 +22,8 @@ export default {
     };
   },
   async fetch () {
-    const response = await this.$axios.$get('https://dummyjson.com/users');
-    this.users = response.users;
+    const response = await this.$axios.$get('http://localhost:9000/utilisateur');
+    this.users = response;
   }
 };
 </script>
