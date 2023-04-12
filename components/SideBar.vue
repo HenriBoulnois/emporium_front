@@ -1,7 +1,7 @@
 <template>
   <div
     id="default-sidebar"
-    class="fixed top-20 left-0 bottom-20 w-60"
+    class="h-full w-60"
     aria-label="Sidebar"
   >
     <div class="h-full px-3 py-4 bg-gray-50 dark:bg-gray-800 rounded-tr-lg rounded-br-lg">
@@ -84,6 +84,7 @@
           </a>
         </li>
       </ul>
+          <EmFooter />
     </div>
   </div>
 </template>
