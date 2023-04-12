@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'EmFooter'
+  name: 'EmFooterSideBar'
 }
 </script>
 

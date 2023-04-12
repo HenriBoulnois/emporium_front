@@ -1,12 +1,12 @@
 <template>
-  <SideBar />
+  <div>
+    Collections page
+  </div>
 </template>
 
 <script>
-import SideBar from '~/components/SideBar.vue';
 
 export default {
-  name: 'CollectionsPage',
-  components: { SideBar }
+  name: 'CollectionsPage'
 };
 </script>
