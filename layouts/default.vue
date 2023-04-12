@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screenbg-gray-10 dark:bg-gray-800">
+  <div class="h-screen bg-gray-10 dark:bg-gray-800">
     <div class="grid grid-rows-[auto_1fr] h-full">
       <EmHeader />
       <div class="grid grid-cols-[auto_1fr]">
