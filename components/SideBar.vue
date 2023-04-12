@@ -1,10 +1,10 @@
 <template>
-  <aside
+  <div
     id="default-sidebar"
-    class="fixed top-20 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+    class="fixed top-20 left-0 bottom-20 w-60"
     aria-label="Sidebar"
   >
-    <div class="h-full px-3 py-4 bg-gray-50 dark:bg-gray-800 rounded-tr-lg">
+    <div class="h-full px-3 py-4 bg-gray-50 dark:bg-gray-800 rounded-tr-lg rounded-br-lg">
       <ul class="space-y-2 font-medium">
         <li>
           <a
@@ -54,7 +54,9 @@
                  3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
               />
             </svg>
-            <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
+            <span class="flex-1 ml-3 whitespace-nowrap">
+              <NuxtLink to="/collections"> Collections </NuxtLink>
+            </span>
           </a>
         </li>
         <li>
@@ -76,10 +78,12 @@
                 d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
               />
             </svg>
-            <span class="flex-1 ml-3 whitespace-nowrap">Utilisateurs</span>
+            <span class="flex-1 ml-3 whitespace-nowrap">
+              <NuxtLink to="/users"> Utilisateurs </NuxtLink>
+            </span>
           </a>
         </li>
       </ul>
     </div>
-  </aside>
+  </div>
 </template>
