@@ -1,7 +1,7 @@
 <template>
-  <div id="default-sidebar" class="w-60" aria-label="Sidebar">
+  <div id="default-sidebar" class="w-60 h-screen sticky top-0 bg-gray-800" aria-label="Sidebar">
     <div
-      class="h-full px-3 py-4 bg-gray-800 grid grid-rows-[auto_1fr_auto]"
+      class="px-3 py-4 grid grid-rows-[auto_1fr_auto]"
     >
       <ul class="space-y-2 font-medium">
         <li>
