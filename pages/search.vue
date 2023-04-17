@@ -1,10 +1,42 @@
 <template>
-  <div class="text-white">Query: {{ query }}</div>
+  <div>
+    <ul class="justify-items-center text-center">
+      <li class="grid grid-cols-5">
+        <a>Image</a>
+        <a>Nom</a>
+        <a>Type</a>
+        <a>Catégorie</a>
+        <a>Description</a>
+      </li>
+      <li
+        v-for="item in items"
+        :key="item.id"
+        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 grid grid-cols-5"
+      >
+        <img :src="item.thumbnail">
+        <a class="m-7">{{ item.title }}</a>
+        <a class="">{{ item.category }}</a>
+        <a>{{ item.brand }}</a>
+        <a>{{ item.description }}</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'SearchPage',
+  data () {
+    return {
+      items: []
+    };
+  },
+  async fetch () {
+    const response = await this.$axios.$get(
+      'https://dummyjson.com/products/search?q=' + this.$route.query.q
+    );
+    this.items = response.products;
+  },
   computed: {
     query () {
       return this.$route.query.q;
