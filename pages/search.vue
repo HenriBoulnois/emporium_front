@@ -37,11 +37,8 @@ export default {
     );
     this.items = response.products;
   },
-  computed: {
-    query () {
-      return this.$route.query.q;
-    }
-  },
-  watchQuery: ['q']
+  watch: {
+    '$route.query': '$fetch'
+  }
 };
 </script>
