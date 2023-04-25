@@ -5,9 +5,12 @@
         v-for="user in users"
         :key="user.id"
         class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4"
+        @click="$router.push({ path: '/user', query: { q: user.firstName } })"
       >
-        <img :src="user.image">
-        <a class="m-7">{{ user.firstName }}</a>
+        <button>
+          <img :src="user.image">
+          <a class="m-7">{{ user.pseudo }}</a>
+        </button>
       </li>
     </ul>
   </div>
@@ -22,7 +25,8 @@ export default {
     };
   },
   async fetch () {
-    const response = await this.$axios.$get('https://dummyjson.com/users');
+    // const response = await this.$axios.$get('https://dummyjson.com/users');
+    const response = await this.$axios.$get('https://emporiumback.fly.dev/utilisateur');
     this.users = response.users;
   }
 };

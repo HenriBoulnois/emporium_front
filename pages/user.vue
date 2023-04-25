@@ -1,10 +1,12 @@
 <template>
   <div class="grid grid-rows-2">
-    <div class="grid grid-cols-3 place-content-center">
-      <img :src="user.image">
-      <div class="col-span-2 grid grid-cols-1 list-none place-content-center">
+    <div class="grid grid-cols-3 max-h-fit m-5">
+      <div class="bg-blue-500 grid place-items-center">
+        <img :src="user.image">
+      </div>
+      <div class="grid grid-cols-1 list-none place-content-center bg-blue-600">
         <li>
-          <a class="m-7">{{ user.firstName }}</a>
+          <a class="">{{ user.firstName }}</a>
         </li>
         <li>
           <a class="">{{ user.lastName }}</a>
@@ -16,8 +18,13 @@
           <a>{{ user.university }}</a>
         </li>
       </div>
+      <div class="bg-blue-700">
+        Favorite items
+      </div>
     </div>
-    <div>Collection zone</div>
+    <div class="bg-blue-400">
+      Collection zone
+    </div>
   </div>
 </template>
 
