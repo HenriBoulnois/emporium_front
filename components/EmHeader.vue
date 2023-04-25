@@ -56,10 +56,10 @@
       </form>
     </div>
     <div />
-    <div class="flex items-center">
+    <NuxtLink class="flex items-center" to="/login">
       <span class="flex material-symbols-outlined"> person </span>
       <span class="flex ml-3 whitespace-nowrap"> Mon compte </span>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 
@@ -75,6 +75,7 @@ export default {
     searchInput: function () {
       if (this.input !== '') {
         this.$router.push({ path: '/search', query: { q: this.input } });
+        this.input = '';
       }
     }
   }
