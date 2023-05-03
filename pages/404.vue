@@ -7,9 +7,7 @@
         Mince la page n'existe pas...
       </ex-h-3>
       <div class="text-center">
-        <button @click="$router.push('/')">
-          Retour
-        </button>
+        A
       </div>
     </div>
   </div>
