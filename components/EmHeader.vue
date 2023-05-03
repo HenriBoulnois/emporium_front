@@ -2,18 +2,18 @@
   <div
     class="h-full px-3 py-4 bg-gray-800 grid grid-cols-[auto_1fr_minmax(40%,40%)_1fr_auto]"
   >
-    <a
-      class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 w-fit"
-    >
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    <NuxtLink to="/">
+      <a
+        class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 w-fit"
       >
-      <span class="material-symbols-outlined"> diamond </span>
-      <span class="ml-3 font-extrabold">
-        <NuxtLink to="/"> Emporium </NuxtLink>
-      </span>
-    </a>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        >
+        <span class="material-symbols-outlined"> diamond </span>
+        <span class="ml-3 font-extrabold"> Emporium </span>
+      </a>
+    </NuxtLink>
     <div />
     <div>
       <form>
@@ -57,6 +57,7 @@
     </div>
     <div />
     <NuxtLink class="flex items-center" to="/login">
+      <a v-if="!$auth.user.loggedIn">{{ $auth.user.name }}</a>
       <span class="flex material-symbols-outlined"> person </span>
       <span class="flex ml-3 whitespace-nowrap"> Mon compte </span>
     </NuxtLink>
