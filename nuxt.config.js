@@ -32,7 +32,8 @@ export default {
       auth0: {
         domain: 'emporiumauth.eu.auth0.com',
         clientId: 'oVo0rZCd4nbaBT77uT1eEDwLU4qyN8s0',
-        audience: 'https://emporiumauth.eu.auth0.com/api/v2/'
+        audience: 'https://emporiumauth.eu.auth0.com/api/v2/',
+        logoutRedirectUri: 'http://localhost:3000'
       }
     }
   },

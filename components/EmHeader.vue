@@ -57,9 +57,14 @@
     </div>
     <div />
     <NuxtLink class="flex items-center" to="/login">
-      <a v-if="!$auth.user.loggedIn">{{ $auth.user.name }}</a>
-      <span class="flex material-symbols-outlined"> person </span>
-      <span class="flex ml-3 whitespace-nowrap"> Mon compte </span>
+      <img v-if="$auth.loggedIn" class="max-h-12" :src="$auth.user.picture">
+      <span v-if="!$auth.loggedIn" class="flex material-symbols-outlined">
+        person
+      </span>
+      <span class="flex ml-3 whitespace-nowrap">
+        <a v-if="!$auth.loggedIn">Mon compte</a>
+        <a v-if="$auth.loggedIn">{{ $auth.user.name }}</a>
+      </span>
     </NuxtLink>
   </div>
 </template>
