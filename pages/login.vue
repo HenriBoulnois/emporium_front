@@ -8,7 +8,7 @@
       <button v-if="$auth.loggedIn" @click="$auth.logout()">
         Logout
       </button>
-      {{ $auth.user.name }}
+      <a v-if="$auth.loggedIn">{{ $auth.user }}</a>
     </div>
     <div>droite</div>
   </div>

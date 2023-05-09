@@ -10,14 +10,17 @@
       </li>
       <li
         v-for="item in items"
-        :key="item.id"
-        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr]"
+        :key="item.idOeuvre"
+        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
+        @click="
+          $router.push({ path: '/oeuvre', query: { q: item.idOeuvre } })
+        "
       >
-        <img :src="item.thumbnail">
-        <a class="m-7">{{ item.title }}</a>
-        <a class="">{{ item.category }}</a>
-        <a>{{ item.brand }}</a>
+        <img :src="item.image">
+        <a>{{ item.titre }}</a>
         <a>{{ item.description }}</a>
+        <a>{{ item.type.name }}</a>
+        <a>{{ item.auteur.name }}</a>
       </li>
     </ul>
   </div>
@@ -32,10 +35,18 @@ export default {
     };
   },
   async fetch () {
-    const response = await this.$axios.$get(
-      'https://dummyjson.com/products/search?q=' + this.$route.query.q
-    );
-    this.items = response.products;
+    if (this.$route.query.q != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres'
+      );
+      this.items = response;
+    }
+    if (this.$route.query.g != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres/genre/' + this.$route.query.g
+      );
+      this.items = response;
+    }
   },
   watch: {
     '$route.query': '$fetch'
