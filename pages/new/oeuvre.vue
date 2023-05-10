@@ -110,7 +110,9 @@
       <div :class="tab2Text">
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Titre (Album, EP, Single...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Titre (Album, EP, Single...)
+            </a>
             <input
               v-model="inputTitre"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -142,13 +144,23 @@
               type="text"
               placeholder="Image"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur (Groupe, Chanteur...)</a>
-            <input
-              v-model="inputAuteur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Auteur"
-            >
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Auteur (Groupe, Chanteur...)</a>
+            <div class="grid grid-cols-[auto_auto]">
+              <input
+                v-model="inputAuteur"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Auteur"
+              >
+
+              <NuxtLink
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 h-full rounded text-center"
+                to="/new/ervueo"
+              >
+                +
+              </NuxtLink>
+            </div>
             <a class="block text-gray-700 text-sm font-bold mb-2"> Label </a>
             <input
               v-model="inputEditeur"
@@ -156,14 +168,18 @@
               type="text"
               placeholder="Label"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Support (CD, Vinyl...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Support (CD, Vinyl...)
+            </a>
             <input
               v-model="inputSupport"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Support"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Genre (POP, Rap, Metal...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Genre (POP, Rap, Metal...)
+            </a>
             <input
               v-model="inputGenre"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -183,9 +199,7 @@
             <a :class="fillFullFormError">
               Veuillez remplir tous les champs obligatoires.
             </a>
-            <a :class="success">
-              L'oeuvre a bien été ajoutée.
-            </a>
+            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
         </form>
       </div>
@@ -332,7 +346,7 @@
 
 <script>
 export default {
-  name: 'OeuvreNewPage',
+  name: 'NewOeuvrePage',
   data () {
     return {
       oeuvre: [],
@@ -364,16 +378,7 @@ export default {
       success: 'hidden'
     };
   },
-  async fetch () {
-    // exact user
-    const response = await this.$axios.$get(
-      'https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q
-    );
-    this.oeuvre = response;
-  },
-  watch: {
-    '$route.query': '$fetch'
-  },
+
   methods: {
     selectedTab: function (tabNumber) {
       const styleSelected =
@@ -427,7 +432,7 @@ export default {
         'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab5Text = 'hidden';
       this.inputType = undefined;
-      this.success = 'hidden'
+      this.success = 'hidden';
     },
     submitOeuvre: function () {
       if (
