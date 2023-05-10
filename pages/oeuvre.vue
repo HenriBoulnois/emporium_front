@@ -14,23 +14,62 @@
         <li>
           <a>Description : {{ oeuvre.description }}</a>
         </li>
-        <li v-if="oeuvre.auteur">
+        <li
+          v-if="oeuvre.auteur"
+          class="cursor-pointer"
+          @click="
+            $router.push({
+              path: '/search',
+              query: { a: oeuvre.auteur.idAuteur }
+            })
+          "
+        >
           <a>Auteur : {{ oeuvre.auteur.name }}</a>
         </li>
-        <li v-if="oeuvre.type">
+        <li
+          v-if="oeuvre.type"
+          class="cursor-pointer"
+          @click="
+            $router.push({
+              path: '/search',
+              query: { t: oeuvre.type.idType }
+            })
+          "
+        >
           <a>Type : {{ oeuvre.type.name }}</a>
         </li>
-        <li v-if="oeuvre.support">
+        <li
+          v-if="oeuvre.support"
+          class="cursor-pointer"
+          @click="
+            $router.push({
+              path: '/search',
+              query: { s: oeuvre.support.idSupport }
+            })
+          "
+        >
           <a>Support : {{ oeuvre.support.name }}</a>
         </li>
-        <li v-if="oeuvre.editeur">
+        <li
+          v-if="oeuvre.editeur"
+          class="cursor-pointer"
+          @click="
+            $router.push({
+              path: '/search',
+              query: { e: oeuvre.editeur.idEditeur }
+            })
+          "
+        >
           <a>Editeur : {{ oeuvre.editeur.name }}</a>
         </li>
         <li
           v-if="oeuvre.genre"
           class="cursor-pointer"
           @click="
-            $router.push({ path: '/search', query: { g: oeuvre.genre.idGenre } })
+            $router.push({
+              path: '/search',
+              query: { g: oeuvre.genre.idGenre }
+            })
           "
         >
           <a>Genre : {{ oeuvre.genre.name }}</a>

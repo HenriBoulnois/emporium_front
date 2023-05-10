@@ -4,9 +4,9 @@
       <li class="grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr]">
         <a>Image</a>
         <a>Nom</a>
-        <a>Type</a>
-        <a>Catégorie</a>
         <a>Description</a>
+        <a>Type</a>
+        <a>Auteur</a>
       </li>
       <li
         v-for="item in items"
@@ -44,6 +44,30 @@ export default {
     if (this.$route.query.g != null) {
       const response = await this.$axios.$get(
         'https://emporiumback.fly.dev/oeuvres/genre/' + this.$route.query.g
+      );
+      this.items = response;
+    }
+    if (this.$route.query.a != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres/auteur/' + this.$route.query.a
+      );
+      this.items = response;
+    }
+    if (this.$route.query.t != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres/type/' + this.$route.query.t
+      );
+      this.items = response;
+    }
+    if (this.$route.query.s != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres/support/' + this.$route.query.s
+      );
+      this.items = response;
+    }
+    if (this.$route.query.e != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres/editeur/' + this.$route.query.e
       );
       this.items = response;
     }
