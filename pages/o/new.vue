@@ -101,14 +101,16 @@
             >
               Envoyer
             </button>
+            <a :class="fillFullFormError">
+              Veuillez remplir tous les champs obligatoires.
+            </a>
           </div>
         </form>
       </div>
       <div :class="tab2Text">
-        template 2
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Titre (Album, EP, Single...) </a>
             <input
               v-model="inputTitre"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -116,7 +118,7 @@
               placeholder="Titre"
             >
             <a class="block text-gray-700 text-sm font-bold mb-2">
-              Sous titre
+              Sous titre *
             </a>
             <input
               v-model="inputSousTitre"
@@ -125,7 +127,7 @@
               placeholder="Sous titre"
             >
             <a class="block text-gray-700 text-sm font-bold mb-2">
-              Description
+              Description *
             </a>
             <input
               v-model="inputDescription"
@@ -140,35 +142,28 @@
               type="text"
               placeholder="Image"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Type </a>
-            <input
-              v-model="inputType"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Type"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur (Groupe, Chanteur...)</a>
             <input
               v-model="inputAuteur"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="Description"
+              placeholder="Auteur"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Editeur </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Label </a>
             <input
               v-model="inputEditeur"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="Editeur"
+              placeholder="Label"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Support </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Support (CD, Vinyl...) </a>
             <input
               v-model="inputSupport"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Support"
             >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Genre </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Genre (POP, Rap, Metal...) </a>
             <input
               v-model="inputGenre"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -176,6 +171,7 @@
               placeholder="Genre"
             >
           </div>
+          * Champs faculatifs
           <div class="flex items-center justify-between">
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -184,6 +180,12 @@
             >
               Envoyer
             </button>
+            <a :class="fillFullFormError">
+              Veuillez remplir tous les champs obligatoires.
+            </a>
+            <a :class="success">
+              L'oeuvre a bien été ajoutée.
+            </a>
           </div>
         </form>
       </div>
@@ -357,7 +359,9 @@ export default {
       inputAuteur: undefined,
       inputEditeur: undefined,
       inputSupport: undefined,
-      inputGenre: undefined
+      inputGenre: undefined,
+      fillFullFormError: 'hidden',
+      success: 'hidden'
     };
   },
   async fetch () {
@@ -385,6 +389,7 @@ export default {
           this.resetTab();
           this.tab2Title = styleSelected;
           this.tab2Text = textToShow;
+          this.inputType = 1;
           break;
         case 3:
           this.resetTab();
@@ -421,21 +426,37 @@ export default {
       this.tab5Title =
         'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab5Text = 'hidden';
+      this.inputType = undefined;
+      this.success = 'hidden'
     },
     submitOeuvre: function () {
-      const oeuvre = {
-        titre: this.inputTitre,
-        sousTitre: this.inputSousTitre,
-        description: this.inputDescription,
-        image: this.inputImage,
-        idType: this.inputType,
-        idAuteur: this.inputAuteur,
-        idEditeur: this.inputEditeur,
-        idSupport: this.inputSupport,
-        idGenre: this.inputGenre
-      };
+      if (
+        this.inputTitre !== undefined &&
+        this.inputImage !== undefined &&
+        this.inputType !== undefined &&
+        this.inputAuteur !== undefined &&
+        this.inputEditeur !== undefined &&
+        this.inputSupport !== undefined &&
+        this.inputGenre !== undefined
+      ) {
+        const oeuvre = {
+          titre: this.inputTitre,
+          sousTitre: this.inputSousTitre,
+          description: this.inputDescription,
+          image: this.inputImage,
+          idType: this.inputType,
+          idAuteur: this.inputAuteur,
+          idEditeur: this.inputEditeur,
+          idSupport: this.inputSupport,
+          idGenre: this.inputGenre
+        };
 
-      this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
+        this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
+        this.fillFullFormError = 'hidden';
+        this.success = '';
+      } else {
+        this.fillFullFormError = '';
+      }
     }
   }
 };

@@ -4,9 +4,9 @@
       <li class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr]">
         <a>Image</a>
         <a>Nom</a>
-        <a>Description</a>
-        <a>Catégorie</a>
         <a>Auteur</a>
+        <a>Genre</a>
+        <a>Catégorie</a>
       </li>
       <li
         v-for="oeuvre in oeuvres"
@@ -18,9 +18,9 @@
       >
         <img :src="oeuvre.image">
         <a>{{ oeuvre.titre }}</a>
-        <a>{{ oeuvre.description }}</a>
-        <a>{{ oeuvre.type.name }}</a>
         <a>{{ oeuvre.auteur.name }}</a>
+        <a>{{ oeuvre.genre.name }}</a>
+        <a>{{ oeuvre.type.name }}</a>
       </li>
     </ul>
   </div>

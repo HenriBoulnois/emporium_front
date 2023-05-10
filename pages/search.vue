@@ -4,9 +4,9 @@
       <li class="grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr]">
         <a>Image</a>
         <a>Nom</a>
-        <a>Description</a>
-        <a>Type</a>
         <a>Auteur</a>
+        <a>Genre</a>
+        <a>Catégorie</a>
       </li>
       <li
         v-for="item in items"
@@ -18,9 +18,9 @@
       >
         <img :src="item.image">
         <a>{{ item.titre }}</a>
-        <a>{{ item.description }}</a>
-        <a>{{ item.type.name }}</a>
         <a>{{ item.auteur.name }}</a>
+        <a>{{ item.genre.name }}</a>
+        <a>{{ item.type.name }}</a>
       </li>
     </ul>
   </div>
