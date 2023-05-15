@@ -21,7 +21,8 @@ module.exports = {
     indent: 'off',
     semi: 0,
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-    'no-console': process.env.NODE_ENV === 'development' ? 'error' : 'off',
+    'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'development' ? 'error' : 'off'
+
   }
 }
