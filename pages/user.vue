@@ -4,22 +4,27 @@
       <div class="bg-blue-500 grid place-items-center">
         <!-- <img :src="user.image"> -->
       </div>
-      <div class="grid grid-cols-1 list-none place-content-center bg-blue-600">
-        <li>
-          <a class="">{{ user.pseudo }}</a>
-        </li>
-        <li>
-          <a class="">{{ user.grade }}</a>
-        </li>
-        <li>
-          <a>{{ user.equipe }}</a>
-        </li>
-        <li>
-          <a>{{ user.resultat }}</a>
-        </li>
+      <div class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600">
+        <div class="grid place-content-center">
+          <li>
+            <a class="">{{ user.pseudo }}</a>
+          </li>
+          <li>
+            <a class="">{{ user.grade }}</a>
+          </li>
+          <li>
+            <a>{{ user.equipe }}</a>
+          </li>
+          <li>
+            <a>{{ user.resultat }}</a>
+          </li>
+        </div>
+        <div class="bg-blue-550">
+          Favorite items
+        </div>
       </div>
       <div class="bg-blue-700">
-        Favorite items
+        Last comments
       </div>
     </div>
     <div class="bg-blue-400">
@@ -35,7 +40,8 @@
           v-for="oeuvre in collection"
           :key="oeuvre.idOeuvre"
           class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
-          @click="$router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
+          @click="
+            $router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
           "
         >
           <img :src="oeuvre.image">
