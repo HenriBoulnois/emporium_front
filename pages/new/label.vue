@@ -1,30 +1,32 @@
 <template>
   <div class="grid grid-cols-[1fr_auto_1fr]">
-    <div>gauche</div>
-    <div class="grid-rows-2 bg-blue-500 p-5 m-5 rounded-lg">
+    <div />
+    <div class="grid-rows-2 m-10">
       <ul
-        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
+        class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
       >
-        <li class="mr-2">
+        <li class="">
           <a :class="tab1Title" @click="selectedTab(1)">Type</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab2Title" @click="selectedTab(2)">Auteur</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab3Title" @click="selectedTab(3)">Editeur</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab4Title" @click="selectedTab(4)">Support</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab5Title" @click="selectedTab(5)">Genre</a>
         </li>
       </ul>
       <div :class="tab1Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Nouveau type (Musique, Jeux-vidéo...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Nouveau type (Musique, Jeux-vidéo...)
+            </a>
             <input
               v-model="inputType"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -48,9 +50,11 @@
         </form>
       </div>
       <div :class="tab2Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur (Groupe, Créateur...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Auteur (Groupe, Créateur...)
+            </a>
             <input
               v-model="inputAuteur"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -74,9 +78,11 @@
         </form>
       </div>
       <div :class="tab3Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Editeur (Label, Studio...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Editeur (Label, Studio...)
+            </a>
             <input
               v-model="inputEditeur"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -100,9 +106,10 @@
         </form>
       </div>
       <div :class="tab4Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Support (Dématerialisé, CD...)</a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Support (Dématerialisé, CD...)</a>
             <input
               v-model="inputSupport"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -126,9 +133,11 @@
         </form>
       </div>
       <div :class="tab5Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Genre (Metal, MMORPG...) </a>
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Genre (Metal, MMORPG...)
+            </a>
             <input
               v-model="inputGenre"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -152,30 +161,30 @@
         </form>
       </div>
     </div>
-    <div>droite</div>
+    <div />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NewOeuvrePage',
+  name: 'NewLabelPage',
   data () {
     return {
       oeuvre: [],
       tab1Title:
-        'inline-block p-4 rounded-t-lg text-blue-600 bg-gray-100 active cursor-pointer',
+        'inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer',
       tab1Text: '',
       tab2Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-white cursor-pointer',
       tab2Text: 'hidden',
       tab3Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-white cursor-pointer',
       tab3Text: 'hidden',
       tab4Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-white cursor-pointer',
       tab4Text: 'hidden',
       tab5Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-white cursor-pointer',
       tab5Text: 'hidden',
       inputType: undefined,
       inputAuteur: undefined,
@@ -189,7 +198,7 @@ export default {
   methods: {
     selectedTab: function (tabNumber) {
       const styleSelected =
-        'inline-block p-4 rounded-t-lg text-blue-600 bg-gray-100 active cursor-pointer';
+        'inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer';
       const textToShow = '';
       switch (tabNumber) {
         case 1:
@@ -240,9 +249,7 @@ export default {
       this.success = 'hidden';
     },
     submitType: function () {
-      if (
-        this.inputType !== undefined
-      ) {
+      if (this.inputType !== undefined) {
         const type = {
           name: this.inputType
         };
@@ -254,9 +261,7 @@ export default {
       }
     },
     submitAuteur: function () {
-      if (
-        this.inputAuteur !== undefined
-      ) {
+      if (this.inputAuteur !== undefined) {
         const auteur = {
           name: this.inputAuteur
         };
@@ -268,9 +273,7 @@ export default {
       }
     },
     submitEditeur: function () {
-      if (
-        this.inputEditeur !== undefined
-      ) {
+      if (this.inputEditeur !== undefined) {
         const editeur = {
           name: this.inputEditeur
         };
@@ -282,9 +285,7 @@ export default {
       }
     },
     submitSupport: function () {
-      if (
-        this.inputSupport !== undefined
-      ) {
+      if (this.inputSupport !== undefined) {
         const support = {
           name: this.inputSupport
         };
@@ -296,9 +297,7 @@ export default {
       }
     },
     submitGenre: function () {
-      if (
-        this.inputGenre !== undefined
-      ) {
+      if (this.inputGenre !== undefined) {
         const genre = {
           name: this.inputGenre
         };

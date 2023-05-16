@@ -1,5 +1,5 @@
 <template>
-  <footer class="p-4  bg-gray-800 text-center">
+  <footer class="p-4  bg-gray-900 text-center">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 text-white hover:bg-gray-700">

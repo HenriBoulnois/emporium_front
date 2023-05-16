@@ -5,7 +5,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'emporium_front',
+    title: 'Emporium',
     htmlAttrs: {
       lang: 'en'
     },

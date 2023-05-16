@@ -1,29 +1,28 @@
 <template>
   <div class="grid grid-cols-[1fr_auto_1fr]">
-    <div>gauche</div>
-    <div class="grid-rows-2 bg-blue-500 p-5 m-5 rounded-lg">
+    <div />
+    <div class="grid-rows-2 m-10">
       <ul
-        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
+        class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
       >
-        <li class="mr-2">
+        <li class="">
           <a :class="tab1Title" @click="selectedTab(1)">Basique</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab2Title" @click="selectedTab(2)">CD</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab3Title" @click="selectedTab(3)">Jeux vidéo</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab4Title" @click="selectedTab(4)">Cosmétique</a>
         </li>
-        <li class="mr-2">
+        <li class="">
           <a :class="tab5Title" @click="selectedTab(5)">Figurine</a>
         </li>
       </ul>
       <div :class="tab1Text">
-        template 1
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
             <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
             <input
@@ -95,7 +94,7 @@
           </div>
           <div class="flex items-center justify-between">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
               type="button"
               @click="submitOeuvre()"
             >
@@ -108,14 +107,14 @@
         </form>
       </div>
       <div :class="tab2Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
             <a class="block text-gray-700 text-sm font-bold mb-2">
               Titre (Album, EP, Single...)
             </a>
             <input
               v-model="inputTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:outline-gray-900"
               type="text"
               placeholder="Titre"
             >
@@ -156,7 +155,7 @@
 
               <NuxtLink
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 h-full rounded text-center"
-                to="/new/ervueo"
+                to="/new/label"
               >
                 +
               </NuxtLink>
@@ -190,7 +189,7 @@
           * Champs faculatifs
           <div class="flex items-center justify-between">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
               type="button"
               @click="submitOeuvre()"
             >
@@ -204,7 +203,7 @@
         </form>
       </div>
       <div :class="tab3Text">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
             <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
             <input
@@ -276,7 +275,7 @@
           </div>
           <div class="flex items-center justify-between">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
               type="button"
               @click="submitOeuvre()"
             >
@@ -286,8 +285,7 @@
         </form>
       </div>
       <div :class="tab4Text">
-        template 4
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
             <label
               class="block text-gray-700 text-sm font-bold mb-2"
@@ -304,7 +302,7 @@
           </div>
           <div class="flex items-center justify-between">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
               type="button"
             >
               Envoyer
@@ -313,8 +311,7 @@
         </form>
       </div>
       <div :class="tab5Text">
-        template 5
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
             <label
               class="block text-gray-700 text-sm font-bold mb-2"
@@ -331,7 +328,7 @@
           </div>
           <div class="flex items-center justify-between">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
               type="button"
             >
               Envoyer
@@ -340,7 +337,7 @@
         </form>
       </div>
     </div>
-    <div>droite</div>
+    <div />
   </div>
 </template>
 
@@ -351,7 +348,7 @@ export default {
     return {
       oeuvre: [],
       tab1Title:
-        'inline-block p-4 rounded-t-lg text-blue-600 bg-gray-100 active cursor-pointer',
+        'inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer',
       tab1Text: '',
       tab2Title:
         'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
@@ -382,7 +379,7 @@ export default {
   methods: {
     selectedTab: function (tabNumber) {
       const styleSelected =
-        'inline-block p-4 rounded-t-lg text-blue-600 bg-gray-100 active cursor-pointer';
+        'inline-block p-4 rounded-t-lg bg-white text-gray-600 active cursor-pointer';
       const textToShow = '';
       switch (tabNumber) {
         case 1:

@@ -1,5 +1,5 @@
 <template>
-  <div id="default-sidebar" class="w-60 h-screen sticky top-0 bg-gray-800" aria-label="Sidebar">
+  <div id="default-sidebar" class="w-60 h-screen sticky top-0 bg-gray-900" aria-label="Sidebar">
     <div
       class="px-3 py-4 grid grid-rows-[auto_1fr_auto]"
     >
