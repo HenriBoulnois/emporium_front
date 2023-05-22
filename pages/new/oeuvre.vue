@@ -337,7 +337,7 @@
         </form>
       </div>
     </div>
-    <div />
+    <div class="bg-gray-300" />
   </div>
 </template>
 
@@ -375,7 +375,12 @@ export default {
       success: 'hidden'
     };
   },
-
+  async fetch () {
+    const response = await this.$axios.$get(
+      'https://emporiumback.fly.dev/type'
+    );
+    this.listType = response;
+  },
   methods: {
     selectedTab: function (tabNumber) {
       const styleSelected =
