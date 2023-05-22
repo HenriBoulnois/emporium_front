@@ -12,13 +12,13 @@
           <a :class="tab2Title" @click="selectedTab(2)">CD</a>
         </li>
         <li class="">
-          <a :class="tab3Title" @click="selectedTab(3)">Jeux vidéo</a>
+          <a :class="tab3Title">Jeux vidéo</a>
         </li>
         <li class="">
-          <a :class="tab4Title" @click="selectedTab(4)">Cosmétique</a>
+          <a :class="tab4Title">Cosmétique</a>
         </li>
         <li class="">
-          <a :class="tab5Title" @click="selectedTab(5)">Figurine</a>
+          <a :class="tab5Title">Figurine</a>
         </li>
       </ul>
       <div :class="tab1Text">
@@ -62,6 +62,11 @@
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Type"
+              @click="
+                () => {
+                  searchType = '';
+                }
+              "
             >
             <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur </a>
             <input
@@ -337,7 +342,9 @@
         </form>
       </div>
     </div>
-    <div class="bg-gray-300" />
+    <div class="bg-gray-300">
+      <div :class="searchType" />
+    </div>
   </div>
 </template>
 
@@ -371,15 +378,10 @@ export default {
       inputEditeur: undefined,
       inputSupport: undefined,
       inputGenre: undefined,
+      searchType: 'hidden',
       fillFullFormError: 'hidden',
       success: 'hidden'
     };
-  },
-  async fetch () {
-    const response = await this.$axios.$get(
-      'https://emporiumback.fly.dev/type'
-    );
-    this.listType = response;
   },
   methods: {
     selectedTab: function (tabNumber) {
@@ -438,15 +440,15 @@ export default {
     },
     submitOeuvre: function () {
       if (
-        this.inputTitre !== undefined &&
+        /* this.inputTitre !== undefined &&
         this.inputImage !== undefined &&
-        this.inputType !== undefined &&
-        this.inputAuteur !== undefined &&
+        this.inputType !== undefined && */
+        this.inputAuteur !== undefined /* &&
         this.inputEditeur !== undefined &&
         this.inputSupport !== undefined &&
-        this.inputGenre !== undefined
+        this.inputGenre !== undefined */
       ) {
-        const oeuvre = {
+        /* const oeuvre = {
           titre: this.inputTitre,
           sousTitre: this.inputSousTitre,
           description: this.inputDescription,
@@ -456,9 +458,26 @@ export default {
           idEditeur: this.inputEditeur,
           idSupport: this.inputSupport,
           idGenre: this.inputGenre
-        };
-
-        this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
+        }; */
+        // check if auteur already exist, if not create it
+        this.$axios
+          .$get(
+            'https://emporiumback.fly.dev/auteur/search/' + this.inputAuteur
+          )
+          .then((response) => {
+            this.auteur = response;
+            /* if (response.idAuteur === undefined) {
+              this.$axios
+                .$post('https://emporiumback.fly.dev/auteur', {
+                  name: this.inputAuteur
+                })
+                .then((responsePost) => { oeuvre.idAuteur = responsePost.idAuteur });
+            } else {
+              oeuvre.idAuteur = response.idAuteur;
+            } */
+          });
+          // console.log(oeuvre);
+        // this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
         this.fillFullFormError = 'hidden';
         this.success = '';
       } else {
