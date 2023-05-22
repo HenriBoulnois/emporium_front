@@ -1,17 +1,17 @@
 <template>
-  <div class="grid grid-rows-[auto_auto]">
+  <div class="grid grid-rows-[auto__auto_auto]">
     <div class="grid grid-cols-3 m-5 max-h-25">
       <div class="bg-gray-700 grid place-items-center p-4 rounded-l-lg">
         <img class="max-w-sm" :src="oeuvre.image">
       </div>
       <div class="grid list-none place-content-center text-center bg-gray-700">
-        <li>
+        <li v-if="oeuvre.titre">
           <a class="">Titre : {{ oeuvre.titre }}</a>
         </li>
-        <li>
+        <li v-if="oeuvre.sousTitre">
           <a class="">Sous Titre : {{ oeuvre.sousTitre }}</a>
         </li>
-        <li>
+        <li v-if="oeuvre.description">
           <a>Description : {{ oeuvre.description }}</a>
         </li>
         <li
@@ -78,6 +78,14 @@
       <div class="bg-blue-700">
         Linked items
       </div>
+    </div>
+    <div>
+      <a
+        class="bg-blue-600 cursor-pointer"
+        @click="
+          $router.push({ path: '/edit/oeuvre', query: { q: oeuvre.idOeuvre } })
+        "
+      >Edit</a>
     </div>
     <div class="relative bg-gray-800">
       <a class="text-white pl-4 text-lg">Commentaires :</a>
@@ -162,14 +170,15 @@ export default {
         this.$axios
           .$post('https://emporiumback.fly.dev/commentaire', commentaire)
           .then(
-            this.newComment = '',
-            this.success = 'absolute right-0 top-0 pr-4 text-green-300 text-lg',
+            (this.newComment = ''),
+            (this.success =
+              'absolute right-0 top-0 pr-4 text-green-300 text-lg'),
             setTimeout(this.hide, 2000)
           );
       }
     },
     hide: function () {
-      this.success = 'hidden'
+      this.success = 'hidden';
     }
   }
 };
