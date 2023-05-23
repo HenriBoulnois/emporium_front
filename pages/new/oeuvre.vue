@@ -1,293 +1,49 @@
 <template>
-  <div class="grid grid-cols-[1fr_auto_1fr]">
-    <div />
-    <div class="grid-rows-2 m-10">
-      <ul
+  <div class="grid grid-cols-[auto_1fr]">
+    <div class="m-10">
+      <div
         class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
       >
-        <li class="">
+        <div class="">
           <a :class="tab1Title" @click="selectedTab(1)">Basique</a>
-        </li>
-        <li class="">
-          <a :class="tab2Title" @click="selectedTab(2)">CD</a>
-        </li>
-        <li class="">
-          <a :class="tab3Title">Jeux vidéo</a>
-        </li>
-        <li class="">
+        </div>
+        <div class="">
+          <a :class="tab2Title" @click="selectedTab(2)">Musique</a>
+        </div>
+        <div class="">
+          <a :class="tab3Title" @click="selectedTab(3)">Jeux vidéo</a>
+        </div>
+        <div class="">
           <a :class="tab4Title">Cosmétique</a>
-        </li>
-        <li class="">
+        </div>
+        <div class="">
           <a :class="tab5Title">Figurine</a>
-        </li>
-      </ul>
+        </div>
+      </div>
       <div :class="tab1Text">
-        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
-            <input
-              v-model="inputTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Titre"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Sous titre
-            </a>
-            <input
-              v-model="inputSousTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Sous titre"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Description
-            </a>
-            <input
-              v-model="inputDescription"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Description"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
-            <input
-              v-model="inputImage"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Image"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Type </a>
-            <input
-              v-model="inputType"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Type"
-              @click="
-                () => {
-                  searchType = '';
-                }
-              "
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur </a>
-            <input
-              v-model="inputAuteur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Description"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Editeur </a>
-            <input
-              v-model="inputEditeur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Editeur"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Support </a>
-            <input
-              v-model="inputSupport"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Support"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Genre </a>
-            <input
-              v-model="inputGenre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Genre"
-            >
-          </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-              type="button"
-              @click="submitOeuvre()"
-            >
-              Envoyer
-            </button>
-            <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
-            </a>
-          </div>
-        </form>
+        <BasiqueForm
+          :list-auteur="listAuteur"
+          :list-type="listType"
+          :list-editeur="listEditeur"
+          :list-support="listSupport"
+          :list-genre="listGenre"
+        />
       </div>
       <div :class="tab2Text">
-        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Titre (Album, EP, Single...)
-            </a>
-            <input
-              v-model="inputTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:outline-gray-900"
-              type="text"
-              placeholder="Titre"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Sous titre *
-            </a>
-            <input
-              v-model="inputSousTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Sous titre"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Description *
-            </a>
-            <input
-              v-model="inputDescription"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Description"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
-            <input
-              v-model="inputImage"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Image"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Auteur (Groupe, Chanteur...)</a>
-            <div class="grid grid-cols-[auto_auto]">
-              <input
-                v-model="inputAuteur"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="Auteur"
-              >
-
-              <NuxtLink
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 h-full rounded text-center"
-                to="/new/label"
-              >
-                +
-              </NuxtLink>
-            </div>
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Label </a>
-            <input
-              v-model="inputEditeur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Label"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Support (CD, Vinyl...)
-            </a>
-            <input
-              v-model="inputSupport"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Support"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Genre (POP, Rap, Metal...)
-            </a>
-            <input
-              v-model="inputGenre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Genre"
-            >
-          </div>
-          * Champs faculatifs
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-              type="button"
-              @click="submitOeuvre()"
-            >
-              Envoyer
-            </button>
-            <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
-            </a>
-            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
-          </div>
-        </form>
+        <MusiqueForm
+          :list-auteur="listAuteur"
+          :list-editeur="listEditeur"
+          :list-support="listSupport"
+          :list-genre="listGenre"
+        />
       </div>
       <div :class="tab3Text">
-        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
-            <input
-              v-model="inputTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Titre"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Sous titre
-            </a>
-            <input
-              v-model="inputSousTitre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Sous titre"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Description
-            </a>
-            <input
-              v-model="inputDescription"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Description"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
-            <input
-              v-model="inputImage"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Image"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Type </a>
-            <input
-              v-model="inputType"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Type"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Auteur </a>
-            <input
-              v-model="inputAuteur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Description"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Editeur </a>
-            <input
-              v-model="inputEditeur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Editeur"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Support </a>
-            <input
-              v-model="inputSupport"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Support"
-            >
-            <a class="block text-gray-700 text-sm font-bold mb-2"> Genre </a>
-            <input
-              v-model="inputGenre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Genre"
-            >
-          </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-              type="button"
-              @click="submitOeuvre()"
-            >
-              Envoyer
-            </button>
-          </div>
-        </form>
+        <JVForm
+          :list-auteur="listAuteur"
+          :list-editeur="listEditeur"
+          :list-support="listSupport"
+          :list-genre="listGenre"
+        />
       </div>
       <div :class="tab4Text">
         <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
@@ -342,20 +98,41 @@
         </form>
       </div>
     </div>
-    <div class="bg-gray-300">
-      <div :class="searchType">
-        <v-autocomplete
-          label="Autocomplete"
-          :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-        ></v-autocomplete>
+    <div class="grid grid-rows-[auto_1fr]">
+      <div class="flex items-center bg-white rounded-lg m-10 p-4">
+        <div class="flex-auto">
+          Un label (Auteur, Studio...) n'est pas présent ?
+        </div>
+        <div
+          class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+          @click="
+            $router.push({
+              path: '/new/label'
+            })
+          "
+        >
+          Ajoutez le !
+        </div>
+      </div>
+      <div class="bg-gray-700 rounded-lg m-10">
+        Preview Image
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BasiqueForm from '~/components/NewOeuvre/BasiqueForm.vue';
+import MusiqueForm from '~/components/NewOeuvre/MusiqueForm.vue';
+import JVForm from '~/components/NewOeuvre/JVForm.vue';
+
 export default {
   name: 'NewOeuvrePage',
+  components: {
+    BasiqueForm,
+    MusiqueForm,
+    JVForm
+  },
   data () {
     return {
       oeuvre: [],
@@ -374,7 +151,7 @@ export default {
       tab5Title:
         'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
       tab5Text: 'hidden',
-      inputTitre: undefined,
+      /* inputTitre: undefined,
       inputSousTitre: undefined,
       inputDescription: undefined,
       inputImage: undefined,
@@ -382,11 +159,42 @@ export default {
       inputAuteur: undefined,
       inputEditeur: undefined,
       inputSupport: undefined,
-      inputGenre: undefined,
-      searchType: 'hidden',
+      inputGenre: undefined, */
       fillFullFormError: 'hidden',
-      success: 'hidden'
+      success: 'hidden',
+      listType: '',
+      listAuteur: '',
+      listEditeur: '',
+      listSupport: '',
+      listGenre: ''
     };
+  },
+  async fetch () {
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/type')
+      .then((response) => {
+        this.listType = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/auteur')
+      .then((response) => {
+        this.listAuteur = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/editeur')
+      .then((response) => {
+        this.listEditeur = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/support')
+      .then((response) => {
+        this.listSupport = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/genre')
+      .then((response) => {
+        this.listGenre = response;
+      });
   },
   methods: {
     selectedTab: function (tabNumber) {
@@ -446,7 +254,7 @@ export default {
     submitOeuvre: function () {
       if (
         this.inputTitre !== undefined &&
-        // this.inputImage !== undefined &&
+        this.inputImage !== undefined &&
         this.inputType !== undefined &&
         this.inputAuteur !== undefined &&
         this.inputEditeur !== undefined &&
@@ -483,7 +291,7 @@ export default {
             }
           }); */
         console.log(oeuvre);
-        this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
+        // this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
         this.fillFullFormError = 'hidden';
         this.success = '';
       } else {
