@@ -1,26 +1,15 @@
 <template>
-  <div class="grid grid-cols-[1fr_auto_1fr]">
-    <div />
+  <div class="grid grid-cols-[auto_1fr]">
     <div class="grid-rows-2 m-10">
-      <ul
+      <div
         class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
       >
-        <li class="">
-          <a :class="tab1Title" @click="selectedTab(1)">Type</a>
-        </li>
-        <li class="">
-          <a :class="tab2Title" @click="selectedTab(2)">Auteur</a>
-        </li>
-        <li class="">
-          <a :class="tab3Title" @click="selectedTab(3)">Editeur</a>
-        </li>
-        <li class="">
-          <a :class="tab4Title" @click="selectedTab(4)">Support</a>
-        </li>
-        <li class="">
-          <a :class="tab5Title" @click="selectedTab(5)">Genre</a>
-        </li>
-      </ul>
+        <a :class="tab1Title" @click="selectedTab(1)">Type</a>
+        <a :class="tab2Title" @click="selectedTab(2)">Auteur</a>
+        <a :class="tab3Title" @click="selectedTab(3)">Editeur</a>
+        <a :class="tab4Title" @click="selectedTab(4)">Support</a>
+        <a :class="tab5Title" @click="selectedTab(5)">Genre</a>
+      </div>
       <div :class="tab1Text">
         <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
           <div class="mb-4">
@@ -161,13 +150,23 @@
         </form>
       </div>
     </div>
-    <div />
+    <div class="m-10 bg-white rounded-lg">
+      <div :class="tab1Text">
+        <PreviewType :list-type="listType" />
+      </div>
+      <div :class="tab2Text" />
+      <div :class="tab3Text" />
+      <div :class="tab4Text" />
+      <div :class="tab4Text" />
+    </div>
   </div>
 </template>
 
 <script>
+import PreviewType from '~/components/NewLabel/PreviewType.vue';
 export default {
   name: 'NewLabelPage',
+  components: { PreviewType },
   data () {
     return {
       oeuvre: [],
@@ -192,8 +191,40 @@ export default {
       inputSupport: undefined,
       inputGenre: undefined,
       fillFullFormError: 'hidden',
-      success: 'hidden'
+      success: 'hidden',
+      listType: '',
+      listAuteur: '',
+      listEditeur: '',
+      listSupport: '',
+      listGenre: ''
     };
+  },
+  async fetch () {
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/type')
+      .then((response) => {
+        this.listType = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/auteur')
+      .then((response) => {
+        this.listAuteur = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/editeur')
+      .then((response) => {
+        this.listEditeur = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/support')
+      .then((response) => {
+        this.listSupport = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/genre')
+      .then((response) => {
+        this.listGenre = response;
+      });
   },
   methods: {
     selectedTab: function (tabNumber) {
