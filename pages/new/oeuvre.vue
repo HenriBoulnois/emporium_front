@@ -14,10 +14,10 @@
           <a :class="tab3Title" @click="selectedTab(3)">Jeux vidéo</a>
         </div>
         <div class="">
-          <a :class="tab4Title">Cosmétique</a>
+          <a :class="tab4Title" @click="selectedTab(4)">Livre</a>
         </div>
         <div class="">
-          <a :class="tab5Title">Figurine</a>
+          <a :class="tab5Title" @click="selectedTab(5)">Goodies</a>
         </div>
       </div>
       <div :class="tab1Text">
@@ -30,72 +30,56 @@
         />
       </div>
       <div :class="tab2Text">
-        <MusiqueForm
+        <GenericTypeFormVue
           :list-auteur="listAuteur"
           :list-editeur="listEditeur"
           :list-support="listSupport"
           :list-genre="listGenre"
+          type-id="1"
+          label-auteur="Auteur (Groupe, Chanteur...) *"
+          label-editeur="Label *"
+          label-genre="Genre (POP, Rap, Metal...) *"
+          label-support="Support (CD, Vinyl...) *"
         />
       </div>
       <div :class="tab3Text">
-        <JVForm
+        <GenericTypeFormVue
           :list-auteur="listAuteur"
           :list-editeur="listEditeur"
           :list-support="listSupport"
           :list-genre="listGenre"
+          type-id="2"
+          label-auteur="Studio (Riot, Rare...) *"
+          label-editeur="Editeur *"
+          label-genre="Genre (MMORPG, FPS, Souls-like...) *"
+          label-support="Support (Cartouche, Demat...) *"
         />
       </div>
       <div :class="tab4Text">
-        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <label
-              class="block text-gray-700 text-sm font-bold mb-2"
-              for="username"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Username"
-            >
-          </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Envoyer
-            </button>
-          </div>
-        </form>
+        <GenericTypeFormVue
+          :list-auteur="listAuteur"
+          :list-editeur="listEditeur"
+          :list-support="listSupport"
+          :list-genre="listGenre"
+          type-id="d62f53bb-6952-4ce3-84c2-b6dcf8a666bd"
+          label-auteur="Auteur (Livre)"
+          label-editeur="Editeur (Livre)"
+          label-genre="Genre (Livre)"
+          label-support="Support (Livre)"
+        />
       </div>
       <div :class="tab5Text">
-        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <label
-              class="block text-gray-700 text-sm font-bold mb-2"
-              for="username"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Username"
-            >
-          </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Envoyer
-            </button>
-          </div>
-        </form>
+        <GenericTypeFormVue
+          :list-auteur="listAuteur"
+          :list-editeur="listEditeur"
+          :list-support="listSupport"
+          :list-genre="listGenre"
+          type-id="177fd06b-6075-4c5e-93df-77c8de66c8d8"
+          label-auteur="Auteur (Goodies)"
+          label-editeur="Editeur (Goodies)"
+          label-genre="Genre (Goodies)"
+          label-support="Support (Goodies)"
+        />
       </div>
     </div>
     <div class="grid grid-rows-[auto_1fr]">
@@ -123,19 +107,16 @@
 
 <script>
 import BasiqueForm from '~/components/NewOeuvre/BasiqueForm.vue';
-import MusiqueForm from '~/components/NewOeuvre/MusiqueForm.vue';
-import JVForm from '~/components/NewOeuvre/JVForm.vue';
+import GenericTypeFormVue from '~/components/NewOeuvre/GenericTypeForm.vue';
 
 export default {
   name: 'NewOeuvrePage',
   components: {
     BasiqueForm,
-    MusiqueForm,
-    JVForm
+    GenericTypeFormVue
   },
   data () {
     return {
-      oeuvre: [],
       tab1Title:
         'inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer',
       tab1Text: '',
@@ -151,15 +132,6 @@ export default {
       tab5Title:
         'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
       tab5Text: 'hidden',
-      /* inputTitre: undefined,
-      inputSousTitre: undefined,
-      inputDescription: undefined,
-      inputImage: undefined,
-      inputType: undefined,
-      inputAuteur: undefined,
-      inputEditeur: undefined,
-      inputSupport: undefined,
-      inputGenre: undefined, */
       fillFullFormError: 'hidden',
       success: 'hidden',
       listType: '',
@@ -211,7 +183,6 @@ export default {
           this.resetTab();
           this.tab2Title = styleSelected;
           this.tab2Text = textToShow;
-          this.inputType = 'Musique';
           break;
         case 3:
           this.resetTab();
@@ -250,53 +221,6 @@ export default {
       this.tab5Text = 'hidden';
       this.inputType = undefined;
       this.success = 'hidden';
-    },
-    submitOeuvre: function () {
-      if (
-        this.inputTitre !== undefined &&
-        this.inputImage !== undefined &&
-        this.inputType !== undefined &&
-        this.inputAuteur !== undefined &&
-        this.inputEditeur !== undefined &&
-        this.inputSupport !== undefined &&
-        this.inputGenre !== undefined
-      ) {
-        const oeuvre = {
-          titre: this.inputTitre,
-          sousTitre: this.inputSousTitre,
-          description: this.inputDescription,
-          image: this.inputImage,
-          type: this.inputType,
-          auteur: this.inputAuteur,
-          editeur: this.inputEditeur,
-          support: this.inputSupport,
-          genre: this.inputGenre
-        };
-        // check if auteur already exist, if not create it
-        /* this.$axios
-          .$get(
-            'https://emporiumback.fly.dev/auteur/search/' + this.inputAuteur
-          )
-          .then((response) => {
-            this.auteur = response;
-            console.log(this.auteur[0]);
-            if (this.auteur[0] === undefined) {
-              this.$axios
-                .$post('https://emporiumback.fly.dev/auteur', {
-                  name: this.inputAuteur
-                })
-                .then((responsePost) => { oeuvre.idAuteur = responsePost.idAuteur });
-            } else {
-              oeuvre.idAuteur = response.idAuteur;
-            }
-          }); */
-        console.log(oeuvre);
-        // this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
-        this.fillFullFormError = 'hidden';
-        this.success = '';
-      } else {
-        this.fillFullFormError = '';
-      }
     }
   }
 };

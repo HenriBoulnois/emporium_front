@@ -65,14 +65,13 @@
         label="Genre"
       />
     </div>
-    <div class="flex items-center justify-between">
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-        type="button"
+    <div class="grid grid-rows-2 text-center">
+      <div
+        class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
         @click="submitBasique()"
       >
         Envoyer
-      </button>
+      </div>
       <a :class="fillFullFormError">
         Veuillez remplir tous les champs obligatoires.
       </a>

@@ -1,9 +1,7 @@
 <template>
   <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
     <div class="mb-4">
-      <a class="block text-gray-700 text-sm font-bold mb-2">
-        Titre (Album, EP, Single...)
-      </a>
+      <a class="block text-gray-700 text-sm font-bold mb-2"> Titre * </a>
       <input
         v-model="inputTitre"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:outline-gray-900"
@@ -36,45 +34,38 @@
         :items="listAuteur"
         item-text="name"
         item-value="idAuteur"
-        label="Auteur (Groupe, Chanteur...)"
+        :label="labelAuteur"
       />
       <v-autocomplete
         v-model="inputEditeur"
         :items="listEditeur"
         item-text="name"
         item-value="idEditeur"
-        label="Label"
+        :label="labelEditeur"
       />
       <v-autocomplete
         v-model="inputSupport"
         :items="listSupport"
         item-text="name"
         item-value="idSupport"
-        label="Support (CD, Vinyl...)"
+        :label="labelSupport"
       />
       <v-autocomplete
         v-model="inputGenre"
         :items="listGenre"
         item-text="name"
         item-value="idGenre"
-        label="Genre (POP, Rap, Metal...)"
+        :label="labelGenre"
       />
     </div>
-    <NuxtLink
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 h-full rounded text-center"
-      to="/new/label"
-    >
-      +
-    </NuxtLink>
     * Champs faculatifs
-    <div class="flex items-center justify-between">
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-        type="button"
-        @click="submitMusique()"
+    <div class="grid grid-rows-2 text-center">
+      <div
+        class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+        @click="submitOeuvre()"
       >
         Envoyer
-      </button>
+      </div>
       <a :class="fillFullFormError">
         Veuillez remplir tous les champs obligatoires.
       </a>
@@ -85,12 +76,17 @@
 
 <script>
 export default {
-  name: 'MusiqueForm',
+  name: 'GenericTypeForm',
   props: {
+    typeId: undefined,
     listAuteur: undefined,
     listEditeur: undefined,
     listSupport: undefined,
-    listGenre: undefined
+    listGenre: undefined,
+    labelAuteur: undefined,
+    labelEditeur: undefined,
+    labelSupport: undefined,
+    labelGenre: undefined
   },
   data () {
     return {
@@ -99,9 +95,11 @@ export default {
     };
   },
   methods: {
-    submitMusique: function () {
+    submitOeuvre: function () {
       if (
         this.inputTitre !== undefined &&
+        this.inputSousTitre !== undefined &&
+        this.inputDescription !== undefined &&
         this.inputImage !== undefined &&
         this.inputAuteur !== undefined &&
         this.inputEditeur !== undefined &&
@@ -117,7 +115,7 @@ export default {
             imageName: 'image' + this.inputTitre,
             imageExtension: 'jpg'
           },
-          idType: '1',
+          idType: this.typeId,
           idAuteur: this.inputAuteur,
           idEditeur: this.inputEditeur,
           idSupport: this.inputSupport,
