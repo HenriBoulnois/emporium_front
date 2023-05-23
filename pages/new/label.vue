@@ -152,21 +152,30 @@
     </div>
     <div class="m-10 bg-white rounded-lg">
       <div :class="tab1Text">
-        <PreviewType :list-type="listType" />
+        <GenericPreview :list="listType" label-type="Type" />
       </div>
-      <div :class="tab2Text" />
-      <div :class="tab3Text" />
-      <div :class="tab4Text" />
-      <div :class="tab4Text" />
+      <div :class="tab2Text">
+        <GenericPreview :list="listAuteur" label-type="Auteur" />
+      </div>
+      <div :class="tab3Text">
+        <GenericPreview :list="listEditeur" label-type="Editeur" />
+      </div>
+      <div :class="tab4Text">
+        <GenericPreview :list="listSupport" label-type="Support" />
+      </div>
+      <div :class="tab5Text">
+        <GenericPreview :list="listGenre" label-type="Genre" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import PreviewType from '~/components/NewLabel/PreviewType.vue';
+import GenericPreview from '~/components/NewLabel/GenericPreview.vue';
+
 export default {
   name: 'NewLabelPage',
-  components: { PreviewType },
+  components: { GenericPreview },
   data () {
     return {
       oeuvre: [],
