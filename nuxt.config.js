@@ -46,7 +46,8 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    ['@nuxtjs/vuetify', { theme: { disable: true } }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
