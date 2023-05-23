@@ -343,7 +343,12 @@
       </div>
     </div>
     <div class="bg-gray-300">
-      <div :class="searchType" />
+      <div :class="searchType">
+        <v-autocomplete
+          label="Autocomplete"
+          :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+        ></v-autocomplete>
+      </div>
     </div>
   </div>
 </template>
@@ -398,7 +403,7 @@ export default {
           this.resetTab();
           this.tab2Title = styleSelected;
           this.tab2Text = textToShow;
-          this.inputType = 1;
+          this.inputType = 'Musique';
           break;
         case 3:
           this.resetTab();
@@ -440,33 +445,34 @@ export default {
     },
     submitOeuvre: function () {
       if (
-        /* this.inputTitre !== undefined &&
-        this.inputImage !== undefined &&
-        this.inputType !== undefined && */
-        this.inputAuteur !== undefined /* &&
+        this.inputTitre !== undefined &&
+        // this.inputImage !== undefined &&
+        this.inputType !== undefined &&
+        this.inputAuteur !== undefined &&
         this.inputEditeur !== undefined &&
         this.inputSupport !== undefined &&
-        this.inputGenre !== undefined */
+        this.inputGenre !== undefined
       ) {
-        /* const oeuvre = {
+        const oeuvre = {
           titre: this.inputTitre,
           sousTitre: this.inputSousTitre,
           description: this.inputDescription,
           image: this.inputImage,
-          idType: this.inputType,
-          idAuteur: this.inputAuteur,
-          idEditeur: this.inputEditeur,
-          idSupport: this.inputSupport,
-          idGenre: this.inputGenre
-        }; */
+          type: this.inputType,
+          auteur: this.inputAuteur,
+          editeur: this.inputEditeur,
+          support: this.inputSupport,
+          genre: this.inputGenre
+        };
         // check if auteur already exist, if not create it
-        this.$axios
+        /* this.$axios
           .$get(
             'https://emporiumback.fly.dev/auteur/search/' + this.inputAuteur
           )
           .then((response) => {
             this.auteur = response;
-            /* if (response.idAuteur === undefined) {
+            console.log(this.auteur[0]);
+            if (this.auteur[0] === undefined) {
               this.$axios
                 .$post('https://emporiumback.fly.dev/auteur', {
                   name: this.inputAuteur
@@ -474,10 +480,10 @@ export default {
                 .then((responsePost) => { oeuvre.idAuteur = responsePost.idAuteur });
             } else {
               oeuvre.idAuteur = response.idAuteur;
-            } */
-          });
-          // console.log(oeuvre);
-        // this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
+            }
+          }); */
+        console.log(oeuvre);
+        this.$axios.$post('https://emporiumback.fly.dev/oeuvres', oeuvre);
         this.fillFullFormError = 'hidden';
         this.success = '';
       } else {
