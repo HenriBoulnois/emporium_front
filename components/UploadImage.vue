@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center"
+    class="relative min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover items-center"
     style="
       background-image: url(https://images.unsplash.com/photo-1621243804936-775306a8f2e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);
     "
@@ -31,7 +31,7 @@
               class="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center"
             >
               <div
-                class="h-full w-full text-center flex flex-col items-center justify-center items-center"
+                class="h-full w-full text-center flex flex-col items-center justify-center"
               >
                 <!---<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-400 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -74,7 +74,6 @@
   </div>
 </template>
 <script>
-import UploadService from '~/service/UploadFilesService';
 export default {
   name: 'UploadImage',
   data () {
@@ -89,7 +88,7 @@ export default {
     };
   },
   mounted () {
-    UploadService.getFiles().then((response) => {
+    this.getFiles().then((response) => {
       this.imageInfos = response.data;
     });
   },
@@ -98,17 +97,17 @@ export default {
       this.currentImage = this.$refs.file.files.item(0);
       this.previewImage = URL.createObjectURL(this.currentImage);
       this.progress = 0;
-      this.message = ''
+      this.message = '';
     },
     upload () {
       this.progress = 0;
 
-      UploadService.upload(this.currentImage, (event) => {
+      this.uploadFile(this.currentImage, (event) => {
         this.progress = Math.round((100 * event.loaded) / event.total);
       })
         .then((response) => {
           this.message = response.data.message;
-          return UploadService.getFiles();
+          return this.getFiles();
         })
         .then((images) => {
           this.imageInfos = images.data;
@@ -118,7 +117,22 @@ export default {
           this.message = 'Could not upload the image! ' + err;
           this.currentImage = undefined;
         });
-    }
+    },
+    uploadFile (file, onUploadProgress) {
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    return this.$axios.post('/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      onUploadProgress
+    });
+  },
+  getFiles () {
+    return this.$axios.get('/files');
+  }
   }
 };
 </script>
