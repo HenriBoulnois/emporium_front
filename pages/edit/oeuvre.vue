@@ -2,6 +2,9 @@
   <div class="grid">
     <div class="grid grid-cols-3 bg-gray-700 m-5 shadow-inner rounded-lg h-fit">
       <div class="grid bg-white p-4 rounded-l-lg h-full">
+        <div class="place-self-center">
+          Informations actuelles
+        </div>
         <img
           v-if="oeuvre.image"
           class="max-w-sm place-self-center"
@@ -33,7 +36,10 @@
           Genre : {{ oeuvre.genre.name }}
         </div>
       </div>
-      <div class="bg-white h-full rounded-r-lg drop-shadow-xl">
+      <div class="grid bg-white p-4 h-full rounded-r-lg drop-shadow-xl">
+        <div class="place-self-center">
+          Formulaire de modification
+        </div>
         <form class="p-4">
           <div class="mb-4">
             <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
@@ -119,20 +125,28 @@
         </form>
       </div>
       <div class="grid p-4 h-full place-items-center">
-        <img
-          v-if="oeuvre.image"
-          class="max-w-sm"
-          src="oeuvre.image"
-        >
+        <div class="">
+          Visualisation des changements
+        </div>
+        <img v-if="oeuvre.image" class="max-w-sm" src="oeuvre.image">
         <ImagePlaceholder v-if="!oeuvre.image" />
-        <div>
-          Titre : {{ inputTitre }}
+        <div>Titre : {{ inputTitre }}</div>
+        <div>Sous Titre : {{ inputSousTitre }}</div>
+        <div>Description : {{ inputDescription }}</div>
+        <div v-if="oeuvre.auteur">
+          Auteur :
         </div>
-        <div>
-          Sous Titre : {{ inputSousTitre }}
+        <div v-if="oeuvre.type">
+          Type :
         </div>
-        <div>
-          Description : {{ inputDescription }}
+        <div v-if="oeuvre.support">
+          Support :
+        </div>
+        <div v-if="oeuvre.editeur">
+          Editeur :
+        </div>
+        <div v-if="oeuvre.genre">
+          Genre :
         </div>
       </div>
     </div>
