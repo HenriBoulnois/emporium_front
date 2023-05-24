@@ -40,25 +40,25 @@ export default {
           });
           break;
         case 'Auteur':
-        this.$router.push({
+          this.$router.push({
             path: '/search',
             query: { a: item.idAuteur }
           });
           break;
         case 'Genre':
-        this.$router.push({
+          this.$router.push({
             path: '/search',
             query: { g: item.idGenre }
           });
           break;
         case 'Editeur':
-        this.$router.push({
+          this.$router.push({
             path: '/search',
             query: { e: item.idEditeur }
           });
           break;
         case 'Support':
-        this.$router.push({
+          this.$router.push({
             path: '/search',
             query: { s: item.idSupport }
           });
