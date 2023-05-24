@@ -1,23 +1,50 @@
 <template>
-  <div>
-    <div class="grid grid-cols-3 p-4 max-h-25">
-      <div class="bg-gray-700 grid place-items-center p-4 rounded-l-lg">
-        <img class="max-w-sm" :src="oeuvre.image">
+  <div class="grid">
+    <div class="grid grid-cols-3 bg-gray-700 m-5 shadow-inner rounded-lg h-fit">
+      <div class="grid bg-white p-4 rounded-l-lg h-full">
+        <img
+          v-if="oeuvre.image"
+          class="max-w-sm place-self-center"
+          src="oeuvre.image"
+        >
+        <ImagePlaceholder v-if="!oeuvre.image" class="place-self-center" />
+        <div v-if="oeuvre.titre">
+          Titre : {{ oeuvre.titre }}
+        </div>
+        <div v-if="oeuvre.sousTitre">
+          Sous Titre : {{ oeuvre.sousTitre }}
+        </div>
+        <div v-if="oeuvre.description">
+          Description : {{ oeuvre.description }}
+        </div>
+        <div v-if="oeuvre.auteur">
+          Auteur : {{ oeuvre.auteur.name }}
+        </div>
+        <div v-if="oeuvre.type">
+          Type : {{ oeuvre.type.name }}
+        </div>
+        <div v-if="oeuvre.support">
+          Support : {{ oeuvre.support.name }}
+        </div>
+        <div v-if="oeuvre.editeur">
+          Editeur : {{ oeuvre.editeur.name }}
+        </div>
+        <div v-if="oeuvre.genre">
+          Genre : {{ oeuvre.genre.name }}
+        </div>
       </div>
-      <div class="grid list-none place-content-center text-center bg-gray-700">
-        <form class="rounded-lg p-4">
-          <div class="">
-            <a class="block text-white text-sm font-bold mb-2">
-              Titre : {{ oeuvre.titre }}
-            </a>
+      <div class="bg-white h-full rounded-r-lg drop-shadow-xl">
+        <form class="p-4">
+          <div class="mb-4">
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
             <input
               v-model="inputTitre"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Titre"
             >
-            <a class="block text-white text-sm font-bold mb-2">
-              Sous titre : {{ oeuvre.sousTitre }}
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Sous titre
             </a>
             <input
               v-model="inputSousTitre"
@@ -25,8 +52,8 @@
               type="text"
               placeholder="Sous titre"
             >
-            <a class="block text-white text-sm font-bold mb-2">
-              Description : {{ oeuvre.description }}
+            <a class="block text-gray-700 text-sm font-bold mb-2">
+              Description
             </a>
             <input
               v-model="inputDescription"
@@ -34,142 +61,79 @@
               type="text"
               placeholder="Description"
             >
-            <div class="grid grid-cols-2">
-              <a
-                v-if="oeuvre.type"
-                class="block text-white text-sm font-bold mb-2"
-              >
-                Type : {{ oeuvre.type.name }}
-              </a>
-              <span
-                class="material-symbols-outlined"
-                @click="getLabelList('type')"
-              >
-                storage
-              </span>
-            </div>
+            <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
             <input
+              v-model="inputImage"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Image"
+            >
+            <v-autocomplete
               v-model="inputType"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Type"
-            >
-            <div class="grid grid-cols-2">
-              <a
-                v-if="oeuvre.auteur"
-                class="block text-white text-sm font-bold mb-2"
-              >
-                Auteur : {{ oeuvre.auteur.name }}
-              </a>
-              <span
-                class="material-symbols-outlined"
-                @click="getLabelList('auteur')"
-              >
-                storage
-              </span>
-            </div>
-            <input
+              :items="listType"
+              item-text="name"
+              item-value="idType"
+              label="Type"
+            />
+            <v-autocomplete
               v-model="inputAuteur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Auteur"
-            >
-            <div class="grid grid-cols-2">
-              <a
-                v-if="oeuvre.editeur"
-                class="block text-white text-sm font-bold mb-2"
-              >
-                Editeur : {{ oeuvre.editeur.name }}
-              </a>
-              <span
-                class="material-symbols-outlined"
-                @click="getLabelList('editeur')"
-              >
-                storage
-              </span>
-            </div>
-            <input
+              :items="listAuteur"
+              item-text="name"
+              item-value="idAuteur"
+              label="Auteur"
+            />
+            <v-autocomplete
               v-model="inputEditeur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Editeur"
-            >
-            <div class="grid grid-cols-2">
-              <a
-                v-if="oeuvre.support"
-                class="block text-white text-sm font-bold mb-2"
-              >
-                Support : {{ oeuvre.support.name }}
-              </a>
-              <span
-                class="material-symbols-outlined"
-                @click="getLabelList('support')"
-              >
-                storage
-              </span>
-            </div>
-            <input
+              :items="listEditeur"
+              item-text="name"
+              item-value="idEditeur"
+              label="Editeur"
+            />
+            <v-autocomplete
               v-model="inputSupport"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Support"
-            >
-            <div class="grid grid-cols-2">
-              <a
-                v-if="oeuvre.genre"
-                class="block text-white text-sm font-bold mb-2"
-              >
-                Genre : {{ oeuvre.genre.name }}
-              </a>
-              <span
-                class="material-symbols-outlined"
-                @click="getLabelList('genre')"
-              >
-                storage
-              </span>
-            </div>
-            <input
+              :items="listSupport"
+              item-text="name"
+              item-value="idSupport"
+              label="Support"
+            />
+            <v-autocomplete
               v-model="inputGenre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Genre"
-            >
+              :items="listGenre"
+              item-text="name"
+              item-value="idGenre"
+              label="Genre"
+            />
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              type="button"
-              @click="submitOeuvre()"
+          <div class="grid grid-rows-2 text-center">
+            <div
+              class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+              @click="submitBasique()"
             >
               Envoyer
-            </button>
+            </div>
             <a :class="fillFullFormError">
               Veuillez remplir tous les champs obligatoires.
             </a>
+            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
         </form>
       </div>
-      <div class="bg-gray-700 rounded-r-lg">
-        <ul v-if="labelList" class="justify-items-center text-center pt-1">
-          <li class="grid grid-cols-3 p-2 items-center">
-            <a>ID</a>
-            <a>Name</a>
-            <a>Edit</a>
-          </li>
-          <li
-            v-for="label in labelList"
-            :key="label.id"
-            class="grid grid-cols-3 p-4 items-center"
-          >
-            <a>{{ label.id }}</a>
-            <a>{{ label.name }}</a>
-            <span
-              class="material-symbols-outlined bg-gray-600 hover:bg-gray-700 rounded-full cursor-pointer"
-            >
-              edit
-            </span>
-          </li>
-        </ul>
+      <div class="grid p-4 h-full place-items-center">
+        <img
+          v-if="oeuvre.image"
+          class="max-w-sm"
+          src="oeuvre.image"
+        >
+        <ImagePlaceholder v-if="!oeuvre.image" />
+        <div>
+          Titre : {{ inputTitre }}
+        </div>
+        <div>
+          Sous Titre : {{ inputSousTitre }}
+        </div>
+        <div>
+          Description : {{ inputDescription }}
+        </div>
       </div>
     </div>
   </div>
