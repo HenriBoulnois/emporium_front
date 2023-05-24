@@ -12,11 +12,10 @@
         v-for="item in items"
         :key="item.idOeuvre"
         class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
-        @click="
-          $router.push({ path: '/oeuvre', query: { q: item.idOeuvre } })
-        "
+        @click="$router.push({ path: '/oeuvre', query: { q: item.idOeuvre } })"
       >
-        <img :src="item.image">
+        <img v-if="item.image" :src="item.image">
+        <ImagePlaceholder v-if="!item.image" />
         <a>{{ item.titre }}</a>
         <a>{{ item.auteur.name }}</a>
         <a>{{ item.genre.name }}</a>
@@ -27,8 +26,13 @@
 </template>
 
 <script>
+import ImagePlaceholder from '~/components/ImagePlaceholder.vue';
+
 export default {
   name: 'SearchPage',
+  components: {
+    ImagePlaceholder
+  },
   data () {
     return {
       items: []

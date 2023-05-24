@@ -1,7 +1,9 @@
 <template>
   <div>
     <ul class="justify-items-center text-center pt-1">
-      <li class="bg-gray-600 rounded-lg m-4 grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-2 items-center">
+      <li
+        class="bg-gray-600 rounded-lg m-4 grid grid-cols-[1fr_1fr_1fr_1fr_1fr] p-2 items-center"
+      >
         <a>Image</a>
         <a>Nom</a>
         <a>Auteur</a>
@@ -11,12 +13,13 @@
       <li
         v-for="oeuvre in oeuvres"
         :key="oeuvre.idOeuvre"
-        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
+        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[1fr_1fr_1fr_1fr_1fr] p-4 place-items-center"
         @click="
           $router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
         "
       >
-        <img :src="oeuvre.image">
+        <img v-if="oeuvre.image" :src="oeuvre.image">
+        <ImagePlaceholder v-if="!oeuvre.image" />
         <a>{{ oeuvre.titre }}</a>
         <a>{{ oeuvre.auteur.name }}</a>
         <a>{{ oeuvre.genre.name }}</a>
@@ -27,8 +30,13 @@
 </template>
 
 <script>
+import ImagePlaceholder from '~/components/ImagePlaceholder.vue';
+
 export default {
   name: 'OeuvresPage',
+  comments: {
+    ImagePlaceholder
+  },
   data () {
     return {
       oeuvres: []

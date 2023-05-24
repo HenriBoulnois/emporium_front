@@ -23,16 +23,15 @@
               placeholder="Nouveau type"
             >
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+          <div class="grid grid-rows-2 text-center">
+            <div
+              class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
               @click="submitType()"
             >
               Envoyer
-            </button>
+            </div>
             <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
+              Un rongeur semble avoir grignotté le câble
             </a>
             <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
@@ -51,16 +50,15 @@
               placeholder="Auteur"
             >
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+          <div class="grid grid-rows-2 text-center">
+            <div
+              class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
               @click="submitAuteur()"
             >
               Envoyer
-            </button>
+            </div>
             <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
+              Un rongeur semble avoir grignotté le câble
             </a>
             <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
@@ -79,16 +77,15 @@
               placeholder="Editeur"
             >
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+          <div class="grid grid-rows-2 text-center">
+            <div
+              class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
               @click="submitEditeur()"
             >
               Envoyer
-            </button>
+            </div>
             <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
+              Un rongeur semble avoir grignotté le câble
             </a>
             <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
@@ -106,16 +103,15 @@
               placeholder="Support"
             >
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+          <div class="grid grid-rows-2 text-center">
+            <div
+              class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
               @click="submitSupport()"
             >
               Envoyer
-            </button>
+            </div>
             <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
+              Un rongeur semble avoir grignotté le câble
             </a>
             <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
@@ -134,16 +130,15 @@
               placeholder="Genre"
             >
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+          <div class="grid grid-rows-2 text-center">
+            <div
+              class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
               @click="submitGenre()"
             >
               Envoyer
-            </button>
+            </div>
             <a :class="fillFullFormError">
-              Veuillez remplir tous les champs obligatoires.
+              Un rongeur semble avoir grignotté le câble
             </a>
             <a :class="success"> L'oeuvre a bien été ajoutée. </a>
           </div>
@@ -209,33 +204,48 @@ export default {
     };
   },
   async fetch () {
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/type')
-      .then((response) => {
-        this.listType = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/auteur')
-      .then((response) => {
-        this.listAuteur = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/editeur')
-      .then((response) => {
-        this.listEditeur = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/support')
-      .then((response) => {
-        this.listSupport = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/genre')
-      .then((response) => {
-        this.listGenre = response;
-      });
+    await this.fetchType();
+    await this.fetchAuteur();
+    await this.fetchEditeur();
+    await this.fetchSupport();
+    await this.fetchGenre();
   },
   methods: {
+    async fetchType () {
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/type')
+        .then((response) => {
+          this.listType = response;
+        });
+    },
+    async fetchAuteur () {
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/auteur')
+        .then((response) => {
+          this.listAuteur = response;
+        });
+    },
+    async fetchEditeur () {
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/editeur')
+        .then((response) => {
+          this.listEditeur = response;
+        });
+    },
+    async fetchSupport () {
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/support')
+        .then((response) => {
+          this.listSupport = response;
+        });
+    },
+    async fetchGenre () {
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/genre')
+        .then((response) => {
+          this.listGenre = response;
+        });
+    },
     selectedTab: function (tabNumber) {
       const styleSelected =
         'inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer';
@@ -293,9 +303,14 @@ export default {
         const type = {
           name: this.inputType
         };
-        this.$axios.$post('https://emporiumback.fly.dev/type', type);
-        this.fillFullFormError = 'hidden';
-        this.success = '';
+        this.$axios
+          .$post('https://emporiumback.fly.dev/type', type)
+          .then(() => {
+            this.fillFullFormError = 'hidden';
+            this.success = '';
+            this.fetchType();
+            this.inputType = undefined;
+          });
       } else {
         this.fillFullFormError = '';
       }
@@ -305,9 +320,13 @@ export default {
         const auteur = {
           name: this.inputAuteur
         };
-        this.$axios.$post('https://emporiumback.fly.dev/auteur', auteur);
-        this.fillFullFormError = 'hidden';
-        this.success = '';
+        this.$axios.$post('https://emporiumback.fly.dev/auteur', auteur)
+        .then(() => {
+            this.fillFullFormError = 'hidden';
+            this.success = '';
+            this.fetchAuteur();
+            this.inputAuteur = undefined;
+          });
       } else {
         this.fillFullFormError = '';
       }
@@ -317,9 +336,13 @@ export default {
         const editeur = {
           name: this.inputEditeur
         };
-        this.$axios.$post('https://emporiumback.fly.dev/editeur', editeur);
-        this.fillFullFormError = 'hidden';
-        this.success = '';
+        this.$axios.$post('https://emporiumback.fly.dev/editeur', editeur)
+        .then(() => {
+            this.fillFullFormError = 'hidden';
+            this.success = '';
+            this.fetchEditeur();
+            this.inputEditeur = undefined;
+          });
       } else {
         this.fillFullFormError = '';
       }
@@ -329,9 +352,13 @@ export default {
         const support = {
           name: this.inputSupport
         };
-        this.$axios.$post('https://emporiumback.fly.dev/support', support);
-        this.fillFullFormError = 'hidden';
-        this.success = '';
+        this.$axios.$post('https://emporiumback.fly.dev/support', support)
+        .then(() => {
+            this.fillFullFormError = 'hidden';
+            this.success = '';
+            this.fetchSupport();
+            this.inputSupport = undefined;
+          });
       } else {
         this.fillFullFormError = '';
       }
@@ -341,9 +368,13 @@ export default {
         const genre = {
           name: this.inputGenre
         };
-        this.$axios.$post('https://emporiumback.fly.dev/genre', genre);
-        this.fillFullFormError = 'hidden';
-        this.success = '';
+        this.$axios.$post('https://emporiumback.fly.dev/genre', genre)
+        .then(() => {
+            this.fillFullFormError = 'hidden';
+            this.success = '';
+            this.fetchGenre();
+            this.inputGenre = undefined;
+          });
       } else {
         this.fillFullFormError = '';
       }

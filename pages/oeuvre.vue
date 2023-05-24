@@ -1,10 +1,22 @@
 <template>
-  <div class="grid grid-rows-[auto__auto_auto]">
+  <div class="grid grid-rows-[auto_auto]">
     <div class="grid grid-cols-3 m-5 max-h-25">
       <div class="bg-gray-700 grid place-items-center p-4 rounded-l-lg">
-        <img class="max-w-sm" :src="oeuvre.image">
+        <img v-if="oeuvre.image" class="max-w-sm" src="oeuvre.image">
+        <ImagePlaceholder v-if="!oeuvre.image" />
       </div>
-      <div class="grid list-none place-content-center text-center bg-gray-700">
+      <div class="grid list-none place-content-center bg-gray-700 relative">
+        <span
+          class="material-symbols-outlined absolute top-0 right-0 cursor-pointer"
+          @click="
+            $router.push({
+              path: '/edit/oeuvre',
+              query: { q: oeuvre.idOeuvre }
+            })
+          "
+        >
+          edit
+        </span>
         <li v-if="oeuvre.titre">
           <a class="">Titre : {{ oeuvre.titre }}</a>
         </li>
@@ -75,17 +87,9 @@
           <a>Genre : {{ oeuvre.genre.name }}</a>
         </li>
       </div>
-      <div class="bg-blue-700">
-        Linked items
+      <div class="bg-gray-700 rounded-r-lg">
+        Du même auteur :
       </div>
-    </div>
-    <div>
-      <a
-        class="bg-blue-600 cursor-pointer"
-        @click="
-          $router.push({ path: '/edit/oeuvre', query: { q: oeuvre.idOeuvre } })
-        "
-      >Edit</a>
     </div>
     <div class="relative bg-gray-800">
       <a class="text-white pl-4 text-lg">Commentaires :</a>
@@ -132,8 +136,13 @@
 </template>
 
 <script>
+import ImagePlaceholder from '~/components/ImagePlaceholder.vue';
+
 export default {
   name: 'OeuvrePage',
+  components: {
+    ImagePlaceholder
+  },
   data () {
     return {
       oeuvre: [],

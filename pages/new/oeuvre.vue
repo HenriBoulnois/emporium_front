@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="bg-gray-700 rounded-lg m-10">
-        Preview Image
+        <UploadImage />
       </div>
     </div>
   </div>
@@ -108,12 +108,14 @@
 <script>
 import BasiqueForm from '~/components/NewOeuvre/BasiqueForm.vue';
 import GenericTypeFormVue from '~/components/NewOeuvre/GenericTypeForm.vue';
+import UploadImage from '~/components/UploadImage.vue';
 
 export default {
   name: 'NewOeuvrePage',
   components: {
     BasiqueForm,
-    GenericTypeFormVue
+    GenericTypeFormVue,
+    UploadImage
   },
   data () {
     return {
