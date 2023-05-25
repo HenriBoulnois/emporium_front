@@ -2,12 +2,21 @@
   <div class="grid">
     <div class="grid grid-cols-3 bg-gray-700 shadow-inner rounded-lg h-fit">
       <div class="grid bg-white p-4 rounded-l-lg h-full">
+        <span
+          class="material-symbols-outlined bg-red-400 h-fit w-fit rounded-full p-1"
+          @click="deleteOeuvre()"
+        >
+          delete
+        </span>
+        <div :class="deleteSuccess">
+          L'oeuvre a été supprimé
+        </div>
         <div class="place-self-center">
           Informations actuelles
         </div>
         <img
           v-if="oeuvre.imagePath"
-          class="max-w-full max-h-full"
+          class="max-w-full max-h-52 place-self-center"
           :src="oeuvre.imagePath"
         >
         <ImagePlaceholder v-if="!oeuvre.imagePath" />
@@ -175,7 +184,8 @@ export default {
       listAuteur: '',
       listEditeur: '',
       listSupport: '',
-      listGenre: ''
+      listGenre: '',
+      deleteSuccess: 'hidden'
     };
   },
   async fetch () {
@@ -259,6 +269,19 @@ export default {
       } else {
         console.log('titre undefined');
       }
+    },
+    deleteOeuvre () {
+      this.$axios
+        .$delete(
+          'https://emporiumback.fly.dev/oeuvres/delete/' + this.oeuvre.idOeuvre
+        )
+        .then(() => {
+          this.deleteSuccess = '';
+          setTimeout(this.$router.push({ path: '/oeuvres' }), 10000);
+        })
+        .catch(function () {
+          console.log('issue with delete');
+        });
     }
   }
 };
