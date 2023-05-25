@@ -7,7 +7,7 @@
         <li>
           <NuxtLink to="/">
             <a
-              class="flex items-center p-2 text-white hover:bg-gray-700"
+              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-700"
             >
               <svg
                 aria-hidden="true"
@@ -26,7 +26,7 @@
         <li>
           <NuxtLink to="/oeuvres">
             <a
-              class="flex items-center p-2 text-white hover:bg-gray-700"
+              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-700"
             >
               <svg
                 aria-hidden="true"
@@ -47,7 +47,7 @@
         <li>
           <NuxtLink to="/new/oeuvre">
             <a
-              class="flex items-center p-2 text-white hover:bg-gray-700"
+              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-700"
             >
               <svg
                 aria-hidden="true"

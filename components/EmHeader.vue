@@ -2,7 +2,7 @@
   <div
     class="h-full px-3 py-4 bg-gray-900 grid grid-cols-[auto_1fr_minmax(40%,40%)_1fr_auto]"
   >
-    <NuxtLink to="/">
+    <NuxtLink class="flex" to="/">
       <a
         class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 w-fit"
       >
