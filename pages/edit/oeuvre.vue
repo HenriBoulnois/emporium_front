@@ -122,7 +122,7 @@
           <div class="grid grid-rows-2 text-center">
             <div
               class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              @click="submitBasique()"
+              @click="submitOeuvre()"
             >
               Envoyer
             </div>
@@ -137,8 +137,8 @@
         <div class="">
           Visualisation des changements
         </div>
-        <img v-if="oeuvre.image" class="max-w-sm" src="oeuvre.image">
-        <ImagePlaceholder v-if="!oeuvre.image" />
+        <img v-if="oeuvre.imagePath" class="max-w-full max-h-52" :src="oeuvre.imagePath">
+        <ImagePlaceholder v-if="!oeuvre.imagePath" />
         <div>Titre : {{ inputTitre }}</div>
         <div>Sous Titre : {{ inputSousTitre }}</div>
         <div>Description : {{ inputDescription }}</div>
@@ -231,7 +231,7 @@ export default {
           titre: this.inputTitre,
           sousTitre: this.inputSousTitre,
           description: this.inputDescription,
-          image: this.inputImage,
+          image: this.inputImagePath,
           idType: this.inputType,
           idAuteur: this.inputAuteur,
           idEditeur: this.inputEditeur,
