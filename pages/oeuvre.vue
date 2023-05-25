@@ -1,9 +1,9 @@
 <template>
-  <div class="grid grid-rows-[auto_auto]">
-    <div class="grid grid-cols-3 m-5 max-h-25">
+  <div class="grid grid-rows-[max(500px)_auto]">
+    <div class="grid grid-cols-3 m-5">
       <div class="bg-gray-700 grid place-items-center p-4 rounded-l-lg">
-        <img v-if="oeuvre.image" class="max-w-sm" src="oeuvre.image">
-        <ImagePlaceholder v-if="!oeuvre.image" />
+        <img v-if="oeuvre.imagePath" class="max-w-full max-h-full" :src="oeuvre.imagePath">
+        <ImagePlaceholder v-if="!oeuvre.imagePath" />
       </div>
       <div class="grid list-none place-content-center bg-gray-700 relative">
         <span
@@ -89,6 +89,11 @@
       </div>
       <div class="bg-gray-700 rounded-r-lg">
         Du même auteur :
+        <RelatedOeuvre
+          v-if="oeuvre.auteur"
+          :oeuvre-id="oeuvre.idOeuvre"
+          :auteur-id="oeuvre.auteur.idAuteur"
+        />
       </div>
     </div>
     <div class="relative bg-gray-800">
@@ -137,11 +142,13 @@
 
 <script>
 import ImagePlaceholder from '~/components/ImagePlaceholder.vue';
+import RelatedOeuvre from '~/components/Oeuvre/RelatedOeuvre.vue';
 
 export default {
   name: 'OeuvrePage',
   components: {
-    ImagePlaceholder
+    ImagePlaceholder,
+    RelatedOeuvre
   },
   data () {
     return {
@@ -152,7 +159,8 @@ export default {
     };
   },
   async fetch () {
-    // exact user
+    this.oeuvre = [];
+    this.commentaires = [];
     await this.$axios
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
       .then(reponse => (this.oeuvre = reponse))
