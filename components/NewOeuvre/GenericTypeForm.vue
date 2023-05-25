@@ -57,6 +57,10 @@
         item-value="idGenre"
         :label="labelGenre"
       />
+      <label class="btn btn-default">
+        <input id="file" ref="file" type="file" accept="image/jpeg, image/png" @change="fileUpload()">
+      </label>
+      <img src="https://storage.googleapis.com/emporium_bucket_image/emporium_bucket_image/tes6ffb2469-23da-4d78-ae76-4831562b32c3.png">
     </div>
     * Champs faculatifs
     <div class="grid grid-rows-2 text-center">
@@ -95,42 +99,53 @@ export default {
     };
   },
   methods: {
+    fileUpload () {
+      this.imageUpload = this.$refs.file.files[0];
+    },
     submitOeuvre: function () {
-      if (
-        this.inputTitre !== undefined &&
-        this.inputSousTitre !== undefined &&
-        this.inputDescription !== undefined &&
-        this.inputImage !== undefined &&
-        this.inputAuteur !== undefined &&
-        this.inputEditeur !== undefined &&
-        this.inputSupport !== undefined &&
-        this.inputGenre !== undefined
-      ) {
-        const oeuvre = {
-          titre: this.inputTitre,
-          sousTitre: this.inputSousTitre,
-          description: this.inputDescription,
-          image: {
-            image: '',
-            imageName: 'image' + this.inputTitre,
-            imageExtension: 'jpg'
-          },
-          idType: this.typeId,
-          idAuteur: this.inputAuteur,
-          idEditeur: this.inputEditeur,
-          idSupport: this.inputSupport,
-          idGenre: this.inputGenre
-        };
-        console.log(oeuvre);
+      // if (
+      //   this.inputTitre !== undefined &&
+      //   this.inputSousTitre !== undefined &&
+      //   this.inputDescription !== undefined &&
+      //   this.inputImage !== undefined &&
+      //   this.inputAuteur !== undefined &&
+      //   this.inputEditeur !== undefined &&
+      //   this.inputSupport !== undefined &&
+      //   this.inputGenre !== undefined &&
+      //   this.imageUpload !== undefined
+      // ) {
+        const formData = new FormData();
+        // const oeuvre = {
+        //   titre: this.inputTitre,
+        //   sousTitre: this.inputSousTitre,
+        //   description: this.inputDescription,
+        //   idType: this.typeId,
+        //   idAuteur: this.inputAuteur,
+        //   idEditeur: this.inputEditeur,
+        //   idSupport: this.inputSupport,
+        //   idGenre: this.inputGenre
+        // };
+        formData.append('image', this.imageUpload);
+        formData.append('imageName', this.imageUpload.name);
+        formData.append('titre', this.inputTitre);
+        formData.append('sousTitre', this.inputSousTitre);
+        formData.append('description', this.inputDescription);
+        formData.append('idType', this.typeId);
+        formData.append('idAuteur', this.inputAuteur);
+        formData.append('idEditeur', this.inputEditeur);
+        formData.append('idSupport', this.inputSupport);
+        formData.append('idGenre', this.inputGenre);
+
+        // console.log(oeuvre);
         this.$axios
-          .$post('https://emporiumback.fly.dev/oeuvres', oeuvre)
+          .$post('http://localhost:9000/oeuvres', formData)
           .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
           });
-      } else {
-        this.fillFullFormError = '';
-      }
+      // } else {
+      //   this.fillFullFormError = '';
+      // }
     }
   }
 };
