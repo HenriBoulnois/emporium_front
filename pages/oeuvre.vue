@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="grid grid-cols-3 p-4 bg-gray-700 rounded-lg">
-      <div class="">
+      <div class="place-self-center">
         <img
           v-if="oeuvre.imagePath"
           class="max-h-80"

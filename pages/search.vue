@@ -75,6 +75,12 @@ export default {
       );
       this.items = response;
     }
+    if (this.$route.query.n != null) {
+      const response = await this.$axios.$get(
+        'https://emporiumback.fly.dev/oeuvres/search/' + this.$route.query.n
+      );
+      this.items = response;
+    }
   },
   watch: {
     '$route.query': '$fetch'
