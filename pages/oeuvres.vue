@@ -18,8 +18,8 @@
           $router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
         "
       >
-        <img v-if="oeuvre.image" :src="oeuvre.image">
-        <ImagePlaceholder v-if="!oeuvre.image" />
+        <img v-if="oeuvre.imagePath" :src="oeuvre.imagePath">
+        <ImagePlaceholder v-if="!oeuvre.imagePath" />
         <a>{{ oeuvre.titre }}</a>
         <a>{{ oeuvre.auteur.name }}</a>
         <a>{{ oeuvre.genre.name }}</a>

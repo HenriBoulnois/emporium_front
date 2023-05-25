@@ -170,7 +170,12 @@ export default {
       inputEditeur: undefined,
       inputSupport: undefined,
       inputGenre: undefined,
-      labelList: undefined
+      labelList: undefined,
+      listType: '',
+      listAuteur: '',
+      listEditeur: '',
+      listSupport: '',
+      listGenre: ''
     };
   },
   async fetch () {
@@ -179,6 +184,31 @@ export default {
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
       .then(reponse => (this.oeuvre = reponse))
       .catch(error => console.log(error));
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/type')
+      .then((response) => {
+        this.listType = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/auteur')
+      .then((response) => {
+        this.listAuteur = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/editeur')
+      .then((response) => {
+        this.listEditeur = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/support')
+      .then((response) => {
+        this.listSupport = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/genre')
+      .then((response) => {
+        this.listGenre = response;
+      });
   },
   watch: {
     '$route.query': '$fetch'
@@ -229,14 +259,6 @@ export default {
       } else {
         console.log('titre undefined');
       }
-    },
-    getLabelList (whichLabel) {
-      this.$axios
-        .$get('https://emporiumback.fly.dev/' + whichLabel)
-        .then(response => (this.labelList = response))
-        .catch(function () {
-          console.log('issue with post');
-        });
     }
   }
 };
