@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-[auto_1fr]">
-    <div class="grid-rows-2 m-10">
+    <div class="grid-rows-2">
       <div
         class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
       >
@@ -145,7 +145,7 @@
         </form>
       </div>
     </div>
-    <div class="m-10 bg-white rounded-lg">
+    <div class="ml-12 bg-white rounded-lg">
       <div :class="tab1Text">
         <GenericPreview :list="listType" label-type="Type" />
       </div>

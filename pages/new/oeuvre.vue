@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-[auto_1fr]">
-    <div class="m-10">
+    <div class="mr-6">
       <div
         class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
       >
@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="grid grid-rows-[auto_1fr]">
-      <div class="flex items-center bg-white rounded-lg m-10 p-4">
+      <div class="flex items-center bg-white rounded-lg ml-6 mb-6 p-4">
         <div class="flex-auto">
           Un label (Auteur, Studio...) n'est pas présent ?
         </div>
@@ -98,7 +98,7 @@
           Ajoutez le !
         </div>
       </div>
-      <div class="bg-gray-700 rounded-lg m-10">
+      <div class="bg-gray-700 rounded-lg ml-6">
         <UploadImage />
       </div>
     </div>

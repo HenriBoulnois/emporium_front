@@ -1,16 +1,16 @@
 <template>
   <div class="grid">
-    <div class="grid grid-cols-3 bg-gray-700 m-5 shadow-inner rounded-lg h-fit">
+    <div class="grid grid-cols-3 bg-gray-700 shadow-inner rounded-lg h-fit">
       <div class="grid bg-white p-4 rounded-l-lg h-full">
         <div class="place-self-center">
           Informations actuelles
         </div>
         <img
-          v-if="oeuvre.image"
-          class="max-w-sm place-self-center"
-          src="oeuvre.image"
+          v-if="oeuvre.imagePath"
+          class="max-w-full max-h-full"
+          :src="oeuvre.imagePath"
         >
-        <ImagePlaceholder v-if="!oeuvre.image" class="place-self-center" />
+        <ImagePlaceholder v-if="!oeuvre.imagePath" />
         <div v-if="oeuvre.titre">
           Titre : {{ oeuvre.titre }}
         </div>

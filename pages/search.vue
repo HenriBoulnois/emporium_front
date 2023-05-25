@@ -1,27 +1,27 @@
 <template>
   <div>
-    <ul class="justify-items-center text-center">
-      <li class="grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr]">
+    <div class="justify-items-center text-center">
+      <div class="bg-gray-600 rounded-lg grid grid-cols-[1fr_1fr_1fr_1fr_1fr] p-2 items-center">
         <a>Image</a>
         <a>Nom</a>
         <a>Auteur</a>
         <a>Genre</a>
         <a>Catégorie</a>
-      </li>
-      <li
+      </div>
+      <div
         v-for="item in items"
         :key="item.idOeuvre"
-        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
+        class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[1fr_1fr_1fr_1fr_1fr] p-4 place-items-center"
         @click="$router.push({ path: '/oeuvre', query: { q: item.idOeuvre } })"
       >
-        <img v-if="item.image" :src="item.image">
-        <ImagePlaceholder v-if="!item.image" />
+        <img v-if="item.imagePath" :src="item.imagePath" class="max-h-28">
+        <ImagePlaceholder v-if="!item.imagePath" />
         <a>{{ item.titre }}</a>
         <a>{{ item.auteur.name }}</a>
         <a>{{ item.genre.name }}</a>
         <a>{{ item.type.name }}</a>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 

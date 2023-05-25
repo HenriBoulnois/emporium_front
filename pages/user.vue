@@ -1,8 +1,13 @@
 <template>
-  <div class="grid grid-rows-2">
-    <div class="grid grid-cols-3 max-h-fit m-5">
-      <div class="bg-blue-500 grid place-items-center">
-        <!-- <img :src="user.image"> -->
+  <div class="">
+    <div class="grid grid-cols-3">
+      <div class="bg-gray-700 grid place-items-center rounded-l-lg">
+        <img
+          v-if="user.imagePath"
+          class="max-h-80"
+          :src="user.imagePath"
+        >
+        <ImagePlaceholder v-if="!user.imagePath" />
       </div>
       <div class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600">
         <div class="grid place-content-center">
@@ -23,34 +28,39 @@
           Favorite items
         </div>
       </div>
-      <div class="bg-blue-700">
+      <div class="bg-blue-700 rounded-r-lg">
         Last comments
       </div>
     </div>
-    <div class="bg-blue-400">
-      <ul class="justify-items-center text-center">
-        <li class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr]">
+    <div class="bg-gray-800">
+      <div class="justify-items-center text-center">
+        <div class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr]">
           <a>Image</a>
           <a>Nom</a>
           <a>Type</a>
           <a>Catégorie</a>
           <a>Description</a>
-        </li>
-        <li
+        </div>
+        <div
           v-for="oeuvre in collection"
           :key="oeuvre.idOeuvre"
-          class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
+          class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr] p-4 items-center"
           @click="
             $router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
           "
         >
-          <img :src="oeuvre.image">
+          <img
+            v-if="oeuvre.imagePath"
+            class="max-w-full max-h-32"
+            :src="oeuvre.imagePath"
+          >
+          <ImagePlaceholder v-if="!oeuvre.imagePath" />
           <a>{{ oeuvre.titre }}</a>
           <a>{{ oeuvre.description }}</a>
           <a>{{ oeuvre.type.name }}</a>
           <a>{{ oeuvre.auteur.name }}</a>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
