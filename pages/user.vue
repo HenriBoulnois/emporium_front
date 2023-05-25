@@ -1,35 +1,23 @@
 <template>
   <div class="">
     <div class="grid grid-cols-3">
-      <div class="bg-gray-700 grid place-items-center rounded-l-lg">
+      <div class="bg-gray-700 grid place-items-center rounded-l-lg p-4">
         <img
           v-if="user.imagePath"
           class="max-h-80"
           :src="user.imagePath"
         >
         <ImagePlaceholder v-if="!user.imagePath" />
+        <a class="pt-4">{{ user.pseudo }}</a>
+        <a class="pt-4">{{ user.uwuid }}</a>
       </div>
       <div class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600">
-        <div class="grid place-content-center">
-          <li>
-            <a class="">{{ user.pseudo }}</a>
-          </li>
-          <li>
-            <a class="">{{ user.grade }}</a>
-          </li>
-          <li>
-            <a>{{ user.equipe }}</a>
-          </li>
-          <li>
-            <a>{{ user.resultat }}</a>
-          </li>
-        </div>
         <div class="bg-blue-550">
           Favorite items
         </div>
       </div>
-      <div class="bg-blue-700 rounded-r-lg">
-        Last comments
+      <div class="bg-gray-700 rounded-r-lg">
+        <UserComments v-if="user.uwuid" :user-id="user.uwuid" />
       </div>
     </div>
     <div class="bg-gray-800">
@@ -66,8 +54,13 @@
 </template>
 
 <script>
+import UserComments from '~/components/User/UserComments.vue';
+
 export default {
   name: 'UserPage',
+  components: {
+    UserComments
+  },
   data () {
     return {
       user: '',
