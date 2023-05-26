@@ -2,94 +2,101 @@
   <div class="">
     <div class="grid grid-cols-3 p-4 bg-gray-700 rounded-lg">
       <div class="place-self-center">
-        <img
-          v-if="oeuvre.imagePath"
-          class="max-h-80"
-          :src="oeuvre.imagePath"
-        >
+        <img v-if="oeuvre.imagePath" class="max-h-80" :src="oeuvre.imagePath">
         <ImagePlaceholder v-if="!oeuvre.imagePath" />
       </div>
-      <div class="grid list-none place-content-center relative">
-        <span
-          class="material-symbols-outlined absolute top-0 right-0 cursor-pointer"
-          @click="
-            $router.push({
-              path: '/edit/oeuvre',
-              query: { q: oeuvre.idOeuvre }
-            })
-          "
-        >
-          edit
-        </span>
-        <li v-if="oeuvre.titre">
-          <a class="">Titre : {{ oeuvre.titre }}</a>
-        </li>
-        <li v-if="oeuvre.sousTitre">
-          <a class="">Sous Titre : {{ oeuvre.sousTitre }}</a>
-        </li>
-        <li v-if="oeuvre.description">
-          <a>Description : {{ oeuvre.description }}</a>
-        </li>
-        <li
-          v-if="oeuvre.auteur"
-          class="cursor-pointer"
-          @click="
-            $router.push({
-              path: '/search',
-              query: { a: oeuvre.auteur.idAuteur }
-            })
-          "
-        >
-          <a>Auteur : {{ oeuvre.auteur.name }}</a>
-        </li>
-        <li
-          v-if="oeuvre.type"
-          class="cursor-pointer"
-          @click="
-            $router.push({
-              path: '/search',
-              query: { t: oeuvre.type.idType }
-            })
-          "
-        >
-          <a>Type : {{ oeuvre.type.name }}</a>
-        </li>
-        <li
-          v-if="oeuvre.support"
-          class="cursor-pointer"
-          @click="
-            $router.push({
-              path: '/search',
-              query: { s: oeuvre.support.idSupport }
-            })
-          "
-        >
-          <a>Support : {{ oeuvre.support.name }}</a>
-        </li>
-        <li
-          v-if="oeuvre.editeur"
-          class="cursor-pointer"
-          @click="
-            $router.push({
-              path: '/search',
-              query: { e: oeuvre.editeur.idEditeur }
-            })
-          "
-        >
-          <a>Editeur : {{ oeuvre.editeur.name }}</a>
-        </li>
-        <li
-          v-if="oeuvre.genre"
-          class="cursor-pointer"
-          @click="
-            $router.push({
-              path: '/search',
-              query: { g: oeuvre.genre.idGenre }
-            })
-          "
-        >
-          <a>Genre : {{ oeuvre.genre.name }}</a>
-        </li>
+      <div class="grid grid-rows-2">
+        <div class="relative">
+          Informations :
+          <span
+            class="material-symbols-outlined absolute top-0 right-0 cursor-pointer"
+            @click="
+              $router.push({
+                path: '/edit/oeuvre',
+                query: { q: oeuvre.idOeuvre }
+              })
+            "
+          >
+            edit
+          </span>
+          <li v-if="oeuvre.titre">
+            <a class="">Titre : {{ oeuvre.titre }}</a>
+          </li>
+          <li v-if="oeuvre.sousTitre">
+            <a class="">Sous Titre : {{ oeuvre.sousTitre }}</a>
+          </li>
+          <li v-if="oeuvre.description">
+            <a>Description : {{ oeuvre.description }}</a>
+          </li>
+          <li
+            v-if="oeuvre.auteur"
+            class="cursor-pointer"
+            @click="
+              $router.push({
+                path: '/search',
+                query: { a: oeuvre.auteur.idAuteur }
+              })
+            "
+          >
+            <a>Auteur : {{ oeuvre.auteur.name }}</a>
+          </li>
+          <li
+            v-if="oeuvre.type"
+            class="cursor-pointer"
+            @click="
+              $router.push({
+                path: '/search',
+                query: { t: oeuvre.type.idType }
+              })
+            "
+          >
+            <a>Type : {{ oeuvre.type.name }}</a>
+          </li>
+          <li
+            v-if="oeuvre.support"
+            class="cursor-pointer"
+            @click="
+              $router.push({
+                path: '/search',
+                query: { s: oeuvre.support.idSupport }
+              })
+            "
+          >
+            <a>Support : {{ oeuvre.support.name }}</a>
+          </li>
+          <li
+            v-if="oeuvre.editeur"
+            class="cursor-pointer"
+            @click="
+              $router.push({
+                path: '/search',
+                query: { e: oeuvre.editeur.idEditeur }
+              })
+            "
+          >
+            <a>Editeur : {{ oeuvre.editeur.name }}</a>
+          </li>
+          <li
+            v-if="oeuvre.genre"
+            class="cursor-pointer"
+            @click="
+              $router.push({
+                path: '/search',
+                query: { g: oeuvre.genre.idGenre }
+              })
+            "
+          >
+            <a>Genre : {{ oeuvre.genre.name }}</a>
+          </li>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="bg-green-300 max-h-20" @click="addToMyCollection(false)">
+            Ajouter
+          </div>
+          <div class="bg-pink-300 max-h-20" @click="addToMyCollection(true)">
+            Mes favoris
+          </div>
+        </div>
       </div>
       <div class="">
         Du même auteur :
@@ -132,6 +139,20 @@ export default {
   },
   watch: {
     '$route.query': '$fetch'
+  },
+  methods: {
+    addToMyCollection: function (asFavorite) {
+      const addedOeuvre = {
+        UWUid: '1',
+        idOeuvre: this.oeuvre.idOeuvre,
+        favorite: asFavorite
+      };
+      this.$axios
+        .$post('https://emporiumback.fly.dev/collection', addedOeuvre)
+        .then(() => {
+          console.log('add to collect');
+        });
+    }
   }
 };
 </script>

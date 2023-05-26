@@ -80,6 +80,11 @@ export default {
   },
   watch: {
     '$route.query': '$fetch'
+  },
+  methods: {
+    removeFromMyCollection () {
+      //
+    }
   }
 };
 </script>
