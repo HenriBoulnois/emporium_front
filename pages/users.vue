@@ -8,7 +8,8 @@
         @click="$router.push({ path: '/user', query: { q: user.pseudo } })"
       >
         <button>
-          <img :src="user.image">
+          <img v-if="user.profilPicturePath" :src="user.profilPicturePath" class="max-h-28">
+          <ImagePlaceholder v-if="!user.profilPicturePath" />
           <a class="m-7">{{ user.pseudo }}</a>
         </button>
       </li>
@@ -25,7 +26,6 @@ export default {
     };
   },
   async fetch () {
-    // const response = await this.$axios.$get('https://dummyjson.com/users');
     const response = await this.$axios.$get('https://emporiumback.fly.dev/utilisateur');
     this.users = response;
   }
