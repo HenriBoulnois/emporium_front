@@ -23,12 +23,18 @@
         placeholder="Description"
       >
       <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
-      <input
-        v-model="inputImage"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
-        placeholder="Image"
-      >
+      <label class="btn btn-default">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          accept="image/jpeg, image/png"
+          @change="fileUpload()"
+        >
+      </label>
+      <div v-if="imagePreview">
+        Image chargée avec succes
+      </div>
       <v-autocomplete
         v-model="inputAuteur"
         :items="listAuteur"
@@ -91,39 +97,50 @@ export default {
   data () {
     return {
       fillFullFormError: 'hidden',
-      success: 'hidden'
+      success: 'hidden',
+      imageUpload: undefined,
+      imagePreview: undefined,
+      inputTitre: undefined,
+      inputSousTitre: undefined,
+      inputDescription: undefined,
+      inputAuteur: undefined,
+      inputEditeur: undefined,
+      inputSupport: undefined,
+      inputGenre: undefined
     };
   },
   methods: {
-    submitOeuvre: function () {
+    fileUpload () {
+      this.imageUpload = this.$refs.file.files[0];
+      this.imagePreview = URL.createObjectURL(this.imageUpload);
+      this.$emit('display-preview-event', { image: this.imagePreview });
+    },
+    submitOeuvre () {
+      this.inputSousTitre = 'sousTitreGenerique';
+      this.inputDescription = 'descriptionGenerique';
       if (
         this.inputTitre !== undefined &&
-        this.inputSousTitre !== undefined &&
-        this.inputDescription !== undefined &&
-        this.inputImage !== undefined &&
+        // this.inputSousTitre !== undefined &&
+        // this.inputDescription !== undefined &&
+        this.imageUpload !== undefined &&
         this.inputAuteur !== undefined &&
         this.inputEditeur !== undefined &&
         this.inputSupport !== undefined &&
         this.inputGenre !== undefined
       ) {
-        const oeuvre = {
-          titre: this.inputTitre,
-          sousTitre: this.inputSousTitre,
-          description: this.inputDescription,
-          image: {
-            image: '',
-            imageName: 'image' + this.inputTitre,
-            imageExtension: 'jpg'
-          },
-          idType: this.typeId,
-          idAuteur: this.inputAuteur,
-          idEditeur: this.inputEditeur,
-          idSupport: this.inputSupport,
-          idGenre: this.inputGenre
-        };
-        console.log(oeuvre);
-        this.$axios
-          .$post('https://emporiumback.fly.dev/oeuvres', oeuvre)
+        const formData = new FormData();
+        formData.append('image', this.imageUpload);
+        formData.append('imageName', this.imageUpload.name);
+        formData.append('titre', this.inputTitre);
+        formData.append('sousTitre', this.inputSousTitre);
+        formData.append('description', this.inputDescription);
+        formData.append('idType', this.typeId);
+        formData.append('idAuteur', this.inputAuteur);
+        formData.append('idEditeur', this.inputEditeur);
+        formData.append('idSupport', this.inputSupport);
+        formData.append('idGenre', this.inputGenre);
+        return this.$axios
+          .$post('https://emporiumback.fly.dev/oeuvres', formData)
           .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';

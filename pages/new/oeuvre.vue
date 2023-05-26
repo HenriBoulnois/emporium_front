@@ -27,6 +27,7 @@
           :list-editeur="listEditeur"
           :list-support="listSupport"
           :list-genre="listGenre"
+          @display-preview-event="displayPreview"
         />
       </div>
       <div :class="tab2Text">
@@ -40,6 +41,7 @@
           label-editeur="Label *"
           label-genre="Genre (POP, Rap, Metal...) *"
           label-support="Support (CD, Vinyl...) *"
+          @display-preview-event="displayPreview"
         />
       </div>
       <div :class="tab3Text">
@@ -53,6 +55,7 @@
           label-editeur="Editeur *"
           label-genre="Genre (MMORPG, FPS, Souls-like...) *"
           label-support="Support (Cartouche, Demat...) *"
+          @display-preview-event="displayPreview"
         />
       </div>
       <div :class="tab4Text">
@@ -66,6 +69,7 @@
           label-editeur="Editeur (Livre)"
           label-genre="Genre (Livre)"
           label-support="Support (Livre)"
+          @display-preview-event="displayPreview"
         />
       </div>
       <div :class="tab5Text">
@@ -79,6 +83,7 @@
           label-editeur="Editeur (Goodies)"
           label-genre="Genre (Goodies)"
           label-support="Support (Goodies)"
+          @display-preview-event="displayPreview"
         />
       </div>
     </div>
@@ -99,7 +104,7 @@
         </div>
       </div>
       <div class="bg-gray-700 rounded-lg ml-6">
-        <UploadImage />
+        <img :src="previewImage">
       </div>
     </div>
   </div>
@@ -108,14 +113,12 @@
 <script>
 import BasiqueForm from '~/components/NewOeuvre/BasiqueForm.vue';
 import GenericTypeFormVue from '~/components/NewOeuvre/GenericTypeForm.vue';
-import UploadImage from '~/components/UploadImage.vue';
 
 export default {
   name: 'NewOeuvrePage',
   components: {
     BasiqueForm,
-    GenericTypeFormVue,
-    UploadImage
+    GenericTypeFormVue
   },
   data () {
     return {
@@ -136,11 +139,12 @@ export default {
       tab5Text: 'hidden',
       fillFullFormError: 'hidden',
       success: 'hidden',
-      listType: '',
-      listAuteur: '',
-      listEditeur: '',
-      listSupport: '',
-      listGenre: ''
+      listType: undefined,
+      listAuteur: undefined,
+      listEditeur: undefined,
+      listSupport: undefined,
+      listGenre: undefined,
+      previewImage: undefined
     };
   },
   async fetch () {
@@ -223,6 +227,9 @@ export default {
       this.tab5Text = 'hidden';
       this.inputType = undefined;
       this.success = 'hidden';
+    },
+    displayPreview (payload) {
+      this.previewImage = payload.image
     }
   }
 };
