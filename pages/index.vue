@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-rows-[auto_auto]">
     <div class="grid grid-cols-2">
-      <div class="bg-blue-400 p-5 mr-5 mb-5 rounded-lg">
-        Most popular cat
+      <div class="bg-white p-5 mr-5 mb-5 rounded-lg">
+        <MostPopularCat />
       </div>
       <div class="bg-blue-500 p-5 mb-5 rounded-lg">
         Last connected user
@@ -44,8 +44,11 @@
 </template>
 
 <script>
+import MostPopularCat from '~/components/Index/MostPopularCat.vue';
+
 export default {
   name: 'IndexPage',
+  components: { MostPopularCat },
   data () {
     return {
       lastModified: []
