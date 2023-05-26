@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
-    <div class="grid grid-cols-3 bg-gray-700 shadow-inner rounded-lg h-fit">
-      <div class="grid bg-white p-4 rounded-l-lg h-full">
+    <div class="grid grid-cols-2 bg-gray-700 shadow-inner rounded-lg h-fit">
+      <div class="grid bg-white p-4 rounded-l-lg h-full text-xl font-bold">
         Liste des labels
         <v-autocomplete
           v-model="inputLabel"
@@ -39,25 +39,33 @@
           label="Genre"
         />
       </div>
-      <div class="grid bg-white p-4 h-full rounded-r-lg drop-shadow-xl">
-        <div class="">
-          Formulaire de modification
+      <div class="bg-gray-200 p-4 rounded-r-lg drop-shadow-xl">
+        <div class="text-gray-700 text-xl font-bold mb-2">
+          Nouveau nom :
         </div>
-        {{ inputLabel }}
-        <a class="block text-gray-700 text-sm font-bold mb-2"> Nouveau nom :</a>
+        <div v-if="inputLabel" class="m-4">
+          Label selectionné : {{ inputLabel.name }}
+        </div>
         <input
           v-model="inputNewName"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded m-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           placeholder="Nouveau nom"
         >
-        <div class="bg-red-300" @click="submitChange()">
-          Submit change
+        <div
+          class="w-fit text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm m-4 px-4 py-2"
+          @click="submitChange()"
+        >
+          Envoyer
         </div>
-      </div>
-      <div class="grid p-4 h-full">
-        <div class="">
-          Visualisation des changements
+        <div :class="error">
+          Une erreur est survenue.
+        </div>
+        <div :class="errorNoInput">
+          Veuillez selectionner un label
+        </div>
+        <div :class="success">
+          Le label a bien été modifié.
         </div>
       </div>
     </div>
@@ -75,7 +83,10 @@ export default {
       listSupport: undefined,
       listGenre: undefined,
       inputLabel: undefined,
-      inputNewName: undefined
+      inputNewName: undefined,
+      error: 'hidden',
+      success: 'hidden',
+      errorNoInput: 'hidden'
     };
   },
   async fetch () {
@@ -113,57 +124,54 @@ export default {
             id: this.inputLabel.idType,
             name: this.inputNewName
           };
-          this.$axios
-            .$put('https://emporiumback.fly.dev/type', newLabelName)
-            .then(() => {
-              this.inputNewName = undefined;
-            });
+          this.submitMethod('type', newLabelName);
         }
         if (this.inputLabel.idAuteur !== undefined) {
           const newLabelName = {
             id: this.inputLabel.idAuteur,
             name: this.inputNewName
           };
-          this.$axios
-            .$put('https://emporiumback.fly.dev/auteur', newLabelName)
-            .then(() => {
-              this.inputNewName = undefined;
-            });
+          this.submitMethod('auteur', newLabelName);
         }
         if (this.inputLabel.idGenre !== undefined) {
           const newLabelName = {
             id: this.inputLabel.idGenre,
             name: this.inputNewName
           };
-          this.$axios
-            .$put('https://emporiumback.fly.dev/genre', newLabelName)
-            .then(() => {
-              this.inputNewName = undefined;
-            });
+          this.submitMethod('genre', newLabelName);
         }
         if (this.inputLabel.idEditeur !== undefined) {
           const newLabelName = {
             id: this.inputLabel.idEditeur,
             name: this.inputNewName
           };
-          this.$axios
-            .$put('https://emporiumback.fly.dev/editeur', newLabelName)
-            .then(() => {
-              this.inputNewName = undefined;
-            });
+          this.submitMethod('editeur', newLabelName);
         }
         if (this.inputLabel.idSupport !== undefined) {
           const newLabelName = {
             id: this.inputLabel.idSupport,
             name: this.inputNewName
           };
-          this.$axios
-            .$put('https://emporiumback.fly.dev/support', newLabelName)
-            .then(() => {
-              this.inputNewName = undefined;
-            });
+          this.submitMethod('support', newLabelName);
         }
+      } else {
+        this.errorNoInput = ''
+        setTimeout(() => { this.errorNoInput = 'hidden' }, 2000)
       }
+    },
+    submitMethod (typeLabel, newLabelName) {
+      this.$axios
+        .$put('https://emporiumback.fly.dev/' + typeLabel, newLabelName)
+        .then(() => {
+          this.inputNewName = undefined;
+          this.error = 'hidden';
+          this.success = '';
+        })
+        .catch(() => {
+          this.success = 'hidden';
+          this.error = '';
+        });
+      this.inputLabel = undefined;
     }
   }
 };

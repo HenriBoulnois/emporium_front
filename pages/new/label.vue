@@ -1,148 +1,165 @@
 <template>
   <div class="grid grid-cols-[auto_1fr]">
-    <div class="grid-rows-2">
-      <div
-        class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
-      >
-        <a :class="tab1Title" @click="selectedTab(1)">Type</a>
-        <a :class="tab2Title" @click="selectedTab(2)">Auteur</a>
-        <a :class="tab3Title" @click="selectedTab(3)">Editeur</a>
-        <a :class="tab4Title" @click="selectedTab(4)">Support</a>
-        <a :class="tab5Title" @click="selectedTab(5)">Genre</a>
-      </div>
-      <div :class="tab1Text">
-        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Nouveau type (Musique, Jeux-vidéo...)
-            </a>
-            <input
-              v-model="inputType"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Nouveau type"
-            >
-          </div>
-          <div class="grid grid-rows-2 text-center">
-            <div
-              class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              @click="submitType()"
-            >
-              Envoyer
+    <div class="grid grid-rows-[auto_auto] h-fit">
+      <div class="grid-rows-2 h-fit">
+        <div
+          class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
+        >
+          <a :class="tab1Title" @click="selectedTab(1)">Type</a>
+          <a :class="tab2Title" @click="selectedTab(2)">Auteur</a>
+          <a :class="tab3Title" @click="selectedTab(3)">Editeur</a>
+          <a :class="tab4Title" @click="selectedTab(4)">Support</a>
+          <a :class="tab5Title" @click="selectedTab(5)">Genre</a>
+        </div>
+        <div :class="tab1Text">
+          <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <a class="block text-gray-700 text-sm font-bold mb-2">
+                Nouveau type (Musique, Jeux-vidéo...)
+              </a>
+              <input
+                v-model="inputType"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Nouveau type"
+              >
             </div>
-            <a :class="fillFullFormError">
-              Un rongeur semble avoir grignotté le câble
-            </a>
-            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
-          </div>
-        </form>
-      </div>
-      <div :class="tab2Text">
-        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Auteur (Groupe, Créateur...)
-            </a>
-            <input
-              v-model="inputAuteur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Auteur"
-            >
-          </div>
-          <div class="grid grid-rows-2 text-center">
-            <div
-              class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              @click="submitAuteur()"
-            >
-              Envoyer
+            <div class="grid grid-rows-2 text-center">
+              <div
+                class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+                @click="submitType()"
+              >
+                Envoyer
+              </div>
+              <a :class="fillFullFormError">
+                Un rongeur semble avoir grignotté le câble
+              </a>
+              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
             </div>
-            <a :class="fillFullFormError">
-              Un rongeur semble avoir grignotté le câble
-            </a>
-            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
-          </div>
-        </form>
-      </div>
-      <div :class="tab3Text">
-        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Editeur (Label, Studio...)
-            </a>
-            <input
-              v-model="inputEditeur"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Editeur"
-            >
-          </div>
-          <div class="grid grid-rows-2 text-center">
-            <div
-              class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              @click="submitEditeur()"
-            >
-              Envoyer
+          </form>
+        </div>
+        <div :class="tab2Text">
+          <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <a class="block text-gray-700 text-sm font-bold mb-2">
+                Auteur (Groupe, Créateur...)
+              </a>
+              <input
+                v-model="inputAuteur"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Auteur"
+              >
             </div>
-            <a :class="fillFullFormError">
-              Un rongeur semble avoir grignotté le câble
-            </a>
-            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
-          </div>
-        </form>
-      </div>
-      <div :class="tab4Text">
-        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Support (Dématerialisé, CD...)</a>
-            <input
-              v-model="inputSupport"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Support"
-            >
-          </div>
-          <div class="grid grid-rows-2 text-center">
-            <div
-              class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              @click="submitSupport()"
-            >
-              Envoyer
+            <div class="grid grid-rows-2 text-center">
+              <div
+                class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+                @click="submitAuteur()"
+              >
+                Envoyer
+              </div>
+              <a :class="fillFullFormError">
+                Un rongeur semble avoir grignotté le câble
+              </a>
+              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
             </div>
-            <a :class="fillFullFormError">
-              Un rongeur semble avoir grignotté le câble
-            </a>
-            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
-          </div>
-        </form>
-      </div>
-      <div :class="tab5Text">
-        <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <a class="block text-gray-700 text-sm font-bold mb-2">
-              Genre (Metal, MMORPG...)
-            </a>
-            <input
-              v-model="inputGenre"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Genre"
-            >
-          </div>
-          <div class="grid grid-rows-2 text-center">
-            <div
-              class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
-              @click="submitGenre()"
-            >
-              Envoyer
+          </form>
+        </div>
+        <div :class="tab3Text">
+          <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <a class="block text-gray-700 text-sm font-bold mb-2">
+                Editeur (Label, Studio...)
+              </a>
+              <input
+                v-model="inputEditeur"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Editeur"
+              >
             </div>
-            <a :class="fillFullFormError">
-              Un rongeur semble avoir grignotté le câble
-            </a>
-            <a :class="success"> L'oeuvre a bien été ajoutée. </a>
-          </div>
-        </form>
+            <div class="grid grid-rows-2 text-center">
+              <div
+                class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+                @click="submitEditeur()"
+              >
+                Envoyer
+              </div>
+              <a :class="fillFullFormError">
+                Un rongeur semble avoir grignotté le câble
+              </a>
+              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+            </div>
+          </form>
+        </div>
+        <div :class="tab4Text">
+          <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <a class="block text-gray-700 text-sm font-bold mb-2">
+                Support (Dématerialisé, CD...)</a>
+              <input
+                v-model="inputSupport"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Support"
+              >
+            </div>
+            <div class="grid grid-rows-2 text-center">
+              <div
+                class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+                @click="submitSupport()"
+              >
+                Envoyer
+              </div>
+              <a :class="fillFullFormError">
+                Un rongeur semble avoir grignotté le câble
+              </a>
+              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+            </div>
+          </form>
+        </div>
+        <div :class="tab5Text">
+          <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <a class="block text-gray-700 text-sm font-bold mb-2">
+                Genre (Metal, MMORPG...)
+              </a>
+              <input
+                v-model="inputGenre"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Genre"
+              >
+            </div>
+            <div class="grid grid-rows-2 text-center">
+              <div
+                class="flex-auto text-center text-white cursor-pointer bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+                @click="submitGenre()"
+              >
+                Envoyer
+              </div>
+              <a :class="fillFullFormError">
+                Un rongeur semble avoir grignotté le câble
+              </a>
+              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="flex items-center bg-white rounded-lg p-4">
+        <div class="flex-auto">
+          Un label est incorrect ?
+        </div>
+        <div
+          class="flex-auto text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+          @click="
+            $router.push({
+              path: '/edit/label'
+            })
+          "
+        >
+          Ajoutez le !
+        </div>
       </div>
     </div>
     <div class="ml-12 bg-white rounded-lg">
@@ -320,8 +337,9 @@ export default {
         const auteur = {
           name: this.inputAuteur
         };
-        this.$axios.$post('https://emporiumback.fly.dev/auteur', auteur)
-        .then(() => {
+        this.$axios
+          .$post('https://emporiumback.fly.dev/auteur', auteur)
+          .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchAuteur();
@@ -336,8 +354,9 @@ export default {
         const editeur = {
           name: this.inputEditeur
         };
-        this.$axios.$post('https://emporiumback.fly.dev/editeur', editeur)
-        .then(() => {
+        this.$axios
+          .$post('https://emporiumback.fly.dev/editeur', editeur)
+          .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchEditeur();
@@ -352,8 +371,9 @@ export default {
         const support = {
           name: this.inputSupport
         };
-        this.$axios.$post('https://emporiumback.fly.dev/support', support)
-        .then(() => {
+        this.$axios
+          .$post('https://emporiumback.fly.dev/support', support)
+          .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchSupport();
@@ -368,8 +388,9 @@ export default {
         const genre = {
           name: this.inputGenre
         };
-        this.$axios.$post('https://emporiumback.fly.dev/genre', genre)
-        .then(() => {
+        this.$axios
+          .$post('https://emporiumback.fly.dev/genre', genre)
+          .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchGenre();
