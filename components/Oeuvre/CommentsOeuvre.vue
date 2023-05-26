@@ -81,13 +81,13 @@ export default {
         console.log(commentaire);
         this.$axios
           .$post('https://emporiumback.fly.dev/commentaire', commentaire)
-          .then(
-            (this.newComment = ''),
-            (this.success =
-              'absolute right-0 top-0 pr-4 text-green-300 text-lg'),
-            setTimeout(this.hide, 2000)
-          )
-          .then(this.fetchComment());
+          .then(() => {
+            this.newComment = ''
+            this.fetchComment()
+            this.success =
+              'absolute right-0 top-0 pr-4 text-green-300 text-lg'
+              setTimeout(this.hide, 2000)
+          })
       }
     },
     hide: function () {

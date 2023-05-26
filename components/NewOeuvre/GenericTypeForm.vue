@@ -139,7 +139,7 @@ export default {
         formData.append('idEditeur', this.inputEditeur);
         formData.append('idSupport', this.inputSupport);
         formData.append('idGenre', this.inputGenre);
-        return this.$axios
+        this.$axios
           .$post('https://emporiumback.fly.dev/oeuvres', formData)
           .then(() => {
             this.fillFullFormError = 'hidden';
