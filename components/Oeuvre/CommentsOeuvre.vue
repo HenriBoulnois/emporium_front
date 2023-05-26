@@ -21,13 +21,10 @@
       <div
         v-for="comment in commentaires"
         :key="comment.idCommentaire"
-        class="bg-gray-600 rounded-lg grid grid-cols-[10%_1fr_10%] items-center p-4 mt-4"
+        class="bg-gray-600 rounded-lg grid grid-cols-[10%_1fr] items-center p-4 mt-4"
       >
         <div class="grid grid-rows-[auto_auto]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0552/1155/7073/products/Product_Image_Energy_02_HOLY_Orange_20_1_1200x.png?v=1671020711"
-          >
-          <a
+          <div
             class="cursor-pointer"
             @click="
               $router.push({
@@ -35,10 +32,19 @@
                 query: { q: comment.utilisateur.pseudo }
               })
             "
-          >{{ comment.utilisateur.pseudo }}</a>
+          >
+            <img
+              v-if="comment.utilisateur.profilPicturePath"
+              class="max-w-full max-h-32"
+              :src="comment.utilisateur.profilPicturePath"
+            >
+            <ImagePlaceholder v-if="!comment.utilisateur.profilPicturePath" />
+            <a class="cursor-pointer">{{ comment.utilisateur.pseudo }}</a>
+          </div>
         </div>
-        <a class="text-left min-h-full bg-red-500">{{ comment.text }}</a>
-        <a>Like Zone</a>
+        <div class="text-left min-h-full bg-gray-300 p-6 rounded-lg">
+          {{ comment.text }}
+        </div>
       </div>
     </div>
   </div>
@@ -82,12 +88,11 @@ export default {
         this.$axios
           .$post('https://emporiumback.fly.dev/commentaire', commentaire)
           .then(() => {
-            this.newComment = ''
-            this.fetchComment()
-            this.success =
-              'absolute right-0 top-0 pr-4 text-green-300 text-lg'
-              setTimeout(this.hide, 2000)
-          })
+            this.newComment = '';
+            this.fetchComment();
+            this.success = 'absolute right-0 top-0 pr-4 text-green-300 text-lg';
+            setTimeout(this.hide, 2000);
+          });
       }
     },
     hide: function () {
