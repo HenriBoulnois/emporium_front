@@ -1,15 +1,15 @@
 <template>
   <div class="">
-    <div class="grid grid-cols-3 p-4 bg-gray-700 rounded-lg">
+    <div class="grid grid-cols-3 p-4 bg-gray-600 rounded-lg">
       <div class="place-self-center">
         <img v-if="oeuvre.imagePath" class="max-h-80" :src="oeuvre.imagePath">
         <ImagePlaceholder v-if="!oeuvre.imagePath" />
       </div>
-      <div class="grid grid-rows-2">
+      <div class="grid grid-rows-[1fr_auto]">
         <div class="relative">
           Informations :
           <span
-            class="material-symbols-outlined absolute top-0 right-0 cursor-pointer"
+            class="material-symbols-outlined absolute top-1 right-2 cursor-pointer text-black hover:bg-white rounded-full p-2"
             @click="
               $router.push({
                 path: '/edit/oeuvre',
@@ -19,16 +19,20 @@
           >
             edit
           </span>
-          <li v-if="oeuvre.titre">
-            <a class="">Titre : {{ oeuvre.titre }}</a>
-          </li>
-          <li v-if="oeuvre.sousTitre">
-            <a class="">Sous Titre : {{ oeuvre.sousTitre }}</a>
-          </li>
-          <li v-if="oeuvre.description">
-            <a>Description : {{ oeuvre.description }}</a>
-          </li>
-          <li
+          <div v-if="oeuvre.titre">
+            <div class="">
+              Titre : {{ oeuvre.titre }}
+            </div>
+          </div>
+          <div v-if="oeuvre.sousTitre">
+            <div class="">
+              Sous Titre : {{ oeuvre.sousTitre }}
+            </div>
+          </div>
+          <div v-if="oeuvre.description">
+            <div>Description : {{ oeuvre.description }}</div>
+          </div>
+          <div
             v-if="oeuvre.auteur"
             class="cursor-pointer"
             @click="
@@ -38,9 +42,9 @@
               })
             "
           >
-            <a>Auteur : {{ oeuvre.auteur.name }}</a>
-          </li>
-          <li
+            <div>Auteur : {{ oeuvre.auteur.name }}</div>
+          </div>
+          <div
             v-if="oeuvre.type"
             class="cursor-pointer"
             @click="
@@ -50,9 +54,9 @@
               })
             "
           >
-            <a>Type : {{ oeuvre.type.name }}</a>
-          </li>
-          <li
+            <div>Type : {{ oeuvre.type.name }}</div>
+          </div>
+          <div
             v-if="oeuvre.support"
             class="cursor-pointer"
             @click="
@@ -62,9 +66,9 @@
               })
             "
           >
-            <a>Support : {{ oeuvre.support.name }}</a>
-          </li>
-          <li
+            <div>Support : {{ oeuvre.support.name }}</div>
+          </div>
+          <div
             v-if="oeuvre.editeur"
             class="cursor-pointer"
             @click="
@@ -74,9 +78,9 @@
               })
             "
           >
-            <a>Editeur : {{ oeuvre.editeur.name }}</a>
-          </li>
-          <li
+            <div>Editeur : {{ oeuvre.editeur.name }}</div>
+          </div>
+          <div
             v-if="oeuvre.genre"
             class="cursor-pointer"
             @click="
@@ -86,16 +90,22 @@
               })
             "
           >
-            <a>Genre : {{ oeuvre.genre.name }}</a>
-          </li>
+            <div>Genre : {{ oeuvre.genre.name }}</div>
+          </div>
         </div>
-        <div class="grid grid-cols-2">
-          <div class="bg-green-300 max-h-20" @click="addToMyCollection(false)">
-            Ajouter
-          </div>
-          <div class="bg-pink-300 max-h-20" @click="addToMyCollection(true)">
-            Mes favoris
-          </div>
+        <div class="grid grid-cols-2 place-items-center">
+          <span
+            class="hover:bg-pink-300 h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 text-pink-400 hover:text-white cursor-pointer"
+            @click="addToMyCollection(true)"
+          >
+            favorite
+          </span>
+          <span
+            class="hover:bg-green-400 text-green-400 hover:text-white h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 cursor-pointer"
+            @click="addToMyCollection(false)"
+          >
+            add_box
+          </span>
         </div>
       </div>
       <div class="">

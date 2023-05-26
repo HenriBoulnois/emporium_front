@@ -3,7 +3,7 @@
     <div
       v-for="oeuvre in oeuvresRelated"
       :key="oeuvre.idOeuvre"
-      class="grid grid-cols-2 p-4 items-center text-center cursor-pointer h-full"
+      class="grid grid-cols-2 p-4 items-center text-center cursor-pointer h-full place-items-center"
       @click="$router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })"
     >
       <img v-if="oeuvre.imagePath" :src="oeuvre.imagePath" class="max-h-28">

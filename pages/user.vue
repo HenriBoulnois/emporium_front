@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="grid grid-cols-3">
-      <div class="bg-gray-700 grid place-items-center rounded-l-lg p-4">
+      <div class="bg-gray-600 grid place-items-center rounded-l-lg p-4">
         <img v-if="user.imagePath" class="max-h-80" :src="user.imagePath">
         <ImagePlaceholder v-if="!user.imagePath" />
         <a class="pt-4">{{ user.pseudo }}</a>
@@ -12,7 +12,7 @@
           Favorite items
         </div>
       </div>
-      <div class="bg-gray-700 rounded-r-lg">
+      <div class="bg-gray-600 rounded-r-lg">
         <UserComments v-if="user.uwuid" :user-id="user.uwuid" />
       </div>
     </div>
