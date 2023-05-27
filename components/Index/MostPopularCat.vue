@@ -1,6 +1,6 @@
 <template>
   <div>
-    Catégorie les plus populaires :
+    Catégories les plus populaires :
     <div class="grid grid-cols-3 text-center">
       <div class="bg-yellow-200 my-6 mx-6 rounded-lg">
         <div
