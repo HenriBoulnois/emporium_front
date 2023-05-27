@@ -6,8 +6,9 @@
         <div class="bg-white p-5 mr-5 mb-5 rounded-lg">
           <MostPopularCat />
         </div>
-        <div class="bg-blue-500 p-5 mb-5 rounded-lg">
-          Last connected user
+        <div class="bg-white p-5 mb-5 rounded-lg grid place-items-center">
+          <div>Emporium est un site de gestion de collection où chacun peut participer en ajoutant les oeuvres qu'il possède afin de créer une base de donnée utilisable par tous.</div>
+          <div>Site web réalisé par Henri Boulnois et Tristan Six</div>
         </div>
       </div>
       <div class="grid grid-cols-2">
@@ -35,7 +36,7 @@
             >
             <ImagePlaceholder v-if="!oeuvre.imagePath" />
             <a>{{ oeuvre.titre }}</a>
-            <a>{{ oeuvre.modificationDate }}</a>
+            <a>{{ oeuvre.modificationDate | moment(" HH:mm:ss DD/MM/YYYY") }}</a>
           </div>
         </div>
         <div class="bg-white p-5 mr-5 rounded-lg">
@@ -101,14 +102,18 @@ export default {
       .then((response) => {
         this.lastComments = response;
       });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email)
-      .then(() => {
-        this.dialog = false;
-      })
-      .catch(() => {
-        this.dialog = true;
-      });
+    if (this.$auth.loggedIn) {
+      await this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
+        )
+        .then(() => {
+          this.dialog = false;
+        })
+        .catch(() => {
+          this.dialog = true;
+        });
+    }
   }
 };
 </script>
