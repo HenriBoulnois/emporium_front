@@ -98,31 +98,7 @@ export default {
     };
   },
   async fetch () {
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/type')
-      .then((response) => {
-        this.listType = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/auteur')
-      .then((response) => {
-        this.listAuteur = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/editeur')
-      .then((response) => {
-        this.listEditeur = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/support')
-      .then((response) => {
-        this.listSupport = response;
-      });
-    await this.$axios
-      .$get('https://emporiumback.fly.dev/genre')
-      .then((response) => {
-        this.listGenre = response;
-      });
+    await this.loadLabel();
     if (this.$auth.loggedIn === undefined) {
       this.dialog = true;
     } else {
@@ -139,6 +115,33 @@ export default {
     }
   },
   methods: {
+    async loadLabel () {
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/type')
+        .then((response) => {
+          this.listType = response;
+        });
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/auteur')
+        .then((response) => {
+          this.listAuteur = response;
+        });
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/editeur')
+        .then((response) => {
+          this.listEditeur = response;
+        });
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/support')
+        .then((response) => {
+          this.listSupport = response;
+        });
+      await this.$axios
+        .$get('https://emporiumback.fly.dev/genre')
+        .then((response) => {
+          this.listGenre = response;
+        });
+    },
     submitChange () {
       if (this.inputNewName !== '' && this.inputLabel !== null) {
         if (this.inputLabel.idType !== undefined) {
@@ -190,12 +193,15 @@ export default {
           this.inputNewName = '';
           this.error = 'hidden';
           this.success = '';
+          this.loadLabel()
+          setTimeout(() => {
+            this.success = 'hidden'
+          }, 2000)
         })
         .catch(() => {
           this.success = 'hidden';
           this.error = '';
         });
-        this.inputLabel = null
     }
   }
 };
