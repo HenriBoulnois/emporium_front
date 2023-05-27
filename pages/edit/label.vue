@@ -63,7 +63,7 @@
             Une erreur est survenue.
           </div>
           <div :class="errorNoInput">
-            Veuillez selectionner un label
+            Veuillez selectionner un label ET sa nouvelle appellation.
           </div>
           <div :class="success">
             Le label a bien été modifié.
@@ -195,7 +195,6 @@ export default {
           this.success = 'hidden';
           this.error = '';
         });
-      this.inputLabel = undefined;
     }
   }
 };

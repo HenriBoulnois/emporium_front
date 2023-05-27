@@ -101,11 +101,11 @@
               })
             "
           >
-            Ajoutez le !
+            Ajoutez-le !
           </div>
         </div>
-        <div class="bg-gray-700 rounded-lg ml-6">
-          <img :src="previewImage">
+        <div class="bg-gray-700 rounded-lg ml-6 grid place-items-center">
+          <img :src="previewImage" class="max-h-[700px] max-w-fit">
         </div>
       </div>
     </div>

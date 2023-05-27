@@ -22,7 +22,7 @@
         type="text"
         placeholder="Description"
       >
-      <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
+      <a class="block text-gray-700 text-sm font-bold mb-2"> Image *</a>
       <label class="btn btn-default">
         <input
           id="file"
@@ -64,7 +64,7 @@
         :label="labelGenre"
       />
     </div>
-    * Champs faculatifs
+    * Champs Obligatoires
     <div class="grid grid-rows-2 text-center">
       <div
         class="flex-auto text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
@@ -116,12 +116,10 @@ export default {
       this.$emit('display-preview-event', { image: this.imagePreview });
     },
     submitOeuvre () {
-      this.inputSousTitre = 'sousTitreGenerique';
-      this.inputDescription = 'descriptionGenerique';
       if (
         this.inputTitre !== undefined &&
-        // this.inputSousTitre !== undefined &&
-        // this.inputDescription !== undefined &&
+        this.inputSousTitre !== undefined &&
+        this.inputDescription !== undefined &&
         this.imageUpload !== undefined &&
         this.inputAuteur !== undefined &&
         this.inputEditeur !== undefined &&

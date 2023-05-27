@@ -47,12 +47,13 @@
               <a class="block text-gray-700 text-sm font-bold mb-2">
                 Description
               </a>
-              <input
+              <textarea
                 v-model="inputDescription"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="text"
                 placeholder="Description"
-              >
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                cols="40"
+                rows="5"
+              />
               <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
               <label class="btn btn-default">
                 <input
@@ -64,7 +65,7 @@
                 >
               </label>
               <div v-if="imagePreview">
-                Image chargée avec succes
+                Image chargée avec succés
               </div>
             </div>
             <div class="grid grid-rows-2 text-center">
@@ -74,10 +75,10 @@
               >
                 Envoyer
               </div>
-              <a :class="fillFullFormError">
-                Veuillez remplir tous les champs obligatoires.
+              <a :class="errorPseudo">
+                Le pseudo ne peut pas être vide !
               </a>
-              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+              <a :class="success"> Le profil a bien été modifié. </a>
             </div>
           </form>
         </div>
@@ -91,11 +92,13 @@
             :src="imagePreview"
           >
           <ImagePlaceholder v-if="!imagePreview" />
-          <div v-if="inputPseudo">
-            Pseudo : {{ inputPseudo }}
+          <div>
+            Pseudo :
+            {{ inputPseudo === undefined ? user.pseudo : inputPseudo }}
           </div>
-          <div v-if="!inputDescription">
-            Titre : {{ inputDescription }}
+          <div>
+            Description :
+            {{ inputDescription === undefined ? user.description : inputDescription }}
           </div>
         </div>
       </div>
@@ -116,13 +119,13 @@ export default {
     return {
       user: [],
       success: 'hidden',
-      fillFullFormError: 'hidden',
       inputPseudo: undefined,
       inputDescription: undefined,
       deleteSuccess: 'hidden',
       imageUpload: undefined,
       imagePreview: undefined,
-      dialog: false
+      dialog: false,
+      errorPseudo: 'hidden'
     };
   },
   async fetch () {
@@ -175,15 +178,24 @@ export default {
             ? this.user.description
             : this.inputDescription
         );
-        this.$axios
+        if (editedUser.get('pseudo') !== '') {
+            this.$axios
           .$put('https://emporiumback.fly.dev/utilisateur/', editedUser)
           .then(() => {
-            this.fillFullFormError = 'hidden';
             this.success = '';
+            setTimeout(() => {
+                this.$router.push({
+                path: '/user',
+                query: { q: this.user.uwuid }
+              })
+            }, 3000)
           })
           .catch(function () {
             console.log('issue with post');
           });
+        } else {
+            this.errorPseudo = ''
+        }
       } else {
         console.log('titre undefined');
       }

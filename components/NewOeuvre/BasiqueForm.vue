@@ -1,28 +1,28 @@
 <template>
   <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
     <div class="mb-4">
-      <a class="block text-gray-700 text-sm font-bold mb-2"> Titre </a>
+      <a class="block text-gray-700 text-sm font-bold mb-2"> Titre *</a>
       <input
         v-model="inputTitre"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
         placeholder="Titre"
       >
-      <a class="block text-gray-700 text-sm font-bold mb-2"> Sous titre </a>
+      <a class="block text-gray-700 text-sm font-bold mb-2"> Sous titre *</a>
       <input
         v-model="inputSousTitre"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
         placeholder="Sous titre"
       >
-      <a class="block text-gray-700 text-sm font-bold mb-2"> Description </a>
+      <a class="block text-gray-700 text-sm font-bold mb-2"> Description *</a>
       <input
         v-model="inputDescription"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
         placeholder="Description"
       >
-      <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
+      <a class="block text-gray-700 text-sm font-bold mb-2"> Image *</a>
       <label class="btn btn-default">
         <input
           id="file"
@@ -40,37 +40,38 @@
         :items="listType"
         item-text="name"
         item-value="idType"
-        label="Type"
+        label="Type *"
       />
       <v-autocomplete
         v-model="inputAuteur"
         :items="listAuteur"
         item-text="name"
         item-value="idAuteur"
-        label="Auteur"
+        label="Auteur *"
       />
       <v-autocomplete
         v-model="inputEditeur"
         :items="listEditeur"
         item-text="name"
         item-value="idEditeur"
-        label="Editeur"
+        label="Editeur *"
       />
       <v-autocomplete
         v-model="inputSupport"
         :items="listSupport"
         item-text="name"
         item-value="idSupport"
-        label="Support"
+        label="Support *"
       />
       <v-autocomplete
         v-model="inputGenre"
         :items="listGenre"
         item-text="name"
         item-value="idGenre"
-        label="Genre"
+        label="Genre *"
       />
     </div>
+    * Champs obligatoires
     <div class="grid grid-rows-2 text-center">
       <div
         class="flex-auto text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
@@ -119,14 +120,10 @@ export default {
       this.$emit('display-preview-event', { image: this.imagePreview });
     },
     submitBasique () {
-      this.inputSousTitre = 'sousTitreGenerique';
-      this.inputDescription = 'descriptionGenerique';
-      console.log(this.inputTitre)
-      console.log(this.inputSupport)
       if (
         this.inputTitre !== undefined &&
-        // this.inputSousTitre !== undefined &&
-        // this.inputDescription !== undefined &&
+        this.inputSousTitre !== undefined &&
+        this.inputDescription !== undefined &&
         this.imageUpload !== undefined &&
         this.inputType !== undefined &&
         this.inputAuteur !== undefined &&

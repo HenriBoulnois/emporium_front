@@ -10,24 +10,23 @@
         <ImagePlaceholder v-if="!user.profilPicturePath" />
         <a class="pt-4">{{ user.pseudo }}</a>
       </div>
-      <div
-        class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600 relative"
-      >
-        <span
-          v-if="isCurrent"
-          class="material-symbols-outlined absolute top-1 right-2 cursor-pointer text-black hover:bg-white rounded-full p-2"
-          @click="
-            $router.push({
-              path: '/edit/user',
-              query: { q: user.uwuid }
-            })
-          "
-        >
-          edit
-        </span>
-        <div class="bg-blue-550">
-          Favorite items
-          {{ user }}
+      <div class="grid grid-rows-[auto_1fr] list-none text-center bg-gray-600">
+        <div class="flex justify-end">
+          <span
+            v-if="isCurrent"
+            class="material-symbols-outlined cursor-pointer text-black hover:bg-white rounded-full p-2 m-2"
+            @click="
+              $router.push({
+                path: '/edit/user',
+                query: { q: user.uwuid }
+              })
+            "
+          >
+            edit
+          </span>
+        </div>
+        <div class="text-justify">
+          {{ user.description }}
         </div>
       </div>
       <div class="bg-gray-600 rounded-r-lg">
@@ -42,7 +41,9 @@
           <a>Type</a>
           <a>Catégorie</a>
           <a>Description</a>
-          <div v-if="isCurrent" class="w-60">Actions</div>
+          <div v-if="isCurrent" class="w-60">
+            Actions
+          </div>
         </div>
         <div
           v-for="collection in collections"
@@ -81,7 +82,10 @@
           <div v-if="collection.oeuvres.auteur">
             {{ collection.oeuvres.auteur.name }}
           </div>
-          <div v-if="isCurrent" class="grid grid-cols-2 place-items-center w-60">
+          <div
+            v-if="isCurrent"
+            class="grid grid-cols-2 place-items-center w-60"
+          >
             <span
               v-if="collection.collection.favorite"
               class="bg-pink-400 hover:bg-transparent h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 text-white hover:text-black"

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <ul class="grid grid-cols-4 justify-items-center text-center">
-      <li
+    <div class="flex flex-wrap justify-items-center text-center">
+      <div
         v-for="user in users"
         :key="user.uwuid"
         class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4"
         @click="$router.push({ path: '/user', query: { q: user.uwuid } })"
       >
-        <button>
-          <img v-if="user.profilPicturePath" :src="user.profilPicturePath" class="max-h-28">
+        <div>
+          <img v-if="user.profilPicturePath" :src="user.profilPicturePath" class="max-h-28 m-4">
           <ImagePlaceholder v-if="!user.profilPicturePath" />
-          <a class="m-7">{{ user.pseudo }}</a>
-        </button>
-      </li>
-    </ul>
+          <a class="mt-7">{{ user.pseudo }}</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
