@@ -38,8 +38,37 @@
             <a>{{ oeuvre.modificationDate }}</a>
           </div>
         </div>
-        <div class="bg-blue-500 p-5 mb-5 rounded-lg">
-          Last connected user
+        <div class="bg-white p-5 mr-5 rounded-lg">
+          Dernières oeuvres modifiées :
+          <div
+            class="bg-gray-200 rounded-lg grid grid-cols-3 p-2 text-center items-center"
+          >
+            <a>Oeuvre</a>
+            <a>Auteur</a>
+            <a>Message</a>
+          </div>
+          <div
+            v-for="commentaire in lastComments"
+            :key="commentaire.idCommentaire"
+            class="bg-gray-200 hover:bg-gray-300 rounded-lg my-4 cursor-pointer grid grid-cols-3 p-4 place-items-center"
+            @click="
+              $router.push({
+                path: '/oeuvre',
+                query: { q: commentaire.idOeuvre }
+              })
+            "
+          >
+            <img
+              v-if="commentaire.imagePath"
+              :src="commentaire.imagePath"
+              class="max-h-20"
+            >
+            <ImagePlaceholder v-if="!commentaire.imagePath" />
+            <div>{{ commentaire.commentaire.utilisateur.pseudo }}</div>
+            <div class="text-ellipsis overflow-hidden">
+              {{ commentaire.commentaire.text }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -56,15 +85,22 @@ export default {
   data () {
     return {
       lastModified: [],
+      lastComments: [],
       isAuthentified: false,
       dialog: false
     };
   },
   async fetch () {
-    const response = await this.$axios.$get(
-      'https://emporiumback.fly.dev/oeuvres/lastModified'
-    );
-    this.lastModified = response;
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/oeuvres/lastModified')
+      .then((response) => {
+        this.lastModified = response;
+      });
+    await this.$axios
+      .$get('https://emporiumback.fly.dev/commentaire/last')
+      .then((response) => {
+        this.lastComments = response;
+      });
     await this.$axios
       .$get('https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email)
       .then(() => {
