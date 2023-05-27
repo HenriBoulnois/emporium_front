@@ -7,7 +7,7 @@
         <ImagePlaceholder v-if="!oeuvre.imagePath" />
       </div>
       <div class="grid grid-rows-[1fr_auto_auto]">
-        <div class="relative">
+        <div class="relative pl-6">
           Informations :
           <span
             v-if="user.pseudo"
@@ -27,12 +27,12 @@
             </div>
           </div>
           <div v-if="oeuvre.sousTitre">
-            <div v-if="!oeuvre.sousTitre === 'null'" class="truncate">
+            <div v-if="oeuvre.sousTitre !== 'null'" class="truncate">
               Sous Titre : {{ oeuvre.sousTitre }}
             </div>
           </div>
           <div v-if="oeuvre.description">
-            <div v-if="!oeuvre.description === 'null'" class="truncate">
+            <div v-if="oeuvre.description !== 'null'" class="truncate">
               Description : {{ oeuvre.description }}
             </div>
           </div>
