@@ -9,7 +9,7 @@
             :items="listType"
             item-text="name"
             return-object
-            label="Type"
+            label="Catégorie"
           />
           <v-autocomplete
             v-model="inputLabel"
@@ -42,10 +42,10 @@
         </div>
         <div class="bg-gray-200 p-4 rounded-r-lg drop-shadow-xl">
           <div class="text-gray-700 text-xl font-bold mb-2">
-            Nouveau nom :
+            Nouvelle appellation :
           </div>
           <div v-if="inputLabel" class="m-4">
-            Label selectionné : {{ inputLabel.name }}
+            Label sélectionné : {{ inputLabel.name }}
           </div>
           <input
             v-model="inputNewName"

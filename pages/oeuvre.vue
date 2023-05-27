@@ -58,7 +58,7 @@
               })
             "
           >
-            <div>Type : {{ oeuvre.type.name }}</div>
+            <div>Catégorie : {{ oeuvre.type.name }}</div>
           </div>
           <div
             v-if="oeuvre.support"

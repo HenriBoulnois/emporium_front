@@ -41,7 +41,7 @@
         :items="listType"
         item-text="name"
         item-value="idType"
-        label="Type *"
+        label="Catégorie *"
       />
       <v-autocomplete
         v-model="inputAuteur"

@@ -6,7 +6,7 @@
           <div
             class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
           >
-            <a :class="tab1Title" @click="selectedTab(1)">Type</a>
+            <a :class="tab1Title" @click="selectedTab(1)">Catégorie</a>
             <a :class="tab2Title" @click="selectedTab(2)">Auteur</a>
             <a :class="tab3Title" @click="selectedTab(3)">Editeur</a>
             <a :class="tab4Title" @click="selectedTab(4)">Support</a>
@@ -16,13 +16,13 @@
             <form class="bg-white rounded-b-lg px-8 pt-6 pb-8 mb-4">
               <div class="mb-4">
                 <a class="block text-gray-700 text-sm font-bold mb-2">
-                  Nouveau type (Musique, Jeux-vidéo...)
+                  Nouvelle catégorie (Musique, Jeux-vidéo...)
                 </a>
                 <input
                   v-model="inputType"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
-                  placeholder="Nouveau type"
+                  placeholder="Nouvelle catégorie"
                 >
               </div>
               <div class="grid grid-rows-2 text-center">
