@@ -175,8 +175,6 @@ export default {
             ? this.user.description
             : this.inputDescription
         );
-
-        console.log(editedUser);
         this.$axios
           .$put('https://emporiumback.fly.dev/utilisateur/', editedUser)
           .then(() => {

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="grid grid-rows-[auto_auto]">
+    <div class="grid grid-rows-[auto_auto_auto]">
+      <CompleteAccountDialog v-if="dialog" :can-disable="true" />
       <div class="grid grid-cols-2">
         <div class="bg-white p-5 mr-5 mb-5 rounded-lg">
           <MostPopularCat />
@@ -42,7 +43,6 @@
         </div>
       </div>
     </div>
-    <CompleteAccountDialog v-if="dialog" :can-disable="true" />
   </div>
 </template>
 

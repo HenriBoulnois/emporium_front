@@ -14,6 +14,7 @@
         class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600 relative"
       >
         <span
+          v-if="isCurrent"
           class="material-symbols-outlined absolute top-1 right-2 cursor-pointer text-black hover:bg-white rounded-full p-2"
           @click="
             $router.push({
@@ -35,18 +36,18 @@
     </div>
     <div class="bg-gray-800">
       <div class="justify-items-center text-center">
-        <div class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_1fr]">
+        <div class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto]">
           <a>Image</a>
           <a>Nom</a>
           <a>Type</a>
           <a>Catégorie</a>
           <a>Description</a>
-          <div>Actions</div>
+          <div v-if="isCurrent" class="w-60">Actions</div>
         </div>
         <div
           v-for="collection in collections"
           :key="collection.idCollection"
-          class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr_1fr] p-4 place-items-center"
+          class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr_auto] p-4 place-items-center"
         >
           <img
             v-if="collection.oeuvres.imagePath"
@@ -80,7 +81,7 @@
           <div v-if="collection.oeuvres.auteur">
             {{ collection.oeuvres.auteur.name }}
           </div>
-          <div class="grid grid-cols-2 place-items-center">
+          <div v-if="isCurrent" class="grid grid-cols-2 place-items-center w-60">
             <span
               v-if="collection.collection.favorite"
               class="bg-pink-400 hover:bg-transparent h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 text-white hover:text-black"
@@ -133,11 +134,14 @@ export default {
     return {
       user: '',
       collections: [],
-      dialog: false
+      dialog: false,
+      isCurrent: false,
+      email: ''
     };
   },
   async fetch () {
     if (this.$auth.loggedIn !== undefined) {
+      this.email = this.$auth.user.email;
       await this.$axios
         .$get(
           'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
@@ -147,7 +151,7 @@ export default {
         })
         .catch(() => {
           this.dialog = true;
-      });
+        });
     }
     await this.$axios
       .$get(
@@ -157,10 +161,11 @@ export default {
       .then((response) => {
         this.user = response;
       })
-      .catch(() => {
-
-      });
-      await this.fetchCollection();
+      .catch(() => {});
+    if (this.email === this.user.email) {
+      this.isCurrent = true;
+    }
+    await this.fetchCollection();
   },
   watch: {
     '$route.query': '$fetch'

@@ -1,9 +1,12 @@
 <template>
   <div class="">
-    <a class="text-white text-lg">Commentaires :</a>
-    <a :class="success"> Le commentaire a bien été ajouté. </a>
-    <div class="grid grid-rows-2 bg-white rounded-lg p-4">
-      <!-- <div v-if="$auth.loggedIn" class="grid grid-rows-2 bg-white rounded-lg p-4"> -->
+    <div class="text-white text-lg">
+      Commentaires :
+    </div>
+    <div :class="success">
+      Le commentaire a bien été ajouté.
+    </div>
+    <div v-if="user.pseudo" class="grid grid-rows-2 bg-white rounded-lg p-4 mb-4">
       <input
         v-model="newComment"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -21,7 +24,7 @@
       <div
         v-for="comment in commentaires"
         :key="comment.idCommentaire"
-        class="bg-gray-600 rounded-lg grid grid-cols-[15%_1fr] items-center p-4 mt-4"
+        class="bg-gray-600 rounded-lg grid grid-cols-[15%_1fr] items-center p-4 mb-4"
       >
         <div class="grid grid-rows-[auto_auto] place-items-center">
           <div
@@ -80,7 +83,7 @@ export default {
     },
     submitComment: function () {
       if (this.newComment !== '') {
-        console.log(this.user)
+        console.log(this.user);
         const commentaire = {
           uwuid: this.user.uwuid,
           idOeuvre: this.oeuvreId,
