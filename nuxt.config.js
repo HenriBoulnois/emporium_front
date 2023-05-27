@@ -34,7 +34,7 @@ export default {
         domain: 'emporiumauth.eu.auth0.com',
         clientId: 'oVo0rZCd4nbaBT77uT1eEDwLU4qyN8s0',
         audience: 'https://emporiumauth.eu.auth0.com/api/v2/',
-        logoutRedirectUri: 'http://localhost:3000'
+        logoutRedirectUri: 'https://steady-hamster-8a0437.netlify.app'
       }
     }
   },
