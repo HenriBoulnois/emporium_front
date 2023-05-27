@@ -2,14 +2,31 @@
   <div class="">
     <div class="grid grid-cols-3">
       <div class="bg-gray-600 grid place-items-center rounded-l-lg p-4">
-        <img v-if="user.imagePath" class="max-h-80" :src="user.imagePath">
-        <ImagePlaceholder v-if="!user.imagePath" />
+        <img
+          v-if="user.profilPicturePath"
+          class="max-h-80"
+          :src="user.profilPicturePath"
+        >
+        <ImagePlaceholder v-if="!user.profilPicturePath" />
         <a class="pt-4">{{ user.pseudo }}</a>
-        <a class="pt-4">{{ user.uwuid }}</a>
       </div>
-      <div class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600">
+      <div
+        class="grid grid-rows-[1fr_1fr] list-none text-center bg-blue-600 relative"
+      >
+        <span
+          class="material-symbols-outlined absolute top-1 right-2 cursor-pointer text-black hover:bg-white rounded-full p-2"
+          @click="
+            $router.push({
+              path: '/edit/user',
+              query: { q: user.uwuid }
+            })
+          "
+        >
+          edit
+        </span>
         <div class="bg-blue-550">
           Favorite items
+          {{ user }}
         </div>
       </div>
       <div class="bg-gray-600 rounded-r-lg">
@@ -28,7 +45,7 @@
         </div>
         <div
           v-for="collection in collections"
-          :key="collection.oeuvres.idOeuvre"
+          :key="collection.idCollection"
           class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr_1fr] p-4 place-items-center"
         >
           <img
@@ -98,41 +115,67 @@
         </div>
       </div>
     </div>
+    <CompleteAccountDialog v-if="dialog" :can-disable="true" />
   </div>
 </template>
 
 <script>
 import UserComments from '~/components/User/UserComments.vue';
+import CompleteAccountDialog from '~/components/User/CompleteAccountDialog.vue';
 
 export default {
   name: 'UserPage',
   components: {
-    UserComments
+    UserComments,
+    CompleteAccountDialog
   },
   data () {
     return {
       user: '',
-      collections: []
+      collections: [],
+      dialog: false
     };
   },
   async fetch () {
-    const response = await this.$axios.$get(
-      'https://emporiumback.fly.dev/utilisateur/search/' + this.$route.query.q
-    );
-    this.user = response;
-    this.fetchCollection();
+    if (this.$auth.loggedIn !== undefined) {
+      await this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
+        )
+        .then(() => {
+          this.dialog = false;
+        })
+        .catch(() => {
+          this.dialog = true;
+      });
+    }
+    await this.$axios
+      .$get(
+        'https://emporiumback.fly.dev/utilisateur/identification/' +
+          this.$route.query.q
+      )
+      .then((response) => {
+        this.user = response;
+      })
+      .catch(() => {
+
+      });
+      await this.fetchCollection();
   },
   watch: {
     '$route.query': '$fetch'
   },
   methods: {
     async fetchCollection () {
-      await this.$axios.$get(
-      'https://emporiumback.fly.dev/collection/utilisateur/' + this.user.uwuid
-    ).then((response) => {
-      this.collections = ''
-      this.collections = response;
-    })
+      this.collections = '';
+      await this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/collection/utilisateur/' +
+            this.user.uwuid
+        )
+        .then((response) => {
+          this.collections = response;
+        });
     },
     removeFromCollection (idCollection) {
       this.$axios
@@ -141,7 +184,7 @@ export default {
         )
         .then(() => {
           console.log('supprimé avec succes');
-          this.fetchCollection()
+          this.fetchCollection();
         })
         .catch(function () {
           console.log('issue with delete');
@@ -158,7 +201,7 @@ export default {
         .$put('https://emporiumback.fly.dev/collection', collection)
         .then(() => {
           console.log('added as fav');
-          this.fetchCollection()
+          this.fetchCollection();
         })
         .catch(() => {
           console.log('issue with add fav');
@@ -175,7 +218,7 @@ export default {
         .$put('https://emporiumback.fly.dev/collection', collection)
         .then(() => {
           console.log('remove as fav');
-          this.fetchCollection()
+          this.fetchCollection();
         })
         .catch(() => {
           console.log('issue with remove fav');

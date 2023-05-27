@@ -54,7 +54,8 @@
 export default {
   name: 'CommentsOeuvre',
   props: {
-    oeuvreId: undefined
+    oeuvreId: undefined,
+    user: undefined
   },
   data () {
     return {
@@ -80,7 +81,7 @@ export default {
     submitComment: function () {
       if (this.newComment !== '') {
         const commentaire = {
-          UWUid: '1',
+          UWUid: this.user.uwuid,
           idOeuvre: this.oeuvreId,
           text: this.newComment
         };

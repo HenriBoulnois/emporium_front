@@ -14,7 +14,7 @@
           "
         >
           <div>Top 2</div>
-          <ImagePlaceholder />
+          <img :src="mostPopular[1].imageTypePath">
           <div>{{ mostPopular[1].type.name }}</div>
           <div>{{ mostPopular[1].count }}</div>
         </div>
@@ -31,7 +31,7 @@
           "
         >
           <div>Top 1</div>
-          <ImagePlaceholder />
+          <img :src="mostPopular[0].imageTypePath">
           <div>{{ mostPopular[0].type.name }}</div>
           <div>{{ mostPopular[0].count }}</div>
         </div>
@@ -48,7 +48,7 @@
           "
         >
           <div>Top 3</div>
-          <ImagePlaceholder />
+          <img :src="mostPopular[2].imageTypePath">
           <div>{{ mostPopular[2].type.name }}</div>
           <div>{{ mostPopular[2].count }}</div>
         </div>

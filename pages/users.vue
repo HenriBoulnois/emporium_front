@@ -5,7 +5,7 @@
         v-for="user in users"
         :key="user.uwuid"
         class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4"
-        @click="$router.push({ path: '/user', query: { q: user.pseudo } })"
+        @click="$router.push({ path: '/user', query: { q: user.uwuid } })"
       >
         <button>
           <img v-if="user.profilPicturePath" :src="user.profilPicturePath" class="max-h-28">

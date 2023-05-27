@@ -118,8 +118,13 @@
       </div>
     </div>
     <div class="relative bg-gray-800">
-      <CommentsOeuvre v-if="oeuvre.idOeuvre" :oeuvre-id="oeuvre.idOeuvre" />
+      <CommentsOeuvre
+        v-if="oeuvre.idOeuvre"
+        :oeuvre-id="oeuvre.idOeuvre"
+        :user="user"
+      />
     </div>
+    <CompleteAccountDialog v-if="dialog" :can-disable="true" />
   </div>
 </template>
 
@@ -127,17 +132,21 @@
 import ImagePlaceholder from '~/components/ImagePlaceholder.vue';
 import CommentsOeuvre from '~/components/Oeuvre/CommentsOeuvre.vue';
 import RelatedOeuvre from '~/components/Oeuvre/RelatedOeuvre.vue';
+import CompleteAccountDialog from '~/components/User/CompleteAccountDialog.vue';
 
 export default {
   name: 'OeuvrePage',
   components: {
     ImagePlaceholder,
     RelatedOeuvre,
-    CommentsOeuvre
+    CommentsOeuvre,
+    CompleteAccountDialog
   },
   data () {
     return {
-      oeuvre: []
+      oeuvre: [],
+      dialog: false,
+      user: []
     };
   },
   async fetch () {
@@ -146,6 +155,18 @@ export default {
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
       .then(reponse => (this.oeuvre = reponse))
       .catch(error => console.log(error));
+    if (this.$auth.loggedIn !== undefined) {
+      await this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
+        )
+        .then(() => {
+          this.dialog = false;
+        })
+        .catch(() => {
+          this.dialog = true;
+        });
+    }
   },
   watch: {
     '$route.query': '$fetch'
@@ -153,7 +174,7 @@ export default {
   methods: {
     addToMyCollection: function (asFavorite) {
       const addedOeuvre = {
-        UWUid: '1',
+        UWUid: this.user.uwuid,
         idOeuvre: this.oeuvre.idOeuvre,
         favorite: asFavorite
       };

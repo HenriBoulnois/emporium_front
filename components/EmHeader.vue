@@ -56,16 +56,58 @@
       </form>
     </div>
     <div />
-    <NuxtLink class="flex items-center" to="/login">
-      <img v-if="$auth.loggedIn" class="max-h-12" :src="$auth.user.picture">
-      <span v-if="!$auth.loggedIn" class="flex material-symbols-outlined text-white">
-        person
-      </span>
-      <span class="flex ml-3 whitespace-nowrap">
-        <a v-if="!$auth.loggedIn" class="text-white">Mon compte</a>
-        <a v-if="$auth.loggedIn">{{ $auth.user.name }}</a>
-      </span>
-    </NuxtLink>
+    <div v-if="$auth.loggedIn" class="place-items-center flex justify-end">
+      <div v-if="user" class="grid grid-cols-2 place-items-center">
+        <img
+          v-if="user.profilPicturePath"
+          class="max-h-12 mr-6"
+          :src="user.profilPicturePath"
+        >
+        <div
+          v-if="!user.profilPicturePath"
+          class="material-symbols-outlined text-white"
+        >
+          person
+        </div>
+        <div
+          v-if="user.pseudo"
+          class="text-white mr-8 cursor-pointer"
+          @click="
+            $router.push({
+              path: '/user',
+              query: { q: user.uwuid }
+            })
+          "
+        >
+          {{ user.pseudo }}
+        </div>
+      </div>
+      <div
+        v-if="!user"
+        class="text-white mr-8 cursor-pointer"
+        @click="
+          $router.push({
+            path: '/new/user'
+          })
+        "
+      >
+        Configurer mon compte
+      </div>
+      <div class="text-white mr-8 cursor-pointer" @click="$auth.logout()">
+        Se déconnecter
+      </div>
+    </div>
+    <div
+      v-if="!$auth.loggedIn"
+      class="flex items-center text-white mr-8 cursor-pointer"
+      @click="
+        $router.push({
+          path: '/login'
+        })
+      "
+    >
+      Se connecter
+    </div>
   </div>
 </template>
 
@@ -74,8 +116,22 @@ export default {
   name: 'EmHeader',
   data () {
     return {
-      input: ''
+      input: '',
+      user: undefined
     };
+  },
+  async fetch () {
+    if (this.$auth.loggedIn === undefined) {
+      this.user = undefined;
+    } else {
+      await this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
+        )
+        .then((response) => {
+          this.user = response;
+        });
+    }
   },
   methods: {
     searchInput: function () {
