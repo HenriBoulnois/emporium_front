@@ -39,7 +39,7 @@
             <a>{{ oeuvre.modificationDate | moment(" HH:mm:ss DD/MM/YYYY") }}</a>
           </div>
         </div>
-        <div class="bg-white p-5 mr-5 rounded-lg">
+        <div class="bg-white p-5 rounded-lg">
           Dernières oeuvres modifiées :
           <div
             class="bg-gray-200 rounded-lg grid grid-cols-3 p-2 text-center items-center"
