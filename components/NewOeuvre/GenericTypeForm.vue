@@ -16,12 +16,13 @@
         placeholder="Sous titre"
       >
       <a class="block text-gray-700 text-sm font-bold mb-2"> Description * </a>
-      <input
+      <textarea
         v-model="inputDescription"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
         placeholder="Description"
-      >
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        cols="40"
+        rows="5"
+      />
       <a class="block text-gray-700 text-sm font-bold mb-2"> Image *</a>
       <label class="btn btn-default">
         <input

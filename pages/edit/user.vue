@@ -24,10 +24,10 @@
             v-if="!user.profilPicturePath"
             class="place-self-center"
           />
-          <div v-if="user.pseudo" class="place-self-center">
+          <div v-if="user.pseudo" class="place-self-center truncate">
             Pseudo : {{ user.pseudo }}
           </div>
-          <div v-if="user.description" class="place-self-center">
+          <div v-if="user.description" class="place-self-center truncate">
             Description : {{ user.description }}
           </div>
         </div>
@@ -92,13 +92,13 @@
             :src="imagePreview"
           >
           <ImagePlaceholder v-if="!imagePreview" />
-          <div>
+          <div class="truncate">
             Pseudo :
             {{ inputPseudo === undefined ? user.pseudo : inputPseudo }}
           </div>
-          <div>
+          <div class="truncate">
             Description :
-            {{ inputDescription === undefined ? user.description : inputDescription }}
+            {{ inputDescription === '' ? user.description : inputDescription }}
           </div>
         </div>
       </div>

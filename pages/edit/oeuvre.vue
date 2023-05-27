@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid">
-      <div class="grid grid-cols-3 bg-gray-700 shadow-inner rounded-lg h-fit">
+      <div class="grid grid-cols-[1fr_1fr_1fr] bg-gray-700 shadow-inner rounded-lg h-fit">
         <div class="grid bg-white p-4 rounded-l-lg h-full">
           <span
             class="material-symbols-outlined cursor-pointer hover:bg-red-400 h-fit w-fit rounded-full p-1"
@@ -21,28 +21,28 @@
             :src="oeuvre.imagePath"
           >
           <ImagePlaceholder v-if="!oeuvre.imagePath" />
-          <div v-if="oeuvre.titre">
+          <div v-if="oeuvre.titre" class="truncate">
             Titre : {{ oeuvre.titre }}
           </div>
-          <div v-if="oeuvre.sousTitre">
+          <div v-if="oeuvre.sousTitre" class="truncate">
             Sous Titre : {{ oeuvre.sousTitre }}
           </div>
-          <div v-if="oeuvre.description">
+          <div v-if="oeuvre.description" class="truncate">
             Description : {{ oeuvre.description }}
           </div>
-          <div v-if="oeuvre.auteur">
+          <div v-if="oeuvre.auteur" class="truncate">
             Auteur : {{ oeuvre.auteur.name }}
           </div>
-          <div v-if="oeuvre.type">
+          <div v-if="oeuvre.type" class="truncate">
             Type : {{ oeuvre.type.name }}
           </div>
-          <div v-if="oeuvre.support">
+          <div v-if="oeuvre.support" class="truncate">
             Support : {{ oeuvre.support.name }}
           </div>
-          <div v-if="oeuvre.editeur">
+          <div v-if="oeuvre.editeur" class="truncate">
             Editeur : {{ oeuvre.editeur.name }}
           </div>
-          <div v-if="oeuvre.genre">
+          <div v-if="oeuvre.genre" class="truncate">
             Genre : {{ oeuvre.genre.name }}
           </div>
         </div>
@@ -71,12 +71,13 @@
               <a class="block text-gray-700 text-sm font-bold mb-2">
                 Description
               </a>
-              <input
+              <textarea
                 v-model="inputDescription"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="text"
                 placeholder="Description"
-              >
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                cols="40"
+                rows="5"
+              />
               <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
               <label class="btn btn-default">
                 <input
@@ -87,7 +88,7 @@
                   @change="fileUpload()"
                 >
               </label>
-              <div v-if="imagePreview">
+              <div v-if="imageLoaded">
                 Image chargée avec succes
               </div>
               <v-autocomplete
@@ -136,7 +137,7 @@
               <a :class="fillFullFormError">
                 Veuillez remplir tous les champs obligatoires.
               </a>
-              <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+              <a :class="success"> L'oeuvre a bien été modifiée. </a>
             </div>
           </form>
         </div>
@@ -150,55 +151,80 @@
             :src="imagePreview"
           >
           <ImagePlaceholder v-if="!imagePreview" />
-          <div v-if="inputTitre">
+          <div v-if="inputTitre" class="truncate">
             Titre : {{ inputTitre }}
           </div>
-          <div v-if="!inputTitre">
+          <div v-if="!inputTitre" class="truncate">
             Titre : {{ oeuvre.titre }}
           </div>
-          <div v-if="inputSousTitre">
+          <div v-if="inputSousTitre" class="truncate">
             Sous Titre : {{ inputSousTitre }}
           </div>
-          <div v-if="!inputSousTitre">
+          <div v-if="!inputSousTitre" class="truncate">
             Sous Titre : {{ oeuvre.sousTitre }}
           </div>
-          <div v-if="inputDescription">
+          <div v-if="inputDescription" class="truncate">
             Description : {{ inputDescription }}
           </div>
-          <div v-if="!inputDescription">
+          <div v-if="!inputDescription" class="truncate">
             Description : {{ oeuvre.description }}
           </div>
-          <div v-if="oeuvre.auteur">
+          <div v-if="oeuvre.auteur" class="truncate">
             Auteur :
             {{
-              inputAuteur === undefined ? oeuvre.auteur.name : inputAuteur.name
+              inputAuteur === '' ? oeuvre.auteur.name : inputAuteur.name
             }}
           </div>
-          <div v-if="oeuvre.type">
+          <div v-if="oeuvre.type" class="truncate">
             Type :
-            {{ inputType === undefined ? oeuvre.type.name : inputType.name }}
+            {{ inputType === '' ? oeuvre.type.name : inputType.name }}
           </div>
-          <div v-if="oeuvre.support">
+          <div v-if="oeuvre.support" class="truncate">
             Support :
             {{
-              inputSupport === undefined
+              inputSupport === ''
                 ? oeuvre.support.name
                 : inputSupport.name
             }}
           </div>
-          <div v-if="oeuvre.editeur">
+          <div v-if="oeuvre.editeur" class="truncate">
             Editeur :
             {{
-              inputEditeur === undefined
+              inputEditeur === ''
                 ? oeuvre.editeur.name
                 : inputEditeur.name
             }}
           </div>
-          <div v-if="oeuvre.genre">
+          <div v-if="oeuvre.genre" class="truncate">
             Genre :
-            {{ inputGenre === undefined ? oeuvre.genre.name : inputGenre.name }}
+            {{ inputGenre === '' ? oeuvre.genre.name : inputGenre.name }}
           </div>
         </div>
+      </div>
+    </div>
+    <div class="flex items-center bg-white rounded-lg mt-6 p-4">
+      <div class="flex-auto">
+        Un label (Auteur, Studio...) est n'est pas présent ou incorrect ?
+      </div>
+      <div
+        class="w-40 text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+        @click="
+          $router.push({
+            path: '/edit/label'
+          })
+        "
+      >
+        Modifiez-le !
+      </div>
+      <div
+        class="w-40 text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2 ml-6"
+        @click="
+          $router.push({
+            path: '/new/label'
+          })
+        "
+      >
+        Ajoutez-le !
       </div>
     </div>
     <CompleteAccountDialog v-if="dialog" :can-disable="false" />
@@ -235,7 +261,8 @@ export default {
       deleteSuccess: 'hidden',
       imageUpload: undefined,
       imagePreview: undefined,
-      dialog: false
+      dialog: false,
+      imageLoaded: false
     };
   },
   async fetch () {
@@ -290,6 +317,7 @@ export default {
     fileUpload () {
       this.imageUpload = this.$refs.file.files[0];
       this.imagePreview = URL.createObjectURL(this.imageUpload);
+      this.imageLoaded = true
     },
     submitOeuvre: function () {
       if (this.oeuvre.titre !== undefined) {
@@ -350,6 +378,13 @@ export default {
           .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
+            this.imagePreview = this.oeuvre.imagePath
+            setTimeout(() => {
+                this.$router.push({
+                path: '/oeuvre',
+                query: { q: this.oeuvre.idOeuvre }
+              })
+            }, 3000)
           })
           .catch(function () {
             console.log('issue with post');
@@ -365,7 +400,7 @@ export default {
         )
         .then(() => {
           this.deleteSuccess = '';
-          setTimeout(this.$router.push({ path: '/oeuvres' }), 10000);
+          setTimeout(this.$router.push({ path: '/oeuvres' }), 2000);
         })
         .catch(function () {
           console.log('issue with delete');

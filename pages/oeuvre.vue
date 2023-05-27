@@ -6,7 +6,7 @@
         <img v-if="oeuvre.imagePath" class="max-h-80" :src="oeuvre.imagePath">
         <ImagePlaceholder v-if="!oeuvre.imagePath" />
       </div>
-      <div class="grid grid-rows-[1fr_auto]">
+      <div class="grid grid-rows-[1fr_auto_auto]">
         <div class="relative">
           Informations :
           <span
@@ -22,17 +22,19 @@
             edit
           </span>
           <div v-if="oeuvre.titre">
-            <div class="">
+            <div class="truncate">
               Titre : {{ oeuvre.titre }}
             </div>
           </div>
           <div v-if="oeuvre.sousTitre">
-            <div class="">
+            <div class="truncate">
               Sous Titre : {{ oeuvre.sousTitre }}
             </div>
           </div>
           <div v-if="oeuvre.description">
-            <div>Description : {{ oeuvre.description }}</div>
+            <div class="truncate">
+              Description : {{ oeuvre.description }}
+            </div>
           </div>
           <div
             v-if="oeuvre.auteur"
@@ -95,6 +97,9 @@
             <div>Genre : {{ oeuvre.genre.name }}</div>
           </div>
         </div>
+        <div class="text-center">
+          {{ isAdded }}
+        </div>
         <div class="grid grid-cols-2 place-items-center">
           <span
             v-if="user.pseudo"
@@ -149,7 +154,8 @@ export default {
     return {
       oeuvre: [],
       dialog: false,
-      user: []
+      user: [],
+      isAdded: ' '
     };
   },
   async fetch () {
@@ -164,7 +170,7 @@ export default {
           'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
         )
         .then((response) => {
-          this.user = response
+          this.user = response;
           this.dialog = false;
         })
         .catch(() => {
@@ -185,7 +191,10 @@ export default {
       this.$axios
         .$post('https://emporiumback.fly.dev/collection', addedOeuvre)
         .then(() => {
-          console.log('add to collect');
+          this.isAdded = "L'oeuvre a bien été ajoutée à votre collection";
+          setTimeout(() => {
+            this.isAdded = '';
+          }, 2000);
         });
     }
   }
