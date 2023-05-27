@@ -7,11 +7,22 @@
             Stop, pas plus loin !
           </v-card-title>
           <v-card-text>
-            Votre compte n'est pas encore créé pour naviguer pleinement,
+            Votre compte n'est pas encore créé, pour naviguer pleinement,
             veuillez créer votre compte
           </v-card-text>
           <v-card-actions>
             <v-spacer />
+            <v-btn
+              color="gray"
+              text
+              @click="
+                $router.push({
+                  path: '/'
+                })
+              "
+            >
+              Revenir à l'accueil
+            </v-btn>
             <v-btn
               v-if="!$auth.loggedIn"
               color="green darken-1"
@@ -38,20 +49,6 @@
               "
             >
               Cliquer ici pour configurer votre compte
-            </v-btn>
-          </v-card-actions>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              color="gray"
-              text
-              @click="
-                $router.push({
-                  path: '/'
-                })
-              "
-            >
-              Revenir à l'accueil
             </v-btn>
           </v-card-actions>
         </v-card>
