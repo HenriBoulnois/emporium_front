@@ -160,7 +160,8 @@ export default {
         .$get(
           'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
         )
-        .then(() => {
+        .then((response) => {
+          this.user = response
           this.dialog = false;
         })
         .catch(() => {

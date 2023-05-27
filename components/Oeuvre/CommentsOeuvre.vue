@@ -21,15 +21,15 @@
       <div
         v-for="comment in commentaires"
         :key="comment.idCommentaire"
-        class="bg-gray-600 rounded-lg grid grid-cols-[10%_1fr] items-center p-4 mt-4"
+        class="bg-gray-600 rounded-lg grid grid-cols-[15%_1fr] items-center p-4 mt-4"
       >
-        <div class="grid grid-rows-[auto_auto]">
+        <div class="grid grid-rows-[auto_auto] place-items-center">
           <div
             class="cursor-pointer"
             @click="
               $router.push({
                 path: '/user',
-                query: { q: comment.utilisateur.pseudo }
+                query: { q: comment.utilisateur.uwuid }
               })
             "
           >
@@ -80,8 +80,9 @@ export default {
     },
     submitComment: function () {
       if (this.newComment !== '') {
+        console.log(this.user)
         const commentaire = {
-          UWUid: this.user.uwuid,
+          uwuid: this.user.uwuid,
           idOeuvre: this.oeuvreId,
           text: this.newComment
         };
