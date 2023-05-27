@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="bg-white p-5 rounded-lg">
-          Dernières oeuvres modifiées :
+          Derniers commentaires :
           <div
             class="bg-gray-200 rounded-lg grid grid-cols-3 p-2 text-center items-center"
           >
