@@ -27,12 +27,12 @@
             </div>
           </div>
           <div v-if="oeuvre.sousTitre">
-            <div class="truncate">
+            <div v-if="!oeuvre.sousTitre === 'null'" class="truncate">
               Sous Titre : {{ oeuvre.sousTitre }}
             </div>
           </div>
           <div v-if="oeuvre.description">
-            <div class="truncate">
+            <div v-if="!oeuvre.description === 'null'" class="truncate">
               Description : {{ oeuvre.description }}
             </div>
           </div>

@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       inputPseudo: undefined,
-      inputEmail: this.$auth.user.email,
+      inputEmail: undefined,
       profilPicture: undefined,
       imagePreview: undefined,
       fillFullFormError: 'hidden',
@@ -75,6 +75,7 @@ export default {
   },
   fetch () {
     if (this.$auth.loggedIn === undefined) {
+      this.inputEmail = this.$auth.user.email
       this.dialog = true;
     } else {
       this.dialog = false

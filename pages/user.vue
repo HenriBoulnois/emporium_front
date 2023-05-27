@@ -169,7 +169,7 @@ export default {
     if (this.email === this.user.email) {
       this.isCurrent = true;
     }
-    await this.fetchCollection();
+    this.fetchCollection();
   },
   watch: {
     '$route.query': '$fetch'
