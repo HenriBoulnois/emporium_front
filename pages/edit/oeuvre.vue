@@ -217,15 +217,15 @@ export default {
       oeuvre: [],
       success: 'hidden',
       fillFullFormError: 'hidden',
-      inputTitre: undefined,
-      inputSousTitre: undefined,
-      inputDescription: undefined,
-      inputImage: undefined,
-      inputType: undefined,
-      inputAuteur: undefined,
-      inputEditeur: undefined,
-      inputSupport: undefined,
-      inputGenre: undefined,
+      inputTitre: '',
+      inputSousTitre: '',
+      inputDescription: '',
+      inputImage: '',
+      inputType: '',
+      inputAuteur: '',
+      inputEditeur: '',
+      inputSupport: '',
+      inputGenre: '',
       labelList: undefined,
       listType: undefined,
       listAuteur: undefined,
@@ -301,52 +301,50 @@ export default {
         }
         editedOeuvre.append(
           'titre',
-          this.inputTitre === undefined ? this.oeuvre.titre : this.inputTitre
+          this.inputTitre === '' ? this.oeuvre.titre : this.inputTitre
         );
         editedOeuvre.append(
           'sousTitre',
-          this.inputSousTitre === undefined
+          this.inputSousTitre === ''
             ? this.oeuvre.sousTitre
             : this.inputSousTitre
         );
         editedOeuvre.append(
           'description',
-          this.inputDescription === undefined
+          this.inputDescription === ''
             ? this.oeuvre.description
             : this.inputDescription
         );
         editedOeuvre.append(
           'idType',
-          this.inputType === undefined
+          this.inputType === ''
             ? this.oeuvre.type.idType
             : this.inputType.idType
         );
         editedOeuvre.append(
           'idAuteur',
-          this.inputAuteur === undefined
+          this.inputAuteur === ''
             ? this.oeuvre.auteur.idAuteur
             : this.inputAuteur.idAuteur
         );
         editedOeuvre.append(
           'idEditeur',
-          this.inputEditeur === undefined
+          this.inputEditeur === ''
             ? this.oeuvre.editeur.idEditeur
             : this.inputEditeur.idEditeur
         );
         editedOeuvre.append(
           'idSupport',
-          this.inputSupport === undefined
+          this.inputSupport === ''
             ? this.oeuvre.support.idSupport
             : this.inputSupport.idSupport
         );
         editedOeuvre.append(
           'idGenre',
-          this.inputGenre === undefined
+          this.inputGenre === ''
             ? this.oeuvre.genre.idGenre
             : this.inputGenre.idGenre
         );
-
-        console.log(editedOeuvre);
         this.$axios
           .$put('https://emporiumback.fly.dev/oeuvres', editedOeuvre)
           .then(() => {

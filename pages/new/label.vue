@@ -210,11 +210,11 @@ export default {
       tab5Title:
         'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-white cursor-pointer',
       tab5Text: 'hidden',
-      inputType: undefined,
-      inputAuteur: undefined,
-      inputEditeur: undefined,
-      inputSupport: undefined,
-      inputGenre: undefined,
+      inputType: '',
+      inputAuteur: '',
+      inputEditeur: '',
+      inputSupport: '',
+      inputGenre: '',
       fillFullFormError: 'hidden',
       success: 'hidden',
       listType: '',
@@ -335,7 +335,7 @@ export default {
       this.success = 'hidden';
     },
     submitType: function () {
-      if (this.inputType !== undefined) {
+      if (this.inputType !== '') {
         const type = {
           name: this.inputType
         };
@@ -345,14 +345,14 @@ export default {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchType();
-            this.inputType = undefined;
+            this.inputType = '';
           });
       } else {
         this.fillFullFormError = '';
       }
     },
     submitAuteur: function () {
-      if (this.inputAuteur !== undefined) {
+      if (this.inputAuteur !== '') {
         const auteur = {
           name: this.inputAuteur
         };
@@ -362,14 +362,14 @@ export default {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchAuteur();
-            this.inputAuteur = undefined;
+            this.inputAuteur = '';
           });
       } else {
         this.fillFullFormError = '';
       }
     },
     submitEditeur: function () {
-      if (this.inputEditeur !== undefined) {
+      if (this.inputEditeur !== '') {
         const editeur = {
           name: this.inputEditeur
         };
@@ -379,14 +379,14 @@ export default {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchEditeur();
-            this.inputEditeur = undefined;
+            this.inputEditeur = '';
           });
       } else {
         this.fillFullFormError = '';
       }
     },
     submitSupport: function () {
-      if (this.inputSupport !== undefined) {
+      if (this.inputSupport !== '') {
         const support = {
           name: this.inputSupport
         };
@@ -396,14 +396,14 @@ export default {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchSupport();
-            this.inputSupport = undefined;
+            this.inputSupport = '';
           });
       } else {
         this.fillFullFormError = '';
       }
     },
     submitGenre: function () {
-      if (this.inputGenre !== undefined) {
+      if (this.inputGenre !== '') {
         const genre = {
           name: this.inputGenre
         };
@@ -413,7 +413,7 @@ export default {
             this.fillFullFormError = 'hidden';
             this.success = '';
             this.fetchGenre();
-            this.inputGenre = undefined;
+            this.inputGenre = '';
           });
       } else {
         this.fillFullFormError = '';

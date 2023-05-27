@@ -89,8 +89,8 @@ export default {
       listEditeur: undefined,
       listSupport: undefined,
       listGenre: undefined,
-      inputLabel: undefined,
-      inputNewName: undefined,
+      inputLabel: null,
+      inputNewName: '',
       error: 'hidden',
       success: 'hidden',
       errorNoInput: 'hidden',
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     submitChange () {
-      if (this.inputNewName !== undefined && this.inputLabel !== undefined) {
+      if (this.inputNewName !== '' && this.inputLabel !== null) {
         if (this.inputLabel.idType !== undefined) {
           const newLabelName = {
             id: this.inputLabel.idType,
@@ -187,7 +187,7 @@ export default {
       this.$axios
         .$put('https://emporiumback.fly.dev/' + typeLabel, newLabelName)
         .then(() => {
-          this.inputNewName = undefined;
+          this.inputNewName = '';
           this.error = 'hidden';
           this.success = '';
         })
@@ -195,6 +195,7 @@ export default {
           this.success = 'hidden';
           this.error = '';
         });
+        this.inputLabel = null
     }
   }
 };

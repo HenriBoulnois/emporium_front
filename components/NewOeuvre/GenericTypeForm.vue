@@ -100,13 +100,13 @@ export default {
       success: 'hidden',
       imageUpload: undefined,
       imagePreview: undefined,
-      inputTitre: undefined,
-      inputSousTitre: undefined,
-      inputDescription: undefined,
-      inputAuteur: undefined,
-      inputEditeur: undefined,
-      inputSupport: undefined,
-      inputGenre: undefined
+      inputTitre: '',
+      inputSousTitre: '',
+      inputDescription: '',
+      inputAuteur: '',
+      inputEditeur: '',
+      inputSupport: '',
+      inputGenre: ''
     };
   },
   methods: {
@@ -117,14 +117,14 @@ export default {
     },
     submitOeuvre () {
       if (
-        this.inputTitre !== undefined &&
-        this.inputSousTitre !== undefined &&
-        this.inputDescription !== undefined &&
+        this.inputTitre !== '' &&
+        this.inputSousTitre !== '' &&
+        this.inputDescription !== '' &&
         this.imageUpload !== undefined &&
-        this.inputAuteur !== undefined &&
-        this.inputEditeur !== undefined &&
-        this.inputSupport !== undefined &&
-        this.inputGenre !== undefined
+        this.inputAuteur !== '' &&
+        this.inputEditeur !== '' &&
+        this.inputSupport !== '' &&
+        this.inputGenre !== ''
       ) {
         const formData = new FormData();
         formData.append('image', this.imageUpload);

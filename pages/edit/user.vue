@@ -120,7 +120,7 @@ export default {
       user: [],
       success: 'hidden',
       inputPseudo: undefined,
-      inputDescription: undefined,
+      inputDescription: '',
       deleteSuccess: 'hidden',
       imageUpload: undefined,
       imagePreview: undefined,
@@ -174,7 +174,7 @@ export default {
         );
         editedUser.append(
           'description',
-          this.inputDescription === undefined
+          this.inputDescription === ''
             ? this.user.description
             : this.inputDescription
         );
