@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="grid">
-      <div class="grid grid-cols-[1fr_1fr_1fr] bg-gray-700 shadow-inner rounded-lg h-fit">
+      <div
+        class="grid grid-cols-[1fr_1fr_1fr] bg-gray-700 shadow-inner rounded-lg h-fit"
+      >
         <div class="grid bg-white p-4 rounded-l-lg h-full">
           <span
             class="material-symbols-outlined cursor-pointer hover:bg-red-400 h-fit w-fit rounded-full p-1"
@@ -25,10 +27,20 @@
             Titre : {{ oeuvre.titre }}
           </div>
           <div v-if="oeuvre.sousTitre" class="truncate">
-            Sous Titre : {{ oeuvre.sousTitre }}
+            <div v-if="oeuvre.sousTitre === 'null'">
+              Sous Titre :
+            </div>
+            <div v-if="oeuvre.sousTitre !== 'null'">
+              Sous Titre : {{ oeuvre.sousTitre }}
+            </div>
           </div>
           <div v-if="oeuvre.description" class="truncate">
-            Description : {{ oeuvre.description }}
+            <div v-if="oeuvre.description === 'null'">
+              Description :
+            </div>
+            <div v-if="oeuvre.description !== 'null'">
+              Description : {{ oeuvre.description }}
+            </div>
           </div>
           <div v-if="oeuvre.auteur" class="truncate">
             Auteur : {{ oeuvre.auteur.name }}
@@ -161,19 +173,27 @@
             Sous Titre : {{ inputSousTitre }}
           </div>
           <div v-if="!inputSousTitre" class="truncate">
-            Sous Titre : {{ oeuvre.sousTitre }}
+            <div v-if="oeuvre.sousTitre === 'null'">
+              Sous Titre :
+            </div>
+            <div v-if="oeuvre.sousTitre !== 'null'">
+              Sous Titre : {{ oeuvre.sousTitre }}
+            </div>
           </div>
           <div v-if="inputDescription" class="truncate">
             Description : {{ inputDescription }}
           </div>
           <div v-if="!inputDescription" class="truncate">
-            Description : {{ oeuvre.description }}
+            <div v-if="oeuvre.description === 'null'">
+              Description :
+            </div>
+            <div v-if="oeuvre.description !== 'null'">
+              Description : {{ oeuvre.description }}
+            </div>
           </div>
           <div v-if="oeuvre.auteur" class="truncate">
             Auteur :
-            {{
-              inputAuteur === '' ? oeuvre.auteur.name : inputAuteur.name
-            }}
+            {{ inputAuteur === '' ? oeuvre.auteur.name : inputAuteur.name }}
           </div>
           <div v-if="oeuvre.type" class="truncate">
             Type :
@@ -181,19 +201,11 @@
           </div>
           <div v-if="oeuvre.support" class="truncate">
             Support :
-            {{
-              inputSupport === ''
-                ? oeuvre.support.name
-                : inputSupport.name
-            }}
+            {{ inputSupport === '' ? oeuvre.support.name : inputSupport.name }}
           </div>
           <div v-if="oeuvre.editeur" class="truncate">
             Editeur :
-            {{
-              inputEditeur === ''
-                ? oeuvre.editeur.name
-                : inputEditeur.name
-            }}
+            {{ inputEditeur === '' ? oeuvre.editeur.name : inputEditeur.name }}
           </div>
           <div v-if="oeuvre.genre" class="truncate">
             Genre :
@@ -317,7 +329,7 @@ export default {
     fileUpload () {
       this.imageUpload = this.$refs.file.files[0];
       this.imagePreview = URL.createObjectURL(this.imageUpload);
-      this.imageLoaded = true
+      this.imageLoaded = true;
     },
     submitOeuvre: function () {
       if (this.oeuvre.titre !== undefined) {
@@ -378,13 +390,13 @@ export default {
           .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
-            this.imagePreview = this.oeuvre.imagePath
+            this.imagePreview = this.oeuvre.imagePath;
             setTimeout(() => {
-                this.$router.push({
+              this.$router.push({
                 path: '/oeuvre',
                 query: { q: this.oeuvre.idOeuvre }
-              })
-            }, 3000)
+              });
+            }, 3000);
           })
           .catch(function () {
             console.log('issue with post');
