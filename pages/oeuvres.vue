@@ -2,18 +2,19 @@
   <div>
     <div class="justify-items-center text-center ">
       <div
-        class="bg-gray-600 rounded-lg grid grid-cols-[1fr_1fr_1fr_1fr_1fr] p-2 items-center"
+        class="bg-gray-600 rounded-lg grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] p-2 items-center"
       >
         <a>Image</a>
         <a>Nom</a>
         <a>Auteur</a>
         <a>Genre</a>
+        <a>Support</a>
         <a>Catégorie</a>
       </div>
       <div
         v-for="oeuvre in oeuvres"
         :key="oeuvre.idOeuvre"
-        class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[1fr_1fr_1fr_1fr_1fr] p-4 place-items-center"
+        class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] p-4 place-items-center"
         @click="
           $router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
         "
@@ -23,6 +24,7 @@
         <a>{{ oeuvre.titre }}</a>
         <a>{{ oeuvre.auteur.name }}</a>
         <a>{{ oeuvre.genre.name }}</a>
+        <a>{{ oeuvre.support.name }}</a>
         <a>{{ oeuvre.type.name }}</a>
       </div>
     </div>
