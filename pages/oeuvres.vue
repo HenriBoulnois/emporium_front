@@ -44,7 +44,7 @@ export default {
   },
   async fetch () {
     const response = await this.$axios.$get(
-      'https://emporiumback.fly.dev/oeuvres'
+      'https://emporiumback.fly.dev/oeuvres/firstPack'
     );
     this.oeuvres = response;
   }
