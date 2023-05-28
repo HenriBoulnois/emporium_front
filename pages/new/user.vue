@@ -8,14 +8,14 @@
             v-model="inputPseudo"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
-            placeholder="Titre"
+            placeholder="pseudo"
           >
           <a class="block text-gray-700 text-sm font-bold mb-2"> Email </a>
           <input
             v-model="inputEmail"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
-            placeholder="Sous titre"
+            placeholder="Email"
             :readonly="true"
           >
           <a class="block text-gray-700 text-sm font-bold mb-2">
