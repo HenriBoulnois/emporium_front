@@ -26,7 +26,9 @@
           </span>
         </div>
         <div class="text-justify">
-          {{ user.description }}
+          <div v-if="user.description !== 'null'">
+            {{ user.description }}
+          </div>
         </div>
       </div>
       <div class="bg-gray-600 rounded-r-lg">
@@ -194,8 +196,7 @@ export default {
         .then(() => {
           this.fetchCollection();
         })
-        .catch(function () {
-        });
+        .catch(function () {});
     },
     addAsFavorite (collectionId, oeuvreId) {
       const collection = {
@@ -209,8 +210,7 @@ export default {
         .then(() => {
           this.fetchCollection();
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     },
     removeAsFavorite (collectionId, oeuvreId) {
       const collection = {
@@ -224,8 +224,7 @@ export default {
         .then(() => {
           this.fetchCollection();
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     }
   }
 };
