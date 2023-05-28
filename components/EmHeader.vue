@@ -44,7 +44,7 @@
           <input
             v-model="input"
             class="block w-full p-4 pl-10 text-sm text-gray-900 border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400"
-            placeholder="Rechercher objects, personnes, ..."
+            placeholder="Rechercher des oeuvres"
           >
           <button
             class="text-white absolute right-2.5 bottom-2.5 bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
