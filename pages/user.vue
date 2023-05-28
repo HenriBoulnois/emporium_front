@@ -47,6 +47,9 @@
           <div v-if="isCurrent" class="w-60">
             Actions
           </div>
+          <div v-if="!isCurrent" class="w-60">
+            Oeuvre favorite
+          </div>
         </div>
         <div
           v-for="collection in collections"
@@ -118,6 +121,14 @@
               @click="removeFromCollection(collection.collection.idCollection)"
             >
               delete
+            </span>
+          </div>
+          <div v-if="!isCurrent" class="w-60">
+            <span
+              v-if="!collection.collection.favorite"
+              class="bg-pink-300 h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 text-white"
+            >
+              favorite
             </span>
           </div>
         </div>
