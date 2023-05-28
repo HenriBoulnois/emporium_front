@@ -35,7 +35,7 @@
                 <a :class="fillFullFormError">
                   Un rongeur semble avoir grignotté le câble
                 </a>
-                <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+                <a :class="success"> La catégorie a bien été ajoutée. </a>
               </div>
             </form>
           </div>
@@ -62,7 +62,7 @@
                 <a :class="fillFullFormError">
                   Un rongeur semble avoir grignotté le câble
                 </a>
-                <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+                <a :class="success"> L'auteur a bien été ajoutée. </a>
               </div>
             </form>
           </div>
@@ -89,7 +89,7 @@
                 <a :class="fillFullFormError">
                   Un rongeur semble avoir grignotté le câble
                 </a>
-                <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+                <a :class="success"> L'éditeur a bien été ajoutée. </a>
               </div>
             </form>
           </div>
@@ -115,7 +115,7 @@
                 <a :class="fillFullFormError">
                   Un rongeur semble avoir grignotté le câble
                 </a>
-                <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+                <a :class="success"> Le support a bien été ajoutée. </a>
               </div>
             </form>
           </div>
@@ -142,7 +142,7 @@
                 <a :class="fillFullFormError">
                   Un rongeur semble avoir grignotté le câble
                 </a>
-                <a :class="success"> L'oeuvre a bien été ajoutée. </a>
+                <a :class="success"> Le genre a bien été ajoutée. </a>
               </div>
             </form>
           </div>
