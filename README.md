@@ -1,69 +1,44 @@
 # emporium_front
 
-## Build Setup
+Bienvenue sur la partie front du projet Emporium réalisé par Henri Boulnois et Tristan Six.
+
+Vous pourrez le retrouver directement ici : https://steady-hamster-8a0437.netlify.app/
+
+Ou suivre les étapes suivantes pour l'installer en local, cependant la connexion n'est complétement fonctionnelle que sur la version déployée sur Netlify.
+
+## Setup
+
+Prérequis : 
+
+- Possséder une des dernières versions de Node.js (>= v14)
+- Yarn doit être installé
 
 ```bash
-# install dependencies
+# installation des dépendances
 $ yarn install
 
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
+# Build le projet et le démarre en local
 $ yarn generate
+$ yarn start
 ```
+## Documentation
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+Le site a été réalisé en Nuxt2 avec les frameworks de style Tailwindcss et Vuetify.
 
-## Special Directories
+L'authentification se fait avec le service Auth0.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## Utilisation
 
-### `assets`
+Le site est utilisable sans connexion, vous pouvez naviguer sur les pages listant les oeuvres ainsi que les fiches détaillées et les utilisateurs avec leur profil.
+La page "login" accessible par le bouton "Se connecter" du header explique les avantages de se connecter et la façon de procéder.
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+Après s'être connecté sur Auth0, il vous sera demandé de configurer votre profil sur notre site en renseignant un pseudo et une image de profil.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+Une fois cette dernière action de faite, vous pourrez :
+- Ajouter et modifier des oeuvres
+- Ajouter et modifier des labels
+- Gérer votre collection personnelle avec des favoris !
+- Ajouter des commentaires
+- Personnaliser votre profil
 
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+Bonne navigation !
