@@ -20,6 +20,7 @@
           <div>- L'ajout et la modification d'oeuvre</div>
           <div>- L'ajout et la modification de label</div>
           <div>- La personnalisation du profil</div>
+          <div>- L'ajout de commentaires</div>
           <div>- La gestion de sa collection personnelle avec des favoris !</div>
         </div>
         <div

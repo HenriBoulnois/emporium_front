@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <CompleteAccountDialog v-if="dialog" :can-disable="true" />
     <div class="grid grid-cols-3">
       <div class="bg-gray-600 grid place-items-center rounded-l-lg p-4">
         <img
@@ -122,7 +123,6 @@
         </div>
       </div>
     </div>
-    <CompleteAccountDialog v-if="dialog" :can-disable="true" />
   </div>
 </template>
 

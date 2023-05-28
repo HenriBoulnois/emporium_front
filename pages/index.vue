@@ -7,7 +7,7 @@
           <MostPopularCat />
         </div>
         <div class="bg-white p-5 mb-5 rounded-lg grid place-items-center">
-          <div>Emporium est un site de gestion de collection où chacun peut participer en ajoutant les oeuvres qu'il possède afin de créer une base de donnée utilisable par tous.</div>
+          <div>Emporium est un site de gestion de collection où chacun peut participer en ajoutant les oeuvres qu'il possède afin de créer une base de données utilisable par tous.</div>
           <div>Site web réalisé par Henri Boulnois et Tristan Six</div>
         </div>
       </div>
