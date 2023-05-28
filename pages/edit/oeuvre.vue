@@ -395,7 +395,7 @@ export default {
                 path: '/oeuvre',
                 query: { q: this.oeuvre.idOeuvre }
               });
-            }, 3000);
+            }, 1500);
           })
       }
     },
@@ -406,7 +406,7 @@ export default {
         )
         .then(() => {
           this.deleteSuccess = '';
-          setTimeout(this.$router.push({ path: '/oeuvres' }), 2000);
+          setTimeout(this.$router.push({ path: '/oeuvres' }), 1000);
         })
     }
   }
