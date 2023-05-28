@@ -53,6 +53,7 @@
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 cols="40"
                 rows="5"
+                maxlength="500"
               />
               <a class="block text-gray-700 text-sm font-bold mb-2"> Image </a>
               <label class="btn btn-default">
@@ -96,7 +97,7 @@
             Pseudo :
             {{ inputPseudo === undefined ? user.pseudo : inputPseudo }}
           </div>
-          <div class="truncate">
+          <div class="line-clamp-10">
             Description :
             {{ inputDescription === '' ? user.description : inputDescription }}
           </div>

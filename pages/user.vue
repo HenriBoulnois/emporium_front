@@ -41,9 +41,9 @@
         <div class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto]">
           <a>Image</a>
           <a>Nom</a>
-          <a>Type</a>
-          <a>Catégorie</a>
+          <a>Auteur</a>
           <a>Description</a>
+          <a>Support</a>
           <div v-if="isCurrent" class="w-60">
             Actions
           </div>
@@ -76,14 +76,14 @@
           <div v-if="collection.oeuvres.titre">
             {{ collection.oeuvres.titre }}
           </div>
+          <div v-if="collection.oeuvres.auteur">
+            {{ collection.oeuvres.auteur.name }}
+          </div>
           <div v-if="collection.oeuvres.description">
             {{ collection.oeuvres.description }}
           </div>
-          <div v-if="collection.oeuvres.type">
-            {{ collection.oeuvres.type.name }}
-          </div>
-          <div v-if="collection.oeuvres.auteur">
-            {{ collection.oeuvres.auteur.name }}
+          <div v-if="collection.oeuvres.support">
+            {{ collection.oeuvres.support.name }}
           </div>
           <div
             v-if="isCurrent"

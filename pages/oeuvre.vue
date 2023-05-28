@@ -32,7 +32,7 @@
             </div>
           </div>
           <div v-if="oeuvre.description">
-            <div v-if="oeuvre.description !== 'null'" class="truncate">
+            <div v-if="oeuvre.description !== 'null'" class="line-clamp-10">
               Description : {{ oeuvre.description }}
             </div>
           </div>

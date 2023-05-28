@@ -34,7 +34,7 @@
               Sous Titre : {{ oeuvre.sousTitre }}
             </div>
           </div>
-          <div v-if="oeuvre.description" class="truncate">
+          <div v-if="oeuvre.description" class="line-clamp-10">
             <div v-if="oeuvre.description === 'null'">
               Description :
             </div>
@@ -180,10 +180,10 @@
               Sous Titre : {{ oeuvre.sousTitre }}
             </div>
           </div>
-          <div v-if="inputDescription" class="truncate">
+          <div v-if="inputDescription" class="line-clamp-10">
             Description : {{ inputDescription }}
           </div>
-          <div v-if="!inputDescription" class="truncate">
+          <div v-if="!inputDescription" class="line-clamp-10">
             <div v-if="oeuvre.description === 'null'">
               Description :
             </div>
