@@ -2,7 +2,10 @@
   <div class="">
     <CompleteAccountDialog v-if="dialog" :can-disable="true" />
     <div class="grid grid-cols-3">
-      <div class="bg-gray-600 grid place-items-center rounded-l-lg p-4">
+      <div
+        class="bg-gray-600 grid grid-rows-[1fr_auto_auto_1fr] place-items-center rounded-l-lg p-4"
+      >
+        <div />
         <img
           v-if="user.profilPicturePath"
           class="max-h-80"
@@ -10,6 +13,7 @@
         >
         <ImagePlaceholder v-if="!user.profilPicturePath" />
         <a class="pt-4">{{ user.pseudo }}</a>
+        <div />
       </div>
       <div class="grid grid-rows-[auto_1fr] list-none text-center bg-gray-600">
         <div class="flex justify-end">
@@ -26,8 +30,11 @@
             edit
           </span>
         </div>
-        <div class="text-justify">
-          <div v-if="user.description !== 'null'">
+        <div v-if="user.description !== null" class="text-justify">
+          <div class="text-center font-bold pt-4">
+            Description
+          </div>
+          <div class="bg-white p-4 m-4 rounded-lg">
             {{ user.description }}
           </div>
         </div>
@@ -37,8 +44,10 @@
       </div>
     </div>
     <div class="bg-gray-800">
-      <div class="justify-items-center text-center">
-        <div class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto]">
+      <div :class="hasItems">
+        <div
+          class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto] bg-gray-600 p-4 mt-4 rounded-lg text-center"
+        >
           <a>Image</a>
           <a>Nom</a>
           <a>Auteur</a>
@@ -153,7 +162,8 @@ export default {
       collections: [],
       dialog: false,
       isCurrent: false,
-      email: ''
+      email: '',
+      hasItems: 'hidden'
     };
   },
   async fetch () {
@@ -180,7 +190,7 @@ export default {
       })
       .catch(() => {});
     if (this.email === this.user.email) {
-      this.isCurrent = true;
+      this.isCurrent = 'justify-items-center text-center';
     }
     this.fetchCollection();
   },
@@ -197,6 +207,9 @@ export default {
         )
         .then((response) => {
           this.collections = response;
+          if (this.collections[0].idCollection === undefined) {
+            this.hasItems = true;
+          }
         });
     },
     removeFromCollection (idCollection) {

@@ -1,6 +1,8 @@
 <template>
   <div v-if="comments">
-    Derniers commentaires :
+    <div class="text-center font-bold pt-4">
+      Derniers commentaires
+    </div>
     <div
       v-for="comment in comments"
       :key="comment.idComment"
@@ -49,7 +51,7 @@ export default {
       .$get(
         'https://emporiumback.fly.dev/commentaire/utilisateur/' + this.userId
       )
-      .then(response => (this.comments = response))
+      .then(response => (this.comments = response));
   }
 };
 </script>
