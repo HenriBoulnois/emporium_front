@@ -10,7 +10,7 @@ Ou suivre les étapes suivantes pour l'installer en local, cependant la connexio
 
 Prérequis : 
 
-- Possséder une des dernières versions de Node.js (>= v14)
+- Posséder une des dernières versions de Node.js (>= v14)
 - Yarn doit être installé
 
 ```bash
