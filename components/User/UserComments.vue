@@ -50,7 +50,6 @@ export default {
         'https://emporiumback.fly.dev/commentaire/utilisateur/' + this.userId
       )
       .then(response => (this.comments = response))
-      .catch(error => console.log(error));
   }
 };
 </script>

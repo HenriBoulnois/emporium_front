@@ -39,7 +39,6 @@ export default {
           this.auteurId
       )
       .then(reponse => (this.oeuvresRelated = reponse))
-      .catch(error => console.log(error));
   }
 };
 </script>

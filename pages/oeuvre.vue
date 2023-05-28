@@ -163,7 +163,6 @@ export default {
     await this.$axios
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
       .then(reponse => (this.oeuvre = reponse))
-      .catch(error => console.log(error));
     if (this.$auth.loggedIn !== undefined) {
       await this.$axios
         .$get(

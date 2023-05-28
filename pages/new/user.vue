@@ -45,8 +45,6 @@
           </div>
           <a :class="fillFullFormError"> Veuillez remplir tous les champs. </a>
           <a :class="success"> Votre compte est complété. </a>
-          <a :class="success">
-            Il est possible de modifier vos informations ici</a>
         </div>
       </form>
     </div>
@@ -74,11 +72,21 @@ export default {
     };
   },
   fetch () {
-    if (this.$auth.loggedIn === undefined) {
-      this.inputEmail = this.$auth.user.email
-      this.dialog = true;
+    if (this.$auth.loggedIn === true) {
+      this.inputEmail = this.$auth.user.email;
+      this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/utilisateur/' + this.$auth.user.email
+        )
+        .then((response) => {
+          this.$router.push({
+            path: '/user',
+            query: { q: response.uwuid }
+          });
+        });
+      this.dialog = false;
     } else {
-      this.dialog = false
+      this.dialog = true;
     }
   },
   methods: {
@@ -102,7 +110,7 @@ export default {
           .then(() => {
             this.fillFullFormError = 'hidden';
             this.success = '';
-            setTimeout(this.$forceUpdate, 2000);
+            setTimeout(this.$nuxt.refresh(), 1000);
           });
       } else {
         this.fillFullFormError = '';

@@ -5,7 +5,7 @@
         <div class="grid bg-white p-4 rounded-l-lg h-full">
           <span
             class="material-symbols-outlined cursor-pointer hover:bg-red-400 h-fit w-fit rounded-full p-1"
-            @click="deleteAccount()"
+            @click="deleteUser()"
           >
             delete
           </span>
@@ -135,7 +135,6 @@ export default {
           this.$route.query.q
       )
       .then(reponse => (this.user = reponse))
-      .catch(error => console.log(error));
     if (this.$auth.loggedIn === undefined) {
       this.dialog = true;
     } else {
@@ -189,19 +188,22 @@ export default {
                 query: { q: this.user.uwuid }
               })
             }, 3000)
-          })
-          .catch(function () {
-            console.log('issue with post');
           });
         } else {
             this.errorPseudo = ''
         }
-      } else {
-        console.log('titre undefined');
       }
     },
     deleteUser () {
-      //
+        this.$axios
+          .$delete('https://emporiumback.fly.dev/utilisateur/delete/' + this.user.uwuid)
+          .then(() => {
+            setTimeout(() => {
+                this.$router.push({
+                path: '/'
+              })
+            }, 1500)
+          })
     }
   }
 };

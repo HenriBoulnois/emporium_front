@@ -281,7 +281,6 @@ export default {
     await this.$axios
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
       .then(reponse => (this.oeuvre = reponse))
-      .catch(error => console.log(error));
     await this.$axios
       .$get('https://emporiumback.fly.dev/type')
       .then((response) => {
@@ -398,11 +397,6 @@ export default {
               });
             }, 3000);
           })
-          .catch(function () {
-            console.log('issue with post');
-          });
-      } else {
-        console.log('titre undefined');
       }
     },
     deleteOeuvre () {
@@ -414,9 +408,6 @@ export default {
           this.deleteSuccess = '';
           setTimeout(this.$router.push({ path: '/oeuvres' }), 2000);
         })
-        .catch(function () {
-          console.log('issue with delete');
-        });
     }
   }
 };

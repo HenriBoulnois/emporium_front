@@ -192,11 +192,9 @@ export default {
           'https://emporiumback.fly.dev/collection/delete/' + idCollection
         )
         .then(() => {
-          console.log('supprimé avec succes');
           this.fetchCollection();
         })
         .catch(function () {
-          console.log('issue with delete');
         });
     },
     addAsFavorite (collectionId, oeuvreId) {
@@ -209,11 +207,9 @@ export default {
       this.$axios
         .$put('https://emporiumback.fly.dev/collection', collection)
         .then(() => {
-          console.log('added as fav');
           this.fetchCollection();
         })
         .catch(() => {
-          console.log('issue with add fav');
         });
     },
     removeAsFavorite (collectionId, oeuvreId) {
@@ -226,11 +222,9 @@ export default {
       this.$axios
         .$put('https://emporiumback.fly.dev/collection', collection)
         .then(() => {
-          console.log('remove as fav');
           this.fetchCollection();
         })
         .catch(() => {
-          console.log('issue with remove fav');
         });
     }
   }

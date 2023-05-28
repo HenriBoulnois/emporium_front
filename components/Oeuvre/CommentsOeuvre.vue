@@ -83,13 +83,11 @@ export default {
     },
     submitComment: function () {
       if (this.newComment !== '') {
-        console.log(this.user);
         const commentaire = {
           uwuid: this.user.uwuid,
           idOeuvre: this.oeuvreId,
           text: this.newComment
         };
-        console.log(commentaire);
         this.$axios
           .$post('https://emporiumback.fly.dev/commentaire', commentaire)
           .then(() => {
