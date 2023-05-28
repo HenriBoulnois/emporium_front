@@ -3,21 +3,21 @@
     <div class="grid grid-cols-[auto_1fr]">
       <div class="mr-6">
         <div
-          class="flex flex-wrap text-center text-white bg-gray-500 rounded-t-lg"
+          class="flex flex-row text-center text-white bg-gray-500 rounded-t-lg"
         >
-          <div class="">
+          <div class="flex-auto">
             <a :class="tab1Title" @click="selectedTab(1)">Basique</a>
           </div>
-          <div class="">
+          <div class="flex-auto">
             <a :class="tab2Title" @click="selectedTab(2)">Musique</a>
           </div>
-          <div class="">
+          <div class="flex-auto">
             <a :class="tab3Title" @click="selectedTab(3)">Jeux vidéo</a>
           </div>
-          <div class="">
+          <div class="flex-auto">
             <a :class="tab4Title" @click="selectedTab(4)">Livre</a>
           </div>
-          <div class="">
+          <div class="flex-auto">
             <a :class="tab5Title" @click="selectedTab(5)">Goodies</a>
           </div>
         </div>
@@ -128,19 +128,19 @@ export default {
   data () {
     return {
       tab1Title:
-        'inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer',
+        'w-full inline-block p-4 rounded-t-lg text-gray-600 bg-white active cursor-pointer',
       tab1Text: '',
       tab2Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
       tab2Text: 'hidden',
       tab3Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
       tab3Text: 'hidden',
       tab4Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
       tab4Text: 'hidden',
       tab5Title:
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer',
       tab5Text: 'hidden',
       fillFullFormError: 'hidden',
       success: 'hidden',
@@ -197,7 +197,7 @@ export default {
   methods: {
     selectedTab: function (tabNumber) {
       const styleSelected =
-        'inline-block p-4 rounded-t-lg bg-white text-gray-600 active cursor-pointer';
+        'w-full inline-block p-4 rounded-t-lg bg-white text-gray-600 active cursor-pointer';
       const textToShow = '';
       switch (tabNumber) {
         case 1:
@@ -231,19 +231,19 @@ export default {
     },
     resetTab: function () {
       this.tab1Title =
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab1Text = 'hidden';
       this.tab2Title =
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab2Text = 'hidden';
       this.tab3Title =
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab3Text = 'hidden';
       this.tab4Title =
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab4Text = 'hidden';
       this.tab5Title =
-        'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
+        'w-full inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 cursor-pointer';
       this.tab5Text = 'hidden';
       this.inputType = undefined;
       this.success = 'hidden';
