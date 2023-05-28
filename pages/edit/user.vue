@@ -27,7 +27,7 @@
           <div v-if="user.pseudo" class="place-self-center truncate">
             Pseudo : {{ user.pseudo }}
           </div>
-          <div v-if="user.description" class="place-self-center truncate">
+          <div v-if="user.description" class="place-self-center line-clamp-10">
             Description : {{ user.description }}
           </div>
         </div>
