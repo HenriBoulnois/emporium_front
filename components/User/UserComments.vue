@@ -11,7 +11,7 @@
       <div class="grid place-items-center">
         <img
           v-if="comment.imagePath"
-          class="max-w-full max-h-32"
+          class="max-w-full max-h-32 shadow-md shadow-black"
           :src="comment.imagePath"
           @click="
             $router.push({

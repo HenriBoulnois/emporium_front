@@ -1,5 +1,5 @@
 <template>
-  <footer class="p-4 bg-gray-900 text-center">
+  <footer class="p-4 bg-gray-700 text-center">
     <div class="text-white">
       2023 - 2024 © Emporium
     </div>

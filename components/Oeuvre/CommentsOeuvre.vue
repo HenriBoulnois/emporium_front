@@ -14,7 +14,7 @@
         placeholder="Nouveau commentaire"
       >
       <div
-        class="flex-auto text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+        class="flex-auto text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2"
         @click="submitComment()"
       >
         Envoyer
@@ -24,7 +24,7 @@
       <div
         v-for="comment in commentaires"
         :key="comment.idCommentaire"
-        class="bg-gray-600 rounded-lg grid grid-cols-[15%_1fr] items-center p-4 mb-4"
+        class="bg-white rounded-lg grid grid-cols-[15%_1fr] items-center p-4 mb-4"
       >
         <div class="grid grid-rows-[auto_auto] place-items-center">
           <div
@@ -38,7 +38,7 @@
           >
             <img
               v-if="comment.utilisateur.profilPicturePath"
-              class="max-w-full max-h-32"
+              class="max-w-full max-h-32 shadow-md shadow-gray-200"
               :src="comment.utilisateur.profilPicturePath"
             >
             <ImagePlaceholder v-if="!comment.utilisateur.profilPicturePath" />

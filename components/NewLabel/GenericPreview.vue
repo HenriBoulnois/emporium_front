@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="bg-gray-600 text-center rounded-lg m-4 grid grid-cols-2 p-2 items-center"
+      class="bg-gray-700 text-center rounded-lg m-4 grid grid-cols-2 p-2 items-center text-white"
     >
       <div>Nom</div>
       <div>Search</div>

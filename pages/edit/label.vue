@@ -54,7 +54,7 @@
             placeholder="Nouveau nom"
           >
           <div
-            class="w-fit text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm m-4 px-4 py-2"
+            class="w-fit text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm m-4 px-4 py-2"
             @click="submitChange()"
           >
             Envoyer

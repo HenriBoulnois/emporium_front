@@ -1,7 +1,7 @@
 <template>
   <div
     id="default-sidebar"
-    class="w-60 h-screen sticky top-0 bg-gray-900"
+    class="w-60 h-screen sticky top-0 bg-gray-700"
     aria-label="Sidebar"
   >
     <div class="px-3 py-4 grid grid-rows-[auto_1fr_auto]">
@@ -9,7 +9,7 @@
         <li>
           <NuxtLink to="/">
             <a
-              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-700"
+              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-600"
             >
               <span class="material-symbols-outlined"> home </span>
               <span class="ml-3"> Accueil </span>
@@ -19,7 +19,7 @@
         <li>
           <NuxtLink to="/oeuvres">
             <a
-              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-700"
+              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-600"
             >
               <span class="material-symbols-outlined">
                 featured_play_list
@@ -31,7 +31,7 @@
         <li>
           <NuxtLink to="/new/oeuvre">
             <a
-              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-700"
+              class="flex items-center rounded-lg p-2 text-white hover:bg-gray-600"
             >
               <span class="material-symbols-outlined"> playlist_add </span>
               <span class="flex-1 ml-3 whitespace-nowrap">
@@ -43,7 +43,7 @@
         <li>
           <NuxtLink to="/users">
             <a
-              class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700"
+              class="flex items-center p-2 rounded-lg text-white hover:bg-gray-600"
             >
               <span class="material-symbols-outlined"> group </span>
               <span class="flex-1 ml-3 whitespace-nowrap"> Utilisateurs </span>

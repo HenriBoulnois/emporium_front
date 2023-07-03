@@ -1,10 +1,10 @@
 <template>
   <div
-    class="h-full px-3 py-4 bg-gray-900 grid grid-cols-[auto_1fr_minmax(40%,40%)_1fr_auto]"
+    class="h-full px-3 py-4 bg-gray-700 grid grid-cols-[auto_1fr_minmax(40%,40%)_1fr_auto]"
   >
     <NuxtLink class="flex" to="/">
       <a
-        class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 w-fit"
+        class="flex items-center p-2 rounded-lg text-white hover:bg-gray-600 w-fit"
       >
         <link
           rel="stylesheet"
@@ -19,7 +19,7 @@
       <form>
         <label
           for="default-search"
-          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          class="mb-2 text-sm font-medium sr-only"
         >Rechercher</label>
         <div class="relative">
           <div
@@ -27,7 +27,7 @@
           >
             <svg
               aria-hidden="true"
-              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+              class="w-5 h-5 text-black"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -43,11 +43,11 @@
           </div>
           <input
             v-model="input"
-            class="block w-full p-4 pl-10 text-sm text-gray-900 border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400"
+            class="block w-full p-4 pl-10 text-sm border bg-white rounded-lg placeholder-black text-black"
             placeholder="Rechercher des oeuvres"
           >
           <button
-            class="text-white absolute right-2.5 bottom-2.5 bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+            class="text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2"
             @click.prevent="searchInput"
           >
             Rechercher

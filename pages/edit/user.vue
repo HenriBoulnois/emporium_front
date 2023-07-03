@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid">
-      <div class="grid grid-cols-3 bg-gray-700 shadow-inner rounded-lg h-fit">
+      <div class="grid grid-cols-3 bg-gray-100 shadow-inner rounded-lg h-fit">
         <div class="grid bg-white p-4 rounded-l-lg h-full">
           <span
             class="material-symbols-outlined cursor-pointer hover:bg-red-400 h-fit w-fit rounded-full p-1"
@@ -17,7 +17,7 @@
           </div>
           <img
             v-if="user.profilPicturePath"
-            class="max-w-full max-h-52 place-self-center"
+            class="max-w-full max-h-52 place-self-center shadow-md shadow-black"
             :src="user.profilPicturePath"
           >
           <ImagePlaceholder
@@ -89,7 +89,7 @@
           </div>
           <img
             v-if="imagePreview"
-            class="max-w-full max-h-52"
+            class="max-w-full max-h-52 shadow-md shadow-black"
             :src="imagePreview"
           >
           <ImagePlaceholder v-if="!imagePreview" />

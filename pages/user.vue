@@ -3,19 +3,19 @@
     <CompleteAccountDialog v-if="dialog" :can-disable="true" />
     <div class="grid grid-cols-3">
       <div
-        class="bg-gray-600 grid grid-rows-[1fr_auto_auto_1fr] place-items-center rounded-l-lg p-4"
+        class="bg-white grid grid-rows-[1fr_auto_auto_1fr] place-items-center rounded-l-lg p-4"
       >
         <div />
         <img
           v-if="user.profilPicturePath"
-          class="max-h-80"
+          class="max-h-80 shadow-md shadow-black"
           :src="user.profilPicturePath"
         >
         <ImagePlaceholder v-if="!user.profilPicturePath" />
         <a class="pt-4">{{ user.pseudo }}</a>
         <div />
       </div>
-      <div class="grid grid-rows-[auto_1fr] list-none text-center bg-gray-600">
+      <div class="grid grid-rows-[auto_1fr] list-none text-center bg-white">
         <div class="flex justify-end">
           <span
             v-if="isCurrent"
@@ -34,25 +34,25 @@
           <div class="text-center font-bold pt-4">
             Description
           </div>
-          <div class="bg-white p-4 m-4 rounded-lg">
+          <div class="bg-gray-100 p-4 m-4 rounded-lg">
             {{ user.description }}
           </div>
         </div>
       </div>
-      <div class="bg-gray-600 rounded-r-lg">
+      <div class="bg-white rounded-r-lg">
         <UserComments v-if="user.uwuid" :user-id="user.uwuid" />
       </div>
     </div>
-    <div class="bg-gray-800">
+    <div class="bg-gray-700">
       <div :class="hasItems">
         <div
-          class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto] bg-gray-600 p-4 mt-4 rounded-lg text-center"
+          class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto] bg-white p-4 mt-4 rounded-lg text-center"
         >
-          <a>Image</a>
-          <a>Nom</a>
-          <a>Auteur</a>
-          <a>Description</a>
-          <a>Support</a>
+          <div>Image</div>
+          <div>Nom</div>
+          <div>Auteur</div>
+          <div>Description</div>
+          <div>Support</div>
           <div v-if="isCurrent" class="w-60">
             Actions
           </div>
@@ -63,11 +63,11 @@
         <div
           v-for="collection in collections"
           :key="collection.idCollection"
-          class="bg-gray-600 hover:bg-gray-700 rounded-lg my-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr_auto] p-4 place-items-center"
+          class="bg-white hover:bg-gray-100 rounded-lg my-4 cursor-pointer grid grid-cols-[max(10%)_1fr_1fr_1fr_1fr_auto] p-4 place-items-center"
         >
           <img
             v-if="collection.oeuvres.imagePath"
-            class="max-w-full max-h-32"
+            class="max-w-full max-h-32 shadow-md shadow-black"
             :src="collection.oeuvres.imagePath"
             @click="
               $router.push({
