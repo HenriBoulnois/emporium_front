@@ -1,14 +1,16 @@
 <template>
   <div class="">
     <CompleteAccountDialog v-if="dialog" :can-disable="true" />
-    <div class="grid grid-cols-3 p-4 bg-gray-600 rounded-lg">
+    <div class="grid grid-cols-3 p-4 bg-white rounded-lg">
       <div class="place-self-center">
-        <img v-if="oeuvre.imagePath" class="max-h-80" :src="oeuvre.imagePath">
+        <img v-if="oeuvre.imagePath" class="max-h-80 shadow-md shadow-black" :src="oeuvre.imagePath">
         <ImagePlaceholder v-if="!oeuvre.imagePath" />
       </div>
       <div class="grid grid-rows-[1fr_auto_auto]">
         <div class="relative pl-6">
-          Informations :
+          <div class="pb-3 font-extrabold">
+            Informations :
+          </div>
           <span
             v-if="user.pseudo"
             class="material-symbols-outlined absolute top-1 right-2 cursor-pointer text-black hover:bg-white rounded-full p-2"
@@ -38,7 +40,7 @@
           </div>
           <div
             v-if="oeuvre.auteur"
-            class="cursor-pointer"
+            class="cursor-pointer hover:underline"
             @click="
               $router.push({
                 path: '/search',
@@ -50,7 +52,7 @@
           </div>
           <div
             v-if="oeuvre.type"
-            class="cursor-pointer"
+            class="cursor-pointer hover:underline"
             @click="
               $router.push({
                 path: '/search',
@@ -62,7 +64,7 @@
           </div>
           <div
             v-if="oeuvre.support"
-            class="cursor-pointer"
+            class="cursor-pointer hover:underline"
             @click="
               $router.push({
                 path: '/search',
@@ -74,7 +76,7 @@
           </div>
           <div
             v-if="oeuvre.editeur"
-            class="cursor-pointer"
+            class="cursor-pointer hover:underline"
             @click="
               $router.push({
                 path: '/search',
@@ -86,7 +88,7 @@
           </div>
           <div
             v-if="oeuvre.genre"
-            class="cursor-pointer"
+            class="cursor-pointer hover:underline"
             @click="
               $router.push({
                 path: '/search',
@@ -100,25 +102,38 @@
         <div class="text-center">
           {{ isAdded }}
         </div>
-        <div class="grid grid-cols-2 place-items-center">
+        <div
+          v-if="!inCollection.idCollection"
+          :class="displayAdd"
+        >
           <span
-            v-if="user.pseudo"
             class="hover:bg-pink-300 h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 text-pink-400 hover:text-white cursor-pointer"
             @click="addToMyCollection(true)"
           >
             favorite
           </span>
           <span
-            v-if="user.pseudo"
             class="hover:bg-green-400 text-green-400 hover:text-white h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-2 cursor-pointer"
             @click="addToMyCollection(false)"
           >
             add_box
           </span>
         </div>
+        <div
+          v-if="inCollection.idCollection"
+          class="grid text-center"
+        >
+          <span
+            v-if="user.pseudo && inCollection.favorite == true"
+            class="material-symbols-outlined text-pink-400"
+          >favorite</span>
+          Cette oeuvre fait déjà partie de votre collection !
+        </div>
       </div>
       <div class="">
-        Du même auteur :
+        <div class="pb-3 font-extrabold">
+          Du même auteur :
+        </div>
         <RelatedOeuvre
           v-if="oeuvre.auteur"
           :oeuvre-id="oeuvre.idOeuvre"
@@ -126,7 +141,7 @@
         />
       </div>
     </div>
-    <div class="relative bg-gray-800">
+    <div class="relative bg-gray-700">
       <CommentsOeuvre
         v-if="oeuvre.idOeuvre"
         :oeuvre-id="oeuvre.idOeuvre"
@@ -155,14 +170,16 @@ export default {
       oeuvre: [],
       dialog: false,
       user: [],
-      isAdded: ' '
+      isAdded: ' ',
+      inCollection: [],
+      displayAdd: 'grid grid-cols-2 place-items-center hidden'
     };
   },
   async fetch () {
     this.oeuvre = [];
     await this.$axios
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
-      .then(reponse => (this.oeuvre = reponse))
+      .then(reponse => (this.oeuvre = reponse));
     if (this.$auth.loggedIn !== undefined) {
       await this.$axios
         .$get(
@@ -174,6 +191,17 @@ export default {
         })
         .catch(() => {
           this.dialog = true;
+        });
+      await this.$axios
+        .$get(
+          'https://emporiumback.fly.dev/collection/utilisateur/' +
+            this.user.uwuid +
+            '/oeuvres/' +
+            this.oeuvre.idOeuvre
+        )
+        .then((response) => {
+          this.inCollection = response;
+          this.displayAdd = 'grid grid-cols-2 place-items-center'
         });
     }
   },
@@ -191,9 +219,7 @@ export default {
         .$post('https://emporiumback.fly.dev/collection', addedOeuvre)
         .then(() => {
           this.isAdded = "L'oeuvre a bien été ajoutée à votre collection";
-          setTimeout(() => {
-            this.isAdded = '';
-          }, 2000);
+          this.displayAdd = 'grid grid-cols-2 place-items-center hidden'
         });
     }
   }
