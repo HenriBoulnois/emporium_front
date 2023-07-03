@@ -2,7 +2,7 @@
   <div>
     <div class="grid">
       <div
-        class="grid grid-cols-[1fr_1fr_1fr] bg-gray-700 shadow-inner rounded-lg h-fit"
+        class="grid grid-cols-[1fr_1fr_1fr] bg-white shadow-inner rounded-lg h-fit"
       >
         <div class="grid bg-white p-4 rounded-l-lg h-full">
           <span
@@ -19,7 +19,7 @@
           </div>
           <img
             v-if="oeuvre.imagePath"
-            class="max-w-full max-h-52 place-self-center"
+            class="max-w-full max-h-52 place-self-center shadow-lg shadow-black"
             :src="oeuvre.imagePath"
           >
           <ImagePlaceholder v-if="!oeuvre.imagePath" />
@@ -103,35 +103,35 @@
               <div v-if="imageLoaded">
                 Image chargée avec succes
               </div>
-              <v-autocomplete
+              <v-combobox
                 v-model="inputType"
                 :items="listType"
                 item-text="name"
                 return-object
                 label="Type"
               />
-              <v-autocomplete
+              <v-combobox
                 v-model="inputAuteur"
                 :items="listAuteur"
                 item-text="name"
                 return-object
                 label="Auteur"
               />
-              <v-autocomplete
+              <v-combobox
                 v-model="inputEditeur"
                 :items="listEditeur"
                 item-text="name"
                 return-object
                 label="Editeur"
               />
-              <v-autocomplete
+              <v-combobox
                 v-model="inputSupport"
                 :items="listSupport"
                 item-text="name"
                 return-object
                 label="Support"
               />
-              <v-autocomplete
+              <v-combobox
                 v-model="inputGenre"
                 :items="listGenre"
                 item-text="name"
@@ -141,7 +141,7 @@
             </div>
             <div class="grid grid-rows-2 text-center">
               <div
-                class="flex-auto text-center text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+                class="flex-auto text-center text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2 cursor-pointer"
                 @click="submitOeuvre()"
               >
                 Envoyer
@@ -153,7 +153,7 @@
             </div>
           </form>
         </div>
-        <div class="grid p-4 h-full place-items-center">
+        <div class="grid p-4 h-full place-items-center bg-white rounded-r-lg">
           <div v-if="oeuvre.idOeuvre" class="">
             Visualisation des changements
           </div>
@@ -193,23 +193,53 @@
           </div>
           <div v-if="oeuvre.auteur" class="truncate">
             Auteur :
-            {{ inputAuteur === '' ? oeuvre.auteur.name : inputAuteur.name }}
+            {{
+              inputAuteur?.name
+                ? inputAuteur?.name
+                : inputAuteur
+                  ? inputAuteur
+                  : oeuvre.auteur.name
+            }}
           </div>
           <div v-if="oeuvre.type" class="truncate">
             Type :
-            {{ inputType === '' ? oeuvre.type.name : inputType.name }}
+            {{
+              inputType?.name
+                ? inputType?.name
+                : inputType
+                  ? inputType
+                  : oeuvre.type.name
+            }}
           </div>
           <div v-if="oeuvre.support" class="truncate">
             Support :
-            {{ inputSupport === '' ? oeuvre.support.name : inputSupport.name }}
+            {{
+              inputSupport?.name
+                ? inputSupport?.name
+                : inputSupport
+                  ? inputSupport
+                  : oeuvre.support.name
+            }}
           </div>
           <div v-if="oeuvre.editeur" class="truncate">
             Editeur :
-            {{ inputEditeur === '' ? oeuvre.editeur.name : inputEditeur.name }}
+            {{
+              inputEditeur?.name
+                ? inputEditeur?.name
+                : inputEditeur
+                  ? inputEditeur
+                  : oeuvre.editeur.name
+            }}
           </div>
           <div v-if="oeuvre.genre" class="truncate">
             Genre :
-            {{ inputGenre === '' ? oeuvre.genre.name : inputGenre.name }}
+            {{
+              inputGenre?.name
+                ? inputGenre?.name
+                : inputGenre
+                  ? inputGenre
+                  : oeuvre.genre.name
+            }}
           </div>
         </div>
       </div>
@@ -219,7 +249,7 @@
         Un label (Auteur, Studio...) est n'est pas présent ou incorrect ?
       </div>
       <div
-        class="w-40 text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
+        class="w-40 text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2"
         @click="
           $router.push({
             path: '/edit/label'
@@ -229,7 +259,7 @@
         Modifiez-le !
       </div>
       <div
-        class="w-40 text-center text-white bg-gray-800 cursor-pointer hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2 ml-6"
+        class="w-40 text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2 ml-6"
         @click="
           $router.push({
             path: '/new/label'
@@ -259,11 +289,11 @@ export default {
       inputSousTitre: '',
       inputDescription: '',
       inputImage: '',
-      inputType: '',
-      inputAuteur: '',
-      inputEditeur: '',
-      inputSupport: '',
-      inputGenre: '',
+      inputType: undefined,
+      inputAuteur: undefined,
+      inputEditeur: undefined,
+      inputSupport: undefined,
+      inputGenre: undefined,
       labelList: undefined,
       listType: undefined,
       listAuteur: undefined,
@@ -280,7 +310,7 @@ export default {
   async fetch () {
     await this.$axios
       .$get('https://emporiumback.fly.dev/oeuvres/' + this.$route.query.q)
-      .then(reponse => (this.oeuvre = reponse))
+      .then(reponse => (this.oeuvre = reponse));
     await this.$axios
       .$get('https://emporiumback.fly.dev/type')
       .then((response) => {
@@ -355,35 +385,46 @@ export default {
             : this.inputDescription
         );
         editedOeuvre.append(
-          'idType',
-          this.inputType === ''
-            ? this.oeuvre.type.idType
-            : this.inputType.idType
+          'type',
+          this.inputType?.name
+            ? this.inputType?.name
+            : this.inputType
+            ? this.inputType
+            : this.oeuvre.type.name
         );
         editedOeuvre.append(
-          'idAuteur',
-          this.inputAuteur === ''
-            ? this.oeuvre.auteur.idAuteur
-            : this.inputAuteur.idAuteur
+          'auteur',
+          this.inputAuteur?.name
+            ? this.inputAuteur?.name
+            : this.inputAuteur
+            ? this.inputAuteur
+            : this.oeuvre.auteur.name
         );
         editedOeuvre.append(
-          'idEditeur',
-          this.inputEditeur === ''
-            ? this.oeuvre.editeur.idEditeur
-            : this.inputEditeur.idEditeur
+          'editeur',
+          this.inputEditeur?.name
+            ? this.inputEditeur?.name
+            : this.inputEditeur
+            ? this.inputEditeur
+            : this.oeuvre.editeur.name
         );
         editedOeuvre.append(
-          'idSupport',
-          this.inputSupport === ''
-            ? this.oeuvre.support.idSupport
-            : this.inputSupport.idSupport
+          'support',
+          this.inputSupport?.name
+            ? this.inputSupport?.name
+            : this.inputSupport
+            ? this.inputSupport
+            : this.oeuvre.support.name
         );
         editedOeuvre.append(
-          'idGenre',
-          this.inputGenre === ''
-            ? this.oeuvre.genre.idGenre
-            : this.inputGenre.idGenre
+          'genre',
+          this.inputGenre?.name
+            ? this.inputGenre?.name
+            : this.inputGenre
+            ? this.inputGenre
+            : this.oeuvre.genre.name
         );
+        console.log(editedOeuvre)
         this.$axios
           .$put('https://emporiumback.fly.dev/oeuvres', editedOeuvre)
           .then(() => {
@@ -396,7 +437,7 @@ export default {
                 query: { q: this.oeuvre.idOeuvre }
               });
             }, 1500);
-          })
+          });
       }
     },
     deleteOeuvre () {
@@ -407,7 +448,7 @@ export default {
         .then(() => {
           this.deleteSuccess = '';
           setTimeout(this.$router.push({ path: '/oeuvres' }), 1000);
-        })
+        });
     }
   }
 };

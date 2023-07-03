@@ -37,32 +37,32 @@
       <div v-if="imagePreview">
         Image chargée avec succes
       </div>
-      <v-autocomplete
+      <v-combobox
         v-model="inputAuteur"
         :items="listAuteur"
         item-text="name"
-        item-value="idAuteur"
+        return-object
         :label="labelAuteur"
       />
-      <v-autocomplete
+      <v-combobox
         v-model="inputEditeur"
         :items="listEditeur"
         item-text="name"
-        item-value="idEditeur"
+        return-object
         :label="labelEditeur"
       />
-      <v-autocomplete
+      <v-combobox
         v-model="inputSupport"
         :items="listSupport"
         item-text="name"
-        item-value="idSupport"
+        return-object
         :label="labelSupport"
       />
-      <v-autocomplete
+      <v-combobox
         v-model="inputGenre"
         :items="listGenre"
         item-text="name"
-        item-value="idGenre"
+        return-object
         :label="labelGenre"
       />
     </div>
@@ -134,11 +134,11 @@ export default {
         formData.append('titre', this.inputTitre);
         formData.append('sousTitre', this.inputSousTitre);
         formData.append('description', this.inputDescription);
-        formData.append('idType', this.typeId);
-        formData.append('idAuteur', this.inputAuteur);
-        formData.append('idEditeur', this.inputEditeur);
-        formData.append('idSupport', this.inputSupport);
-        formData.append('idGenre', this.inputGenre);
+        formData.append('type', this.typeId);
+        formData.append('auteur', this.inputAuteur?.name ? this.inputAuteur?.name : this.inputAuteur);
+        formData.append('editeur', this.inputEditeur?.name ? this.inputEditeur?.name : this.inputEditeur);
+        formData.append('support', this.inputSupport?.name ? this.inputSupport?.name : this.inputSupport);
+        formData.append('genre', this.inputGenre?.name ? this.inputGenre?.name : this.inputGenre);
         this.$axios
           .$post('https://emporiumback.fly.dev/oeuvres', formData)
           .then(() => {
