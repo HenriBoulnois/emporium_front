@@ -38,6 +38,13 @@
             {{ user.description }}
           </div>
         </div>
+        <div
+          @click="
+            $router.push({ path: '/collection', query: { q: user.uwuid } })
+          "
+        >
+          Ma collection
+        </div>
       </div>
       <div class="bg-white rounded-r-lg">
         <UserComments v-if="user.uwuid" :user-id="user.uwuid" />
