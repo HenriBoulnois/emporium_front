@@ -9,7 +9,7 @@
             class="rounded-tl-lg bg-zinc-600 pt-10 px-10 shadow-inner shadow-gray-700"
           >
             <Nuxt
-              class="bg-gray-700 rounded-t-lg h-full p-6 shadow-2xl shadow-gray-500"
+              class="rounded-t-lg h-full"
             />
           </div>
         </div>

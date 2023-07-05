@@ -43,7 +43,7 @@
         <UserComments v-if="user.uwuid" :user-id="user.uwuid" />
       </div>
     </div>
-    <div class="bg-gray-700">
+    <div class="">
       <div :class="hasItems">
         <div
           class="grid grid-cols-[minmax(10%,10%)_1fr_1fr_1fr_1fr_auto] bg-white p-4 mt-4 rounded-lg text-center"

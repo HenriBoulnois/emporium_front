@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid">
-      <div class="grid grid-cols-2 bg-gray-700 shadow-inner rounded-lg h-fit">
+      <div class="grid grid-cols-2 shadow-inner rounded-lg h-fit">
         <div class="grid bg-white p-4 rounded-l-lg h-full text-xl font-bold">
           Liste des labels
           <v-autocomplete

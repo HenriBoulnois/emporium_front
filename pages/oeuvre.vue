@@ -141,7 +141,7 @@
         />
       </div>
     </div>
-    <div class="relative bg-gray-700">
+    <div class="relative">
       <CommentsOeuvre
         v-if="oeuvre.idOeuvre"
         :oeuvre-id="oeuvre.idOeuvre"
