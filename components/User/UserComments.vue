@@ -1,17 +1,17 @@
 <template>
   <div v-if="comments">
-    <div class="text-center font-bold pt-4">
+    <div class="text-center font-bold">
       Derniers commentaires
     </div>
     <div
       v-for="comment in comments"
       :key="comment.idComment"
-      class="grid grid-cols-2 p-4 items-center text-center cursor-pointer h-full"
+      class="grid grid-cols-[40%_60%] p-4 items-center text-center cursor-pointer"
     >
       <div class="grid place-items-center">
         <img
           v-if="comment.imagePath"
-          class="max-w-full max-h-32 shadow-md shadow-black"
+          class="max-w-full max-h-24 shadow-md shadow-black"
           :src="comment.imagePath"
           @click="
             $router.push({
@@ -30,7 +30,9 @@
           "
         />
       </div>
-      <div>{{ comment.commentaire.text }}</div>
+      <div class="text-justify">
+        {{ comment.commentaire.text }}
+      </div>
     </div>
   </div>
 </template>
