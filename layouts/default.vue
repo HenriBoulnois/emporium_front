@@ -6,10 +6,10 @@
         <div class="grid grid-cols-[auto_1fr]">
           <EmSideBar />
           <div
-            class="rounded-tl-lg bg-zinc-600 pt-10 px-10 shadow-inner shadow-gray-700"
+            class="rounded-tl-lg bg-zinc-500 pt-10 px-10 shadow-inner shadow-gray-700"
           >
             <Nuxt
-              class="rounded-t-lg h-full"
+              class="rounded-t-lg pb-10"
             />
           </div>
         </div>
