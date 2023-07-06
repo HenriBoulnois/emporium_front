@@ -4,14 +4,14 @@
   >
     <NuxtLink class="flex" to="/">
       <a
-        class="flex items-center p-2 rounded-lg text-white hover:bg-gray-600 w-fit"
+        class="flex items-center p-2 rounded-lg text-white w-fit"
       >
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         >
         <img class="max-h-10" src="./../static/favicon.jpg">
-        <span class="ml-3 font-extrabold"> Emporium </span>
+        <span class="ml-3 font-extrabold text-2xl font-mono"> Emporium </span>
       </a>
     </NuxtLink>
     <div />
@@ -84,7 +84,7 @@
       </div>
       <div
         v-if="!user"
-        class="text-white mr-8 cursor-pointer"
+        class="text-white mr-8 cursor-pointer border rounded-lg px-2 hover:shadow-sm hover:shadow-white"
         @click="
           $router.push({
             path: '/new/user'
@@ -93,20 +93,25 @@
       >
         Configurer mon compte
       </div>
-      <div class="text-white mr-8 cursor-pointer" @click="$auth.logout()">
+      <div
+        class="text-white mr-8 cursor-pointer border rounded-lg px-2 hover:shadow-sm hover:shadow-white"
+        @click="$auth.logout()"
+      >
         Se déconnecter
       </div>
     </div>
-    <div
-      v-if="!$auth.loggedIn"
-      class="flex items-center text-white mr-8 cursor-pointer"
-      @click="
-        $router.push({
-          path: '/login'
-        })
-      "
-    >
-      Se connecter
+    <div class="grid place-items-center">
+      <div
+        v-if="!$auth.loggedIn"
+        class="flex items-center text-white mr-8 cursor-pointer border rounded-lg px-2 hover:shadow-sm hover:shadow-white"
+        @click="
+          $router.push({
+            path: '/login'
+          })
+        "
+      >
+        Se connecter / S'inscrire
+      </div>
     </div>
   </div>
 </template>

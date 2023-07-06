@@ -1,7 +1,7 @@
 <template>
   <div
     id="default-sidebar"
-    class="w-60 h-screen sticky top-0 bg-gray-700"
+    class="w-60 h-screen sticky top-0 bg-gray-700 pt-10"
     aria-label="Sidebar"
   >
     <div class="px-3 py-4 grid grid-rows-[auto_1fr_auto]">
