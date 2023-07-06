@@ -84,7 +84,7 @@
       </div>
       <div
         v-if="!user"
-        class="text-white mr-8 cursor-pointer border rounded-lg px-2 hover:shadow-sm hover:shadow-white"
+        class="flex items-center text-black mr-8 cursor-pointer bg-white rounded-lg px-3 h-full hover:shadow-md hover:shadow-gray-900"
         @click="
           $router.push({
             path: '/new/user'
@@ -94,16 +94,16 @@
         Configurer mon compte
       </div>
       <div
-        class="text-white mr-8 cursor-pointer border rounded-lg px-2 hover:shadow-sm hover:shadow-white"
+        class="flex items-center text-black mr-8 cursor-pointer bg-white rounded-lg px-3 h-full hover:shadow-md hover:shadow-gray-900"
         @click="$auth.logout()"
       >
-        Se déconnecter
+        Me déconnecter
       </div>
     </div>
     <div class="grid place-items-center">
       <div
         v-if="!$auth.loggedIn"
-        class="flex items-center text-white mr-8 cursor-pointer border rounded-lg px-2 hover:shadow-sm hover:shadow-white"
+        class="flex items-center text-black mr-8 cursor-pointer bg-white rounded-lg px-3 h-full hover:shadow-md hover:shadow-gray-900"
         @click="
           $router.push({
             path: '/login'
