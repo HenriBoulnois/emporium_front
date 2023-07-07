@@ -15,7 +15,7 @@
         <div class="bg-white p-5 mr-5 rounded-lg">
           Dernières oeuvres modifiées :
           <div
-            class="bg-gray-200 rounded-lg grid grid-cols-3 p-2 text-center items-center"
+            class="rounded-lg grid grid-cols-3 p-2 text-center items-center"
           >
             <a>Image</a>
             <a>Nom</a>
@@ -24,7 +24,7 @@
           <div
             v-for="oeuvre in lastModified"
             :key="oeuvre.idOeuvre"
-            class="bg-gray-200 hover:bg-gray-300 rounded-lg my-4 cursor-pointer grid grid-cols-3 p-4 place-items-center"
+            class="rounded-lg my-4 cursor-pointer grid grid-cols-3 p-4 place-items-center border-t-[1px]"
             @click="
               $router.push({ path: '/oeuvre', query: { q: oeuvre.idOeuvre } })
             "
@@ -42,7 +42,7 @@
         <div class="bg-white p-5 rounded-lg">
           Derniers commentaires :
           <div
-            class="bg-gray-200 rounded-lg grid grid-cols-3 p-2 text-center items-center"
+            class="rounded-lg grid grid-cols-3 p-2 text-center items-center"
           >
             <a>Oeuvre</a>
             <a>Auteur</a>
@@ -51,7 +51,7 @@
           <div
             v-for="commentaire in lastComments"
             :key="commentaire.idCommentaire"
-            class="bg-gray-200 hover:bg-gray-300 rounded-lg my-4 cursor-pointer grid grid-cols-3 p-4 place-items-center"
+            class="rounded-lg my-4 cursor-pointer grid grid-cols-3 p-4 place-items-center border-t-[1px]"
             @click="
               $router.push({
                 path: '/oeuvre',

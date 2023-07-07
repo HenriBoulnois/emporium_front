@@ -35,6 +35,7 @@
             <div>
               <span
                 class="h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-1 cursor-pointer"
+                title="Ouvrir la page de l'oeuvre"
                 @click="
                   $router.push({
                     path: '/oeuvre',
@@ -47,6 +48,7 @@
               <span
                 v-if="collection.collection.favorite && isCurrent"
                 class="h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-1 text-pink-400 cursor-pointer"
+                title="Supprimer des favoris"
                 @click="
                   removeAsFavorite(
                     collection.collection.idCollection,
@@ -59,6 +61,7 @@
               <span
                 v-if="!collection.collection.favorite && isCurrent"
                 class="h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-1 text-pink-400 cursor-pointer"
+                title="Ajouter aux favoris"
                 @click="
                   addAsFavorite(
                     collection.collection.idCollection,
@@ -71,6 +74,7 @@
               <span
                 v-if="isCurrent"
                 class="hover:bg-red-400 hover:text-white h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-1 cursor-pointer"
+                title="Supprimer de ma collection"
                 @click="
                   removeFromCollection(collection.collection.idCollection)
                 "

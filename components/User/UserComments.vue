@@ -6,7 +6,7 @@
     <div
       v-for="comment in comments"
       :key="comment.idComment"
-      class="grid grid-cols-[40%_60%] p-4 items-center text-center cursor-pointer"
+      class="grid grid-cols-[40%_60%] p-4 items-center text-center cursor-pointer border-t-[1px]"
     >
       <div class="grid place-items-center">
         <img
