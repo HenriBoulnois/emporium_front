@@ -1,29 +1,30 @@
 <template>
   <div class="">
-    <CompleteAccountDialog v-if="dialog" :can-disable="true" />
     <div class="grid grid-cols-2">
       <div
         class="bg-white grid grid-flow-row place-items-center rounded-lg p-4 m-4"
       >
-        <span
-          v-if="isCurrent"
-          class="material-symbols-outlined cursor-pointer text-right w-full text-black hover:bg-white rounded-full"
-          @click="
-            $router.push({
-              path: '/edit/user',
-              query: { q: user.uwuid }
-            })
-          "
-        >
-          edit
-        </span>
+        <div class="w-full">
+          <span
+            v-if="isCurrent"
+            class="material-symbols-outlined cursor-pointer w-fit text-black hover:bg-white rounded-full"
+            @click="
+              $router.push({
+                path: '/edit/user',
+                query: { q: user.uwuid }
+              })
+            "
+          >
+            edit
+          </span>
+        </div>
         <img
           v-if="user.profilPicturePath"
           class="max-h-80 shadow-md shadow-black"
           :src="user.profilPicturePath"
         >
         <ImagePlaceholder v-if="!user.profilPicturePath" />
-        <a class="pt-4">{{ user.pseudo }}</a>
+        <a class="pt-4 text-2xl font-bold">{{ user.pseudo }}</a>
         <div v-if="user.description !== null" class="text-justify">
           <div class="text-center font-bold pt-4">
             Description
@@ -36,20 +37,27 @@
           <div class="flex items-center px-3">
             {{ collections.length
             }}<span
-              class="material-symbols-outlined stats pl-3 text-2xl text-green-400"
+              class="material-symbols-outlined stats pl-3 text-2xl text-green-400 cursor-help"
+              title="Oeuvres ajoutées"
             >
               featured_play_list
             </span>
           </div>
           <div class="flex items-center px-3">
             {{ nbFavorite.length
-            }}<span class="material-symbols-outlined stats pl-3 text-pink-400">
+            }}<span
+              class="material-symbols-outlined stats pl-3 text-pink-400 cursor-help"
+              title="Oeuvres favorites"
+            >
               favorite
             </span>
           </div>
           <div class="flex items-center px-3">
             {{ collections.length
-            }}<span class="material-symbols-outlined stats pl-3 text-blue-400">
+            }}<span
+              class="material-symbols-outlined stats pl-3 text-blue-400 cursor-help"
+              title="Commentaires rédigés"
+            >
               comment
             </span>
           </div>
@@ -71,29 +79,35 @@
           <div
             v-for="collection in collections.slice(0, 8)"
             :key="collection.idCollection"
-            class="cursor-pointer p-4 flex"
+            class="p-4 flex"
           >
-            <div class="w-full h-full grid place-items-center">
+            <div class="w-full h-full grid place-items-center relative">
               <img
                 v-if="collection.oeuvres.imagePath"
                 class="bg-white rounded-lg p-1 max-w-full max-h-36 shadow-md shadow-black"
                 :src="collection.oeuvres.imagePath"
-                @click="
-                  $router.push({
-                    path: '/oeuvre',
-                    query: { q: collection.oeuvres.idOeuvre }
-                  })
-                "
               >
-              <ImagePlaceholder
-                v-if="!collection.oeuvres.imagePath"
-                @click="
-                  $router.push({
-                    path: '/oeuvre',
-                    query: { q: collection.oeuvres.idOeuvre }
-                  })
-                "
-              />
+              <ImagePlaceholder v-if="!collection.oeuvres.imagePath" />
+              <div
+                class="bg-white opacity-0 hover:opacity-100 h-full w-full absolute top-0 rounded-lg p-3 grid place-items-center shadow-md shadow-black"
+              >
+                <div class="text-center divide-y-2">
+                  <div>{{ collection.oeuvres.titre }}</div>
+                  <div>{{ collection.oeuvres.auteur.name }}</div>
+                  <span
+                    class="material-symbols-outlined cursor-pointer"
+                    title="Ouvrir la page de l'oeuvre"
+                    @click="
+                      $router.push({
+                        path: '/oeuvre',
+                        query: { q: collection.oeuvres.idOeuvre }
+                      })
+                    "
+                  >
+                    open_in_new
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -107,19 +121,16 @@
 
 <script>
 import UserComments from '~/components/User/UserComments.vue';
-import CompleteAccountDialog from '~/components/User/CompleteAccountDialog.vue';
 
 export default {
   name: 'UserPage',
   components: {
-    UserComments,
-    CompleteAccountDialog
+    UserComments
   },
   data () {
     return {
       user: '',
       collections: [],
-      dialog: false,
       isCurrent: false,
       email: '',
       hasItems: 'hidden',
