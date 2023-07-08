@@ -34,7 +34,16 @@
                   $router.push({ path: '/user', query: { q: user.uwuid } })
                 "
               >
-                open_in_new
+                person_book
+              </span>
+              <span
+                class="h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-1 cursor-pointer"
+                title="Ouvrir la collection"
+                @click="
+                  $router.push({ path: '/collection', query: { q: user.uwuid } })
+                "
+              >
+                library_books
               </span>
             </div>
             <div class="grid grid-flow-col divide-x">
