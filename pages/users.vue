@@ -17,7 +17,7 @@
         :key="user.uwuid"
         class="bg-white rounded-lg m-3 p-2"
       >
-        <div class="grid grid-cols-[60%_40%] h-full">
+        <div class="grid grid-cols-[auto_auto] h-full">
           <div
             class="grid grid-rows-2 divide-y place-items-center text-center h-full"
           >
@@ -46,11 +46,11 @@
                 library_books
               </span>
             </div>
-            <div class="grid grid-flow-col divide-x">
+            <div class="grid grid-flow-col divide-x max-w-max">
               <div class="flex items-center px-3">
                 {{ user.nbOeuvre
                 }}<span
-                  class="material-symbols-outlined stats pl-3 text-2xl text-green-400 cursor-help"
+                  class="h-fit w-fit material-symbols-outlined pl-3 text-green-400 cursor-help"
                   title="Oeuvres ajoutées"
                 >
                   featured_play_list
@@ -59,7 +59,7 @@
               <div class="flex items-center px-3">
                 {{ user.nbFav
                 }}<span
-                  class="material-symbols-outlined stats pl-3 text-pink-400 cursor-help"
+                  class="h-fit w-fit material-symbols-outlined pl-3 text-pink-400 cursor-help"
                   title="Oeuvres favorites"
                 >
                   favorite
@@ -68,7 +68,7 @@
               <div class="flex items-center px-3">
                 {{ user.nbCom
                 }}<span
-                  class="material-symbols-outlined stats pl-3 text-blue-400 cursor-help"
+                  class="h-fit w-fit material-symbols-outlined pl-3 text-blue-400 cursor-help"
                   title="Commentaires rédigés"
                 >
                   comment
@@ -76,7 +76,7 @@
               </div>
             </div>
           </div>
-          <div class="grid place-items-center">
+          <div class="grid place-items-center h-full">
             <img
               v-if="user.profilPicturePath"
               class="max-w-full max-h-32 shadow-md shadow-black -top-4"
