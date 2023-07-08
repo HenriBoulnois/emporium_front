@@ -27,10 +27,10 @@
               <ImagePlaceholder v-if="!item.imagePath" />
             </div>
             <td>{{ item.titre }}</td>
-            <td>{{ item.auteur.name }}</td>
-            <td>{{ item.genre.name }}</td>
-            <td>{{ item.support.name }}</td>
-            <td>{{ item.type.name }}</td>
+            <td>{{ item.auteur?.name }}</td>
+            <td>{{ item.genre?.name }}</td>
+            <td>{{ item.support?.name }}</td>
+            <td>{{ item.type?.name }}</td>
           </tr>
         </template>
         <template #[`footer.page-text`]="props">
@@ -70,7 +70,7 @@ export default {
   },
   async fetch () {
     const response = await this.$axios.$get(
-      'https://emporiumback.fly.dev/oeuvres/firstPack'
+      'https://emporiumback.fly.dev/oeuvres'
     );
     this.oeuvres = response;
   }
