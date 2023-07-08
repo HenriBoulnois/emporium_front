@@ -44,7 +44,7 @@
             @click="
               $router.push({
                 path: '/search',
-                query: { a: oeuvre.auteur.idAuteur }
+                query: { q: oeuvre.auteur.name }
               })
             "
           >
@@ -56,7 +56,7 @@
             @click="
               $router.push({
                 path: '/search',
-                query: { t: oeuvre.type.idType }
+                query: { q: oeuvre.type.name }
               })
             "
           >
@@ -68,7 +68,7 @@
             @click="
               $router.push({
                 path: '/search',
-                query: { s: oeuvre.support.idSupport }
+                query: { q: oeuvre.support.name }
               })
             "
           >
@@ -80,7 +80,7 @@
             @click="
               $router.push({
                 path: '/search',
-                query: { e: oeuvre.editeur.idEditeur }
+                query: { q: oeuvre.editeur.name }
               })
             "
           >
@@ -92,7 +92,7 @@
             @click="
               $router.push({
                 path: '/search',
-                query: { g: oeuvre.genre.idGenre }
+                query: { q: oeuvre.genre.name }
               })
             "
           >

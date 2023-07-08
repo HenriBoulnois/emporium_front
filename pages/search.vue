@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="grid grid-flow-row bg-white rounded-lg">
+    <div class="p-3 text-sm font-bold">
+      Recherche actuelle : {{ $route.query.q }}
+    </div>
     <div class="justify-items-center text-center">
       <v-data-table
         :headers="headers"
@@ -7,7 +10,10 @@
         :items-per-page="10"
         loading
         loading-text="Chargements des oeuvres en cours"
-        :footer-props="{ 'items-per-page-text': 'Oeuvres par page', 'items-per-page-options': [5,10,30,50,100]}"
+        :footer-props="{
+          'items-per-page-text': 'Oeuvres par page',
+          'items-per-page-options': [5, 10, 30, 50, 100]
+        }"
       >
         <template #item="{ item }">
           <tr
@@ -62,6 +68,7 @@ export default {
         },
         { text: 'Catégorie', value: 'type.name', align: 'center', width: '16%' }
       ],
+      oeuvresAll: [],
       oeuvres: []
     };
   },
@@ -70,43 +77,29 @@ export default {
       const response = await this.$axios.$get(
         'https://emporiumback.fly.dev/oeuvres'
       );
-      this.oeuvres = response;
-    }
-    if (this.$route.query.g != null) {
-      const response = await this.$axios.$get(
-        'https://emporiumback.fly.dev/oeuvres/genre/' + this.$route.query.g
-      );
-      this.oeuvres = response;
-    }
-    if (this.$route.query.a != null) {
-      const response = await this.$axios.$get(
-        'https://emporiumback.fly.dev/oeuvres/auteur/' + this.$route.query.a
-      );
-      this.oeuvres = response;
-    }
-    if (this.$route.query.t != null) {
-      const response = await this.$axios.$get(
-        'https://emporiumback.fly.dev/oeuvres/type/' + this.$route.query.t
-      );
-      this.oeuvres = response;
-    }
-    if (this.$route.query.s != null) {
-      const response = await this.$axios.$get(
-        'https://emporiumback.fly.dev/oeuvres/support/' + this.$route.query.s
-      );
-      this.oeuvres = response;
-    }
-    if (this.$route.query.e != null) {
-      const response = await this.$axios.$get(
-        'https://emporiumback.fly.dev/oeuvres/editeur/' + this.$route.query.e
-      );
-      this.oeuvres = response;
-    }
-    if (this.$route.query.n != null) {
-      const response = await this.$axios.$get(
-        'https://emporiumback.fly.dev/oeuvres/search/' + this.$route.query.n
-      );
-      this.oeuvres = response;
+      this.oeuvresAll = response;
+      this.oeuvres = this.oeuvresAll.filter((e) => {
+        return (
+          e.titre.toLowerCase().includes(this.$route.query.q.toLowerCase()) !==
+            false ||
+          e.auteur.name
+            .toLowerCase()
+            .includes(this.$route.query.q.toLowerCase()) !== false ||
+          e.type.name
+            .toLowerCase()
+            .includes(this.$route.query.q.toLowerCase()) !== false ||
+          e.genre.name
+            .toLowerCase()
+            .includes(this.$route.query.q.toLowerCase()) !== false ||
+          e.support.name
+            .toLowerCase()
+            .includes(this.$route.query.q.toLowerCase()) !== false ||
+          e.editeur.name
+            .toLowerCase()
+            .includes(this.$route.query.q.toLowerCase()) !== false
+        );
+      });
+      console.log(this.oeuvres);
     }
   },
   watch: {

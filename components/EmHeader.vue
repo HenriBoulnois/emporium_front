@@ -141,7 +141,7 @@ export default {
   methods: {
     searchInput: function () {
       if (this.input !== '') {
-        this.$router.push({ path: '/search', query: { n: this.input } });
+        this.$router.push({ path: '/search', query: { q: this.input } });
         this.input = '';
       }
     }
