@@ -164,6 +164,7 @@ export default {
         const editedUser = new FormData();
         editedUser.append('UWUid', this.user.uwuid);
         editedUser.append('email', this.user.email);
+        editedUser.append('authId', this.$auth.user.sub);
         if (this.imageUpload !== undefined) {
           editedUser.append('profilPicture', this.imageUpload);
           editedUser.append('imageName', this.imageUpload.name);
@@ -174,7 +175,7 @@ export default {
         );
         editedUser.append(
           'description',
-          this.inputDescription === ''
+          this.inputDescription === undefined
             ? this.user.description
             : this.inputDescription
         );
@@ -196,8 +197,11 @@ export default {
       }
     },
     deleteUser () {
+      const deleteUser = new FormData();
+        deleteUser.append('uwuid', this.user.uwuid);
+        deleteUser.append('authId', this.$auth.user.sub);
         this.$axios
-          .$delete('https://emporiumback.fly.dev/utilisateur/delete/' + this.user.uwuid + '/secret/' + this.$auth.user.sub)
+          .$delete('https://emporiumback.fly.dev/utilisateur/delete/', deleteUser)
           .then(() => {
             setTimeout(() => {
                 this.$router.push({
