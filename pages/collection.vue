@@ -195,9 +195,6 @@ export default {
     '$route.query': '$fetch'
   },
   methods: {
-    searchInCollection () {
-      this.outputSearch = this.inputSearch;
-    },
     async fetchCollection () {
       this.hasItems = false;
       this.collections = '';
