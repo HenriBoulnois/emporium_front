@@ -53,7 +53,7 @@
             </span>
           </div>
           <div class="flex items-center px-3">
-            {{ collections.length
+            {{ user.nbCom
             }}<span
               class="material-symbols-outlined stats pl-3 text-blue-400 cursor-help"
               title="Commentaires rédigés"
