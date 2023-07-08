@@ -3,12 +3,12 @@
     <div class="grid grid-rows-[auto_auto_auto]">
       <CompleteAccountDialog v-if="dialog" :can-disable="true" />
       <div class="grid grid-cols-2">
-        <div class="bg-white p-5 mr-5 mb-5 rounded-lg">
-          <MostPopularCat />
-        </div>
-        <div class="bg-white p-5 mb-5 rounded-lg grid place-items-center">
+        <div class="bg-white p-5 mb-5 mr-5 rounded-lg grid place-items-center">
           <div>Emporium est un site de gestion de collection où chacun peut participer en ajoutant les oeuvres qu'il possède afin de créer une base de données utilisable par tous.</div>
           <div>Site web réalisé par Henri Boulnois et Tristan Six</div>
+        </div>
+        <div class="bg-white p-5 mb-5 rounded-lg">
+          <MostPopularCat />
         </div>
       </div>
       <div class="grid grid-cols-2">
@@ -32,7 +32,7 @@
             <img
               v-if="oeuvre.imagePath"
               :src="oeuvre.imagePath"
-              class="max-h-20"
+              class="max-h-20 shadow-lg shadow-black"
             >
             <ImagePlaceholder v-if="!oeuvre.imagePath" />
             <a>{{ oeuvre.titre }}</a>
@@ -62,7 +62,7 @@
             <img
               v-if="commentaire.imagePath"
               :src="commentaire.imagePath"
-              class="max-h-20"
+              class="max-h-20 shadow-lg shadow-black"
             >
             <ImagePlaceholder v-if="!commentaire.imagePath" />
             <div>{{ commentaire.commentaire.utilisateur.pseudo }}</div>
