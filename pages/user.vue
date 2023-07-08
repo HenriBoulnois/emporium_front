@@ -73,7 +73,7 @@
       </div>
       <div class="grid grid-flow-row pt-4">
         <div class="text-center font-bold">
-          Dernières oeuvres ajoutées
+          Oeuvres de la collection de {{ user.pseudo }}
         </div>
         <div class="flex flex-wrap">
           <div
