@@ -46,7 +46,7 @@
             Auteur : {{ oeuvre.auteur.name }}
           </div>
           <div v-if="oeuvre.type" class="truncate">
-            Type : {{ oeuvre.type.name }}
+            Catégorie : {{ oeuvre.type.name }}
           </div>
           <div v-if="oeuvre.support" class="truncate">
             Support : {{ oeuvre.support.name }}
@@ -108,7 +108,7 @@
                 :items="listType"
                 item-text="name"
                 return-object
-                label="Type"
+                label="Catégorie"
               />
               <v-combobox
                 v-model="inputAuteur"
@@ -202,7 +202,7 @@
             }}
           </div>
           <div v-if="oeuvre.type" class="truncate">
-            Type :
+            Catégorie :
             {{
               inputType?.name
                 ? inputType?.name
@@ -246,7 +246,7 @@
     </div>
     <div class="flex items-center bg-white rounded-lg mt-6 p-4">
       <div class="flex-auto">
-        Un label (Auteur, Studio...) est n'est pas présent ou incorrect ?
+        Un label (Auteur, Studio...) est incorrect ?
       </div>
       <div
         class="w-40 text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2"
@@ -257,16 +257,6 @@
         "
       >
         Modifiez-le !
-      </div>
-      <div
-        class="w-40 text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2 ml-6"
-        @click="
-          $router.push({
-            path: '/new/label'
-          })
-        "
-      >
-        Ajoutez-le !
       </div>
     </div>
     <CompleteAccountDialog v-if="dialog" :can-disable="false" />

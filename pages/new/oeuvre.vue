@@ -3,7 +3,7 @@
     <div class="grid grid-cols-[auto_1fr]">
       <div class="mr-6">
         <div
-          class="flex flex-row text-center text-white bg-gray-500 rounded-t-lg"
+          class="flex flex-row text-center text-white bg-gray-700 rounded-t-lg"
         >
           <div class="flex-auto">
             <a :class="tab1Title" @click="selectedTab(1)">Basique</a>
@@ -91,17 +91,17 @@
       <div class="grid grid-rows-[auto_1fr]">
         <div class="flex items-center bg-white rounded-lg ml-6 mb-6 p-4">
           <div class="flex-auto">
-            Un label (Auteur, Studio...) n'est pas présent ?
+            Un label (Auteur, Studio...) est incorrect ?
           </div>
           <div
-            class="flex-auto text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2"
+            class="w-40 text-center text-white bg-gray-700 cursor-pointer hover:bg-gray-800 font-medium rounded-lg text-sm px-4 py-2"
             @click="
               $router.push({
-                path: '/new/label'
+                path: '/edit/label'
               })
             "
           >
-            Ajoutez-le !
+            Modifiez-le !
           </div>
         </div>
         <div class="bg-gray-700 rounded-lg ml-6 grid place-items-center">
