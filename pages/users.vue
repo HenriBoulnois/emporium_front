@@ -1,16 +1,80 @@
 <template>
   <div>
-    <div class="flex flex-wrap justify-items-center text-center">
-      <div
-        v-for="user in users"
-        :key="user.uwuid"
-        class="bg-gray-600 hover:bg-gray-700 rounded-lg m-4"
-        @click="$router.push({ path: '/user', query: { q: user.uwuid } })"
+    <div class="bg-white rounded-lg mx-3 p-2 font-bold">
+      <div class="text-center text-2xl">
+        <div>Utilisateurs d'Emporium</div>
+      </div>
+      <input
+        v-model="inputSearch"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        placeholder="Rechercher un utilisateur"
       >
-        <div>
-          <img v-if="user.profilPicturePath" :src="user.profilPicturePath" class="max-h-28 m-4">
-          <ImagePlaceholder v-if="!user.profilPicturePath" />
-          <a class="mt-7">{{ user.pseudo }}</a>
+    </div>
+    <div class="grid grid-cols-4">
+      <div
+        v-for="user in searchUsers"
+        :key="user.uwuid"
+        class="bg-white rounded-lg m-3 p-2"
+      >
+        <div class="grid grid-cols-[60%_40%] h-full">
+          <div
+            class="grid grid-rows-2 divide-y place-items-center text-center h-full"
+          >
+            <div class="">
+              <div v-if="user.pseudo" class="font-bold">
+                {{ user.pseudo }}
+              </div>
+            </div>
+            <div>
+              <span
+                class="h-fit w-fit rounded-full place-items-center material-symbols-outlined items-center p-1 cursor-pointer"
+                title="Ouvrir le profil"
+                @click="
+                  $router.push({ path: '/user', query: { q: user.uwuid } })
+                "
+              >
+                open_in_new
+              </span>
+            </div>
+            <div class="grid grid-flow-col divide-x">
+              <div class="flex items-center px-3">
+                {{ user.nbOeuvre
+                }}<span
+                  class="material-symbols-outlined stats pl-3 text-2xl text-green-400 cursor-help"
+                  title="Oeuvres ajoutées"
+                >
+                  featured_play_list
+                </span>
+              </div>
+              <div class="flex items-center px-3">
+                {{ user.nbFav
+                }}<span
+                  class="material-symbols-outlined stats pl-3 text-pink-400 cursor-help"
+                  title="Oeuvres favorites"
+                >
+                  favorite
+                </span>
+              </div>
+              <div class="flex items-center px-3">
+                {{ user.nbCom
+                }}<span
+                  class="material-symbols-outlined stats pl-3 text-blue-400 cursor-help"
+                  title="Commentaires rédigés"
+                >
+                  comment
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="grid place-items-center">
+            <img
+              v-if="user.profilPicturePath"
+              class="max-w-full max-h-32 shadow-md shadow-black -top-4"
+              :src="user.profilPicturePath"
+            >
+            <ImagePlaceholder v-if="!user.profilPicturePath" />
+          </div>
         </div>
       </div>
     </div>
@@ -22,12 +86,26 @@ export default {
   name: 'UsersPage',
   data () {
     return {
-      users: []
+      users: [],
+      inputSearch: ''
     };
   },
   async fetch () {
-    const response = await this.$axios.$get('https://emporiumback.fly.dev/utilisateur');
+    const response = await this.$axios.$get(
+      'https://emporiumback.fly.dev/utilisateur'
+    );
     this.users = response;
+  },
+  computed: {
+    searchUsers () {
+        return this.users.filter((u) => {
+          return (
+            u.pseudo
+              .toLowerCase()
+              .includes(this.inputSearch.toLowerCase()) !== false
+          );
+        });
+    }
   }
 };
 </script>
