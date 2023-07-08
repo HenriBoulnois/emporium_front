@@ -3,9 +3,7 @@
     <CompleteAccountDialog v-if="dialog" :can-disable="true" />
     <div class="bg-white rounded-lg mx-3 p-2 font-bold">
       <div class="text-center text-2xl">
-        <div>
-          Collection de {{ user.pseudo }}
-        </div>
+        <div>Collection de {{ user.pseudo }}</div>
       </div>
       <input
         v-model="inputSearch"
@@ -22,9 +20,18 @@
       >
         <div class="grid grid-cols-[60%_40%]">
           <div
-            class="grid grid-rows-[70%_30%] divide-y place-items-center text-center"
+            class="grid grid-rows-[10%_70%_20%] place-items-center text-center"
           >
-            <div class="">
+            <div class="w-full text-left h-full">
+              <span
+                v-if="!isCurrent && collection.collection.favorite"
+                class="material-symbols-outlined text-pink-400 cursor-help"
+                title="Oeuvres favorites"
+              >
+                favorite
+              </span>
+            </div>
+            <div class="border-b-[1px]">
               <div v-if="collection.oeuvres.titre" class="font-bold">
                 {{ collection.oeuvres.titre }}
               </div>
