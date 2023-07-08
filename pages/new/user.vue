@@ -44,7 +44,7 @@
             Envoyer
           </div>
           <a :class="fillFullFormError"> Veuillez remplir tous les champs. </a>
-          <a :class="success"> Votre compte est complété. </a>
+          <a :class="success"> Votre inscription a été complétée, vous n'avez plus qu'à vous connecter ! </a>
         </div>
       </form>
     </div>
@@ -95,6 +95,7 @@ export default {
       this.imagePreview = URL.createObjectURL(this.profilPicture);
     },
     submitNewUser () {
+      console.log(this.$auth.strategy.token.get())
       if (
         this.inputPseudo !== undefined &&
         this.profilPicture !== undefined &&
@@ -105,12 +106,13 @@ export default {
         newUser.append('imageName', this.profilPicture.name);
         newUser.append('profilPicture', this.profilPicture);
         newUser.append('email', this.inputEmail);
+        newUser.append('authId', this.$auth.user.sub)
         this.$axios
           .$post('https://emporiumback.fly.dev/utilisateur', newUser)
           .then(() => {
             this.fillFullFormError = 'hidden';
-            this.success = '';
-            setTimeout(this.$nuxt.refresh(), 1000);
+            this.success = 'text-xl font-bold';
+            setTimeout(() => { this.$auth.logout() }, 5000);
           });
       } else {
         this.fillFullFormError = '';
