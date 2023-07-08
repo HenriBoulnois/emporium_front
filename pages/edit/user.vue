@@ -197,11 +197,8 @@ export default {
       }
     },
     deleteUser () {
-      const deleteUser = new FormData();
-        deleteUser.append('uwuid', this.user.uwuid);
-        deleteUser.append('authId', this.$auth.user.sub);
         this.$axios
-          .$delete('https://emporiumback.fly.dev/utilisateur/delete/', deleteUser)
+          .$delete('https://emporiumback.fly.dev/utilisateur/delete/' + this.$auth.user.sub)
           .then(() => {
             setTimeout(() => {
                 this.$router.push({
