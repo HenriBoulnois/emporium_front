@@ -197,7 +197,7 @@ export default {
     },
     deleteUser () {
         this.$axios
-          .$delete('https://emporiumback.fly.dev/utilisateur/delete/' + this.user.uwuid)
+          .$delete('https://emporiumback.fly.dev/utilisateur/delete/' + this.user.uwuid + '/secret/' + this.$auth.user.sub)
           .then(() => {
             setTimeout(() => {
                 this.$router.push({
