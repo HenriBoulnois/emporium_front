@@ -111,7 +111,7 @@ export default {
           .$post('https://emporiumback.fly.dev/utilisateur', newUser)
           .then(() => {
             this.fillFullFormError = 'hidden';
-            this.success = 'text-xl font-bold';
+            this.success = 'font-bold';
             setTimeout(() => { this.$auth.logout() }, 5000);
           });
       } else {

@@ -200,11 +200,7 @@ export default {
         this.$axios
           .$delete('https://emporiumback.fly.dev/utilisateur/delete/' + this.$auth.user.sub)
           .then(() => {
-            setTimeout(() => {
-                this.$router.push({
-                path: '/'
-              })
-            }, 1500)
+            setTimeout(() => { this.$auth.logout() }, 1500);
           })
     }
   }
